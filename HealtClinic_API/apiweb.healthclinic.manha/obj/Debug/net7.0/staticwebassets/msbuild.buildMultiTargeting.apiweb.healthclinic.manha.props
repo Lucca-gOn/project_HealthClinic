@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\apiweb.healthclinic.manha.props" />
+</Project>
