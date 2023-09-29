@@ -49,14 +49,13 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        //Deletar
-        [HttpDelete]
-        public IActionResult Delete(Guid id)
+        //Listar por id
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id) 
         {
             try
             {
-                _tiposUsuarioRepository.Deletar(id);
-                return StatusCode(204);
+                return Ok(_tiposUsuarioRepository.BuscarPorId(id));
             }
             catch (Exception erro)
             {
@@ -65,12 +64,15 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id) 
+        //Atualizar
+        [HttpPut]
+        public IActionResult Put(Guid id, TiposUsuario tipoUsuario) 
         {
             try
             {
-                return Ok(_tiposUsuarioRepository.BuscarPorId(id));
+                _tiposUsuarioRepository.Atualizar(id, tipoUsuario);
+
+                return StatusCode(200);
             }
             catch (Exception erro)
             {

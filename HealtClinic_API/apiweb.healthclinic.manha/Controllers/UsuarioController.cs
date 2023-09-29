@@ -18,6 +18,7 @@ namespace apiweb.healthclinic.manha.Controllers
             _usuarioRepository = new UsuarioRepository();
         }
 
+        //Cadastrar
         [HttpPost]
         public IActionResult Post(Usuario usuario)
         {
@@ -34,6 +35,7 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        //listar por id
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {

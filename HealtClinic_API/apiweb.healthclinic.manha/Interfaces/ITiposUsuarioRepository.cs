@@ -6,8 +6,6 @@ namespace apiweb.healthclinic.manha.Interfaces
     {
         void Cadastrar(TiposUsuario novoTipoUsuario);
 
-        void Deletar(Guid id);
-
         List<TiposUsuario> Listar();
 
         TiposUsuario BuscarPorId(Guid id);

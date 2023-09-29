@@ -65,21 +65,6 @@ namespace apiweb.healthclinic.manha.Repositories
             
         }
 
-        public void Deletar(Guid id)
-        {
-            try
-            {
-                _healthContext.TiposUsuario.Where(e => e.IdTipoUsuario == id).ExecuteDelete();
-                _healthContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            
-        }
-
         public List<TiposUsuario> Listar()
         {
             try
