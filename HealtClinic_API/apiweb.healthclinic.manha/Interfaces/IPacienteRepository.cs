@@ -10,7 +10,7 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         Paciente BuscarPorId(Guid id);
 
-        Paciente BuscarPorNome(string nomePaciente);
+        List<Paciente> Listar();
 
         void Atualizar(Guid id, Paciente paciente);
     }

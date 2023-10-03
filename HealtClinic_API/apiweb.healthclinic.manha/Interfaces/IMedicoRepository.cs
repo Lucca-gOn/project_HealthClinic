@@ -9,11 +9,5 @@ namespace apiweb.healthclinic.manha.Interfaces
         void Deletar(Guid id);
 
         List<Medico> Listar();
-
-        Medico BuscarPorNome(string nomeMedico);
-
-        List<Medico> BuscarMedicoPorEspecialidade(string buscarEspecialidade);
-
-        void Atualizar(Guid id, Medico medico);
     }
 }

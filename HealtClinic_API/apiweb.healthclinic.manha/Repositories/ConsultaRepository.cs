@@ -1,28 +1,75 @@
-﻿using apiweb.healthclinic.manha.Domains;
+﻿using apiweb.healthclinic.manha.Contexts;
+using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
     public class ConsultaRepository : IConsultaRepository
     {
-        public void Atualizar(Guid id, Consulta consulta)
+        private readonly HealthContext _healthContext;
+        public ConsultaRepository()
         {
-            throw new NotImplementedException();
+            _healthContext = new HealthContext();
         }
 
-        public Especialidade BuscarPorId(Guid id)
+        public Consulta BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _healthContext.Consulta.FirstOrDefault(e => e.IdConsulta == id)!;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Cadastrar(Consulta novaConsulta)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Add(novaConsulta);
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Consulta.Where(e => e.IdConsulta == id).ExecuteDelete();
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Consulta> Listar()
+        {
+            try
+            {
+                return _healthContext.Consulta.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Consulta> ListarPorPaciente(Guid IdPaciente)
+        {
+            return _healthContext.Consulta.Where(e => e.IdPaciente == IdPaciente).ToList();
         }
     }
 }

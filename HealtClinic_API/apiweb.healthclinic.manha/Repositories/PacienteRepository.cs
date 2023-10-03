@@ -1,33 +1,91 @@
-﻿using apiweb.healthclinic.manha.Domains;
+﻿using apiweb.healthclinic.manha.Contexts;
+using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
     public class PacienteRepository : IPacienteRepository
     {
+        private readonly HealthContext _healthContext;
+        public PacienteRepository()
+        {
+                _healthContext = new HealthContext();
+        }
         public void Atualizar(Guid id, Paciente paciente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Paciente buscarPaciente = _healthContext.Paciente.Find(id)!;
+                if (buscarPaciente != null)
+                {
+                    buscarPaciente.Telefone = paciente.Telefone;
+                    buscarPaciente.Endereco = paciente.Endereco;
+
+                    _healthContext.Update(buscarPaciente);
+
+                    _healthContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Paciente BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                return _healthContext.Paciente.FirstOrDefault(e => e.IdPaciente == id)!;
+            }
+            catch (Exception)
+            {
 
-        public Paciente BuscarPorNome(string nomePaciente)
-        {
-            throw new NotImplementedException();
+                throw;
+            }
         }
 
         public void Cadastrar(Paciente novoPaciente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Add(novoPaciente);
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Paciente.Where(e => e.IdPaciente == id).ExecuteDelete();
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Paciente> Listar()
+        {
+            try
+            {
+                return _healthContext.Paciente.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
