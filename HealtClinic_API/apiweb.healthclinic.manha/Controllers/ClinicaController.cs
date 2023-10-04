@@ -18,7 +18,11 @@ namespace apiweb.healthclinic.manha.Controllers
                _clinicaRepository = new ClinicaRepository();
         }
 
-        //Cadastrar
+        /// <summary>
+        /// Cadastra uma nova clínica.
+        /// </summary>
+        /// <param name="novaClinica">Dados da nova clínica a ser cadastrada.</param>
+        /// <returns>Retorna um código de status indicando o resultado da operação.</returns>
         [HttpPost]
         public IActionResult Post(Clinica novaClinica)
         {
@@ -34,7 +38,10 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        //Listar
+        /// <summary>
+        /// Lista todas as clínicas cadastradas.
+        /// </summary>
+        /// <returns>Retorna uma lista contendo todas as clínicas.</returns>
         [HttpGet]
         public IActionResult Get() 
         {

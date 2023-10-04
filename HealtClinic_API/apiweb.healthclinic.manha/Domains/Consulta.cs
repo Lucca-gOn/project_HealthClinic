@@ -13,7 +13,6 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage ="Data da consulta obrigatória!")]
         public DateTime DataConsulta { get; set; }
 
-
         [Column(TypeName = "TIME")]
         [Required(ErrorMessage = "Horário da consulta obrigatório!")]
         [DataType(DataType.Time)]
@@ -28,7 +27,6 @@ namespace apiweb.healthclinic.manha.Domains
         //ForeignKey com (IdPaciente))]
         public Paciente? Paciente { get; set; }
 
-
         //Referencia com Medico
         [Required(ErrorMessage = "Informe o tipo do médico!")]
         public Guid IdMedico { get; set; }
@@ -37,16 +35,6 @@ namespace apiweb.healthclinic.manha.Domains
         //ForeignKey com (IdMedico))]
         public Medico? Medico { get; set; }
 
-
-        //Referencia com Comentario
-        [Required(ErrorMessage = "Informe o comentário!")]
-        public Guid IdComentario { get; set; }
-
-        [ForeignKey(nameof(IdComentario))]
-        //ForeignKey com (IdComentario))]
-        public Comentario? Comentario { get; set; }
-
-
         //Referencia com StatusConsulta
         [Required(ErrorMessage = "status da consulta obrigatório!")]
         public Guid IdStatusConsulta { get; set; }
@@ -54,7 +42,6 @@ namespace apiweb.healthclinic.manha.Domains
         [ForeignKey(nameof(IdStatusConsulta))]
         //ForeignKey com (IdStatusConsulta))]
         public StatusConsulta? StatusConsulta { get; set; }
-
 
         //Referencia com Prontuario
         [Required(ErrorMessage = "Prontuario obrigatório!")]

@@ -1,28 +1,70 @@
-﻿using apiweb.healthclinic.manha.Domains;
+﻿using apiweb.healthclinic.manha.Contexts;
+using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
     public class ComentarioRepository : IComentarioRepository
     {
+        private readonly HealthContext _healthContext;
+
+        public ComentarioRepository()
+        {
+                _healthContext = new HealthContext();
+        }
         public Comentario BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _healthContext.Comentario.FirstOrDefault(e => e.IdComentario == id)!;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Cadastrar(Comentario novoComentario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Comentario.Add(novoComentario);
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Comentario.Where(e => e.IdComentario == id).ExecuteDelete();
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Comentario> Listar()
         {
-            throw new NotImplementedException();
+            try
+            {
+               return _healthContext.Comentario.ToList();    
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

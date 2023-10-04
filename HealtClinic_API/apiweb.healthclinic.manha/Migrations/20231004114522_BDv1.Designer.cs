@@ -12,7 +12,7 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20230927120950_BDv1")]
+    [Migration("20231004114522_BDv1")]
     partial class BDv1
     {
         /// <inheritdoc />
@@ -99,9 +99,6 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.Property<TimeSpan>("HorarioConsulta")
                         .HasColumnType("TIME");
 
-                    b.Property<Guid>("IdComentario")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdMedico")
                         .HasColumnType("uniqueidentifier");
 
@@ -115,8 +112,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdConsulta");
-
-                    b.HasIndex("IdComentario");
 
                     b.HasIndex("IdMedico");
 
@@ -317,13 +312,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Consulta", "Consulta")
                         .WithMany()
                         .HasForeignKey("IdConsulta")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("IdPaciente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Consulta");
@@ -333,37 +328,29 @@ namespace apiweb.healthclinic.manha.Migrations
 
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Consulta", b =>
                 {
-                    b.HasOne("apiweb.healthclinic.manha.Domains.Comentario", "Comentario")
-                        .WithMany()
-                        .HasForeignKey("IdComentario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("apiweb.healthclinic.manha.Domains.Medico", "Medico")
                         .WithMany()
                         .HasForeignKey("IdMedico")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("IdPaciente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Prontuario", "Prontuario")
                         .WithMany()
                         .HasForeignKey("IdProntuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.StatusConsulta", "StatusConsulta")
                         .WithMany()
                         .HasForeignKey("IdStatusConsulta")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Comentario");
 
                     b.Navigation("Medico");
 
@@ -379,13 +366,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Clinica", "Clinica")
                         .WithMany()
                         .HasForeignKey("IdClinica")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Clinica");
@@ -398,13 +385,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Especialidade", "Especialidade")
                         .WithMany()
                         .HasForeignKey("IdEspecialidade")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Medico", "Medico")
                         .WithMany()
                         .HasForeignKey("IdMedico")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Especialidade");
@@ -417,7 +404,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Usuario");
@@ -428,7 +415,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.TiposUsuario", "TiposUsuario")
                         .WithMany()
                         .HasForeignKey("IdTipoUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("TiposUsuario");

@@ -172,26 +172,6 @@ namespace apiweb.healthclinic.manha.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comentario",
-                columns: table => new
-                {
-                    IdComentario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DescricaoComentario = table.Column<string>(type: "TEXT", nullable: false),
-                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comentario", x => x.IdComentario);
-                    table.ForeignKey(
-                        name: "FK_Comentario_Paciente_IdPaciente",
-                        column: x => x.IdPaciente,
-                        principalTable: "Paciente",
-                        principalColumn: "IdPaciente",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Consulta",
                 columns: table => new
                 {
@@ -200,19 +180,12 @@ namespace apiweb.healthclinic.manha.Migrations
                     HorarioConsulta = table.Column<TimeSpan>(type: "TIME", nullable: false),
                     IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdComentario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdStatusConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Consulta", x => x.IdConsulta);
-                    table.ForeignKey(
-                        name: "FK_Consulta_Comentario_IdComentario",
-                        column: x => x.IdComentario,
-                        principalTable: "Comentario",
-                        principalColumn: "IdComentario",
-                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Consulta_Medico_IdMedico",
                         column: x => x.IdMedico,
@@ -239,6 +212,32 @@ namespace apiweb.healthclinic.manha.Migrations
                         onDelete: ReferentialAction.NoAction);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comentario",
+                columns: table => new
+                {
+                    IdComentario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DescricaoComentario = table.Column<string>(type: "TEXT", nullable: false),
+                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comentario", x => x.IdComentario);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Consulta_IdConsulta",
+                        column: x => x.IdConsulta,
+                        principalTable: "Consulta",
+                        principalColumn: "IdConsulta",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Paciente_IdPaciente",
+                        column: x => x.IdPaciente,
+                        principalTable: "Paciente",
+                        principalColumn: "IdPaciente",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Clinica_CNPJ",
                 table: "Clinica",
@@ -254,11 +253,6 @@ namespace apiweb.healthclinic.manha.Migrations
                 name: "IX_Comentario_IdPaciente",
                 table: "Comentario",
                 column: "IdPaciente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Consulta_IdComentario",
-                table: "Consulta",
-                column: "IdComentario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consulta_IdMedico",
@@ -333,46 +327,34 @@ namespace apiweb.healthclinic.manha.Migrations
                 name: "IX_Usuario_IdTipoUsuario",
                 table: "Usuario",
                 column: "IdTipoUsuario");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comentario_Consulta_IdConsulta",
-                table: "Comentario",
-                column: "IdConsulta",
-                principalTable: "Consulta",
-                principalColumn: "IdConsulta",
-                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Comentario_Consulta_IdConsulta",
-                table: "Comentario");
+            migrationBuilder.DropTable(
+                name: "Comentario");
 
             migrationBuilder.DropTable(
                 name: "MedicoEspecialidade");
 
             migrationBuilder.DropTable(
-                name: "Especialidade");
-
-            migrationBuilder.DropTable(
                 name: "Consulta");
 
             migrationBuilder.DropTable(
-                name: "Comentario");
+                name: "Especialidade");
 
             migrationBuilder.DropTable(
                 name: "Medico");
+
+            migrationBuilder.DropTable(
+                name: "Paciente");
 
             migrationBuilder.DropTable(
                 name: "Prontuario");
 
             migrationBuilder.DropTable(
                 name: "StatusConsulta");
-
-            migrationBuilder.DropTable(
-                name: "Paciente");
 
             migrationBuilder.DropTable(
                 name: "Clinica");

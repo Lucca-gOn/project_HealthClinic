@@ -17,6 +17,12 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             _especialidadeRepository = new EspecialidadeRepository();
         }
+
+        /// <summary>
+        /// Cria uma nova especialidade na clínica.
+        /// </summary>
+        /// <param name="novaEspecialidade">A especialidade a ser criada.</param>
+        /// <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
         [HttpPost]
         public IActionResult Post(Especialidade novaEspecialidade)
         {
@@ -32,6 +38,10 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Lista todas as especialidades disponíveis na clínica.
+        /// </summary>
+        /// <returns>Uma lista de especialidades ou um erro caso algo dê errado.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -47,6 +57,11 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta uma especialidade específica com base no seu ID.
+        /// </summary>
+        /// <param name="id">O ID da especialidade a ser deletada.</param>
+        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
         [HttpDelete]
         public IActionResult Delete(Guid id)
         {

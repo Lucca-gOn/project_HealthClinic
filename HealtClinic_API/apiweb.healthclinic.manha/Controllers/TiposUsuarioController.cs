@@ -12,13 +12,16 @@ namespace apiweb.healthclinic.manha.Controllers
     public class TiposUsuarioController : ControllerBase
     {
         private ITiposUsuarioRepository _tiposUsuarioRepository;
-
         public TiposUsuarioController()
         {
-                _tiposUsuarioRepository = new TiposUsuarioRepository();
+            _tiposUsuarioRepository = new TiposUsuarioRepository();
         }
 
-        //Cadastrar
+        /// <summary>
+        /// Cadastra um novo tipo de usuário.
+        /// </summary>
+        /// <param name="novoTipoUsuario">Objeto contendo informações do tipo de usuário a ser cadastrado.</param>
+        /// <returns>StatusCode 201 se bem-sucedido.</returns>
         [HttpPost]
         public IActionResult Post(TiposUsuario novoTipoUsuario)
         {
@@ -29,12 +32,14 @@ namespace apiweb.healthclinic.manha.Controllers
             }
             catch (Exception erro)
             {
-
                 return BadRequest(erro.Message);
             }
         }
 
-        //Listar
+        /// <summary>
+        /// Lista todos os tipos de usuários cadastrados.
+        /// </summary>
+        /// <returns>Uma lista de tipos de usuários.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -44,14 +49,17 @@ namespace apiweb.healthclinic.manha.Controllers
             }
             catch (Exception erro)
             {
-
                 return BadRequest(erro.Message);
             }
         }
 
-        //Listar por id
+        /// <summary>
+        /// Obtém um tipo de usuário específico baseado em seu ID.
+        /// </summary>
+        /// <param name="id">ID do tipo de usuário a ser obtido.</param>
+        /// <returns>Detalhes do tipo de usuário específico.</returns>
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id) 
+        public IActionResult GetById(Guid id)
         {
             try
             {
@@ -59,24 +67,26 @@ namespace apiweb.healthclinic.manha.Controllers
             }
             catch (Exception erro)
             {
-
                 return BadRequest(erro.Message);
             }
         }
 
-        //Atualizar
+        /// <summary>
+        /// Atualiza as informações de um tipo de usuário específico.
+        /// </summary>
+        /// <param name="id">ID do tipo de usuário a ser atualizado.</param>
+        /// <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
+        /// <returns>StatusCode 200 se bem-sucedido.</returns>
         [HttpPut]
-        public IActionResult Put(Guid id, TiposUsuario tipoUsuario) 
+        public IActionResult Put(Guid id, TiposUsuario tipoUsuario)
         {
             try
             {
                 _tiposUsuarioRepository.Atualizar(id, tipoUsuario);
-
                 return StatusCode(200);
             }
             catch (Exception erro)
             {
-
                 return BadRequest(erro.Message);
             }
         }
