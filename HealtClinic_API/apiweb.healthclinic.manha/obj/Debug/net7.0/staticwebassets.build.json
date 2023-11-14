@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "kp2HDpHqT1pU8cfMZJ6viw/3irEAD2yqU5RLXjHEB8c=",
+  "Hash": "38nZZmllBt1GZrt7GZwyOGilTBrOVl2EdCLfqvaWMDQ=",
   "Source": "apiweb.healthclinic.manha",
   "BasePath": "_content/apiweb.healthclinic.manha",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "apiweb.healthclinic.manha\\wwwroot",
+      "Source": "apiweb.healthclinic.manha",
+      "ContentRoot": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\",
+      "BasePath": "_content/apiweb.healthclinic.manha",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\uploads\\web-developer-4788760-3988051.png",
+      "SourceId": "apiweb.healthclinic.manha",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\",
+      "BasePath": "_content/apiweb.healthclinic.manha",
+      "RelativePath": "uploads/web-developer-4788760-3988051.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\web-developer-4788760-3988051.png"
+    }
+  ]
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apiweb.healthclinic.manha.Migrations
 {
     /// <inheritdoc />
-    public partial class BDv1 : Migration
+    public partial class BdV1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

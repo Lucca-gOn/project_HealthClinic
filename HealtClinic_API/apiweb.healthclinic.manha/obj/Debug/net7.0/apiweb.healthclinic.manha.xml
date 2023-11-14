@@ -77,26 +77,6 @@
             <param name="id">O ID da consulta a ser deletada.</param>
             <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Post(apiweb.healthclinic.manha.Domains.Especialidade)">
-            <summary>
-            Cria uma nova especialidade na clínica.
-            </summary>
-            <param name="novaEspecialidade">A especialidade a ser criada.</param>
-            <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Get">
-            <summary>
-            Lista todas as especialidades disponíveis na clínica.
-            </summary>
-            <returns>Uma lista de especialidades ou um erro caso algo dê errado.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Delete(System.Guid)">
-            <summary>
-            Deleta uma especialidade específica com base no seu ID.
-            </summary>
-            <param name="id">O ID da especialidade a ser deletada.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.LoginController.Login(apiweb.healthclinic.manha.ViewModels.LoginViewModel)">
             <summary>
             Realiza o login do usuário utilizando seu email e senha, retornando um token JWT caso bem-sucedido.
@@ -191,28 +171,6 @@
             <param name="prontuario">Objeto contendo as informações atualizadas do prontuário.</param>
             <returns>StatusCode 200 se bem-sucedido.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.StatusConsultaController.Post(apiweb.healthclinic.manha.Domains.StatusConsulta)">
-            <summary>
-            Cadastra um novo status de consulta.
-            </summary>
-            <param name="novoStatusConsulta">Objeto contendo informações do status da consulta a ser cadastrado.</param>
-            <returns>StatusCode 201 se bem-sucedido.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.StatusConsultaController.GetById(System.Guid)">
-            <summary>
-            Obtém um status de consulta específico baseado em seu ID.
-            </summary>
-            <param name="id">ID do status de consulta a ser obtido.</param>
-            <returns>Detalhes do status de consulta específico.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.StatusConsultaController.Put(System.Guid,apiweb.healthclinic.manha.Domains.StatusConsulta)">
-            <summary>
-            Atualiza as informações de um status de consulta específico.
-            </summary>
-            <param name="id">ID do status de consulta a ser atualizado.</param>
-            <param name="statusConsulta">Objeto contendo as informações atualizadas do status de consulta.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
-        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.TiposUsuarioController.Post(apiweb.healthclinic.manha.Domains.TiposUsuario)">
             <summary>
             Cadastra um novo tipo de usuário.
@@ -255,16 +213,16 @@
             <param name="id">ID do usuário a ser buscado.</param>
             <returns>Detalhes do usuário ou código 400 com a mensagem de erro.</returns>
         </member>
-        <member name="T:apiweb.healthclinic.manha.Migrations.BDv1">
+        <member name="T:apiweb.healthclinic.manha.Migrations.BdV1">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.BDv1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BdV1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.BDv1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BdV1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.BDv1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BdV1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

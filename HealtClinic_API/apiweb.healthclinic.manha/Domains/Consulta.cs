@@ -35,14 +35,6 @@ namespace apiweb.healthclinic.manha.Domains
         //ForeignKey com (IdMedico))]
         public Medico? Medico { get; set; }
 
-        //Referencia com StatusConsulta
-        [Required(ErrorMessage = "status da consulta obrigatório!")]
-        public Guid IdStatusConsulta { get; set; }
-
-        [ForeignKey(nameof(IdStatusConsulta))]
-        //ForeignKey com (IdStatusConsulta))]
-        public StatusConsulta? StatusConsulta { get; set; }
-
         //Referencia com Prontuario
         [Required(ErrorMessage = "Prontuario obrigatório!")]
         public Guid IdProntuario { get; set; }

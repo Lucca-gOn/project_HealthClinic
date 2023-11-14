@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\uploads\\web-developer-4788760-3988051.png",
+      "PackagePath": "staticwebassets\\uploads\\web-developer-4788760-3988051.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.apiweb.healthclinic.manha.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.apiweb.healthclinic.manha.props",
+      "PackagePath": "build\\apiweb.healthclinic.manha.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.apiweb.healthclinic.manha.props",
+      "PackagePath": "buildMultiTargeting\\apiweb.healthclinic.manha.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.apiweb.healthclinic.manha.props",
+      "PackagePath": "buildTransitive\\apiweb.healthclinic.manha.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

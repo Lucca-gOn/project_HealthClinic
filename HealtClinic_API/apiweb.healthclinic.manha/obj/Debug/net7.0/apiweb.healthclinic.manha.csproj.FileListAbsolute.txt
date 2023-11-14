@@ -82,3 +82,4 @@ C:\Users\51021784826\Desktop\project_HealthClinic\HealtClinic_API\apiweb.healthc
 C:\Users\51021784826\Desktop\project_HealthClinic\HealtClinic_API\apiweb.healthclinic.manha\obj\Debug\net7.0\ref\apiweb.healthclinic.manha.dll
 C:\Users\51021784826\Desktop\project_HealthClinic\HealtClinic_API\apiweb.healthclinic.manha\bin\Debug\net7.0\apiweb.healthclinic.manha.xml
 C:\Users\51021784826\Desktop\project_HealthClinic\HealtClinic_API\apiweb.healthclinic.manha\obj\Debug\net7.0\apiweb.healthclinic.manha.xml
+C:\Users\51021784826\Desktop\project_HealthClinic\HealtClinic_API\apiweb.healthclinic.manha\bin\Debug\net7.0\apiweb.healthclinic.manha.staticwebassets.runtime.json

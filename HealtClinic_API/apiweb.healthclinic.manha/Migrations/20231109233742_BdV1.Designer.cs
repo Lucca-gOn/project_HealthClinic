@@ -12,8 +12,8 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231004114522_BDv1")]
-    partial class BDv1
+    [Migration("20231109233742_BdV1")]
+    partial class BdV1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,13 +312,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Consulta", "Consulta")
                         .WithMany()
                         .HasForeignKey("IdConsulta")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("IdPaciente")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Consulta");
@@ -331,25 +331,25 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Medico", "Medico")
                         .WithMany()
                         .HasForeignKey("IdMedico")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("IdPaciente")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Prontuario", "Prontuario")
                         .WithMany()
                         .HasForeignKey("IdProntuario")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.StatusConsulta", "StatusConsulta")
                         .WithMany()
                         .HasForeignKey("IdStatusConsulta")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Medico");
@@ -366,13 +366,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Clinica", "Clinica")
                         .WithMany()
                         .HasForeignKey("IdClinica")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Clinica");
@@ -385,13 +385,13 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Especialidade", "Especialidade")
                         .WithMany()
                         .HasForeignKey("IdEspecialidade")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("apiweb.healthclinic.manha.Domains.Medico", "Medico")
                         .WithMany()
                         .HasForeignKey("IdMedico")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Especialidade");
@@ -404,7 +404,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Usuario");
@@ -415,7 +415,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasOne("apiweb.healthclinic.manha.Domains.TiposUsuario", "TiposUsuario")
                         .WithMany()
                         .HasForeignKey("IdTipoUsuario")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TiposUsuario");

@@ -15,6 +15,10 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage = "CRM do médico obrigatório!")]
         public string? CRM { get; set; }
 
+        [Column(TypeName = "VARCHAR(MAX)")]
+        [Required(ErrorMessage = "Especialidade do médico obrigatória!")]
+        public string? Especialidade { get; set; }
+
         //Referencia com Usuario
         [Required(ErrorMessage = "Informe o usuário!")]
         public Guid IdUsuario { get; set; }
