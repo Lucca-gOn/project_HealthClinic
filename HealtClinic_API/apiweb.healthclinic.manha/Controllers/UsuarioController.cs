@@ -1,6 +1,7 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,16 +19,30 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Endpoint POST para cadastrar um novo usuário.
+        /// Endpoint POST para cadastrar um novo usuário com imagem.
         /// </summary>
-        /// <param name="usuario">Objeto usuário a ser cadastrado.</param>
+        /// <param name="usuarioDto">DTO contendo informações do usuário.</param>
+        /// <param name="file">Arquivo de imagem do usuário.</param>
         /// <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
         [HttpPost]
-        public IActionResult Post(Usuario usuario)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Post([FromForm] UsuarioDto usuarioDto, [FromForm] IFormFile file)
         {
             try
             {
-                _usuarioRepository.Cadastrar(usuario);
+                // Aqui você mapeará o DTO para a entidade Usuario
+                Usuario novoUsuario = new Usuario
+                {
+                    Nome = usuarioDto.Nome,
+                    Email = usuarioDto.Email,
+                    Senha = usuarioDto.Senha,
+                    // Outras propriedades...
+                };
+
+                // Adicione a lógica para tratar o arquivo de imagem aqui
+                // Exemplo: novoUsuario.Imagem = await ConvertFileToByteArrayAsync(file);
+
+                await _usuarioRepository.Cadastrar(novoUsuario, file);
                 return StatusCode(201);
             }
             catch (Exception erro)
@@ -35,6 +50,8 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
+
+
 
         /// <summary>
         /// Endpoint GET para buscar um usuário pelo ID.

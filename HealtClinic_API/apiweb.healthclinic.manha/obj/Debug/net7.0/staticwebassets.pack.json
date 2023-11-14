@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\uploads\\web-developer-4788760-3988051.png",
-      "PackagePath": "staticwebassets\\uploads\\web-developer-4788760-3988051.png"
+      "Id": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\uploads\\teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\teste.jpg"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.apiweb.healthclinic.manha.Microsoft.AspNetCore.StaticWebAssets.props",

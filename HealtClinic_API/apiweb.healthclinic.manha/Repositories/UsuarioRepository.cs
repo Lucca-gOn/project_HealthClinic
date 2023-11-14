@@ -2,6 +2,7 @@
 using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Utils;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
@@ -13,6 +14,12 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             _healthContext = new HealthContext();
         }
+
+        public void Atualizar(Guid id, Usuario usuario, string novoCaminhoImagem)
+        {
+            throw new NotImplementedException();
+        }
+
         public Usuario BuscarPorEmailESenha(string email, string senha)
         {
             try
@@ -80,19 +87,10 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public void Cadastrar(Usuario novoUsuario)
+        public void Cadastrar(Usuario novoUsuario, IFormFile file)
         {
-            try
-            {
-                 novoUsuario.Senha = Criptografia.GerarHash(novoUsuario.Senha!);
-                _healthContext.Usuario.Add(novoUsuario);
-                _healthContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            throw new NotImplementedException();
         }
     }
+    
 }

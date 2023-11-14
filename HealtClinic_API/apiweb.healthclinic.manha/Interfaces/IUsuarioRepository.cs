@@ -4,7 +4,7 @@ namespace apiweb.healthclinic.manha.Interfaces
 {
     public interface IUsuarioRepository
     {
-        void Cadastrar(Usuario novoUsuario);
+        void Cadastrar(Usuario novoUsuario, IFormFile file);
 
         Usuario BuscarPorId(Guid id);
 
