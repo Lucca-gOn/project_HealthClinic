@@ -19,7 +19,7 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Endpoint POST para cadastrar um novo usuário com imagem.
+        /// Cadastrar um novo usuário com imagem.
         /// </summary>
         /// <param name="usuarioDto">DTO contendo informações do usuário.</param>
         /// <param name="file">Arquivo de imagem do usuário.</param>
@@ -30,28 +30,26 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                // Aqui você mapeará o DTO para a entidade Usuario
+                // Mapeia o DTO para a entidade Usuario
                 Usuario novoUsuario = new Usuario
                 {
                     Nome = usuarioDto.Nome,
                     Email = usuarioDto.Email,
-                    Senha = usuarioDto.Senha,
-                    // Outras propriedades...
+                    Senha = usuarioDto.Senha, // Aplicar criptografia de senha
+                    DataNascimento = usuarioDto.DataNascimento,
+                    Sexo = usuarioDto.Sexo,
+                    IdTipoUsuario = usuarioDto.IdTipoUsuario
                 };
 
-                // Adicione a lógica para tratar o arquivo de imagem aqui
-                // Exemplo: novoUsuario.Imagem = await ConvertFileToByteArrayAsync(file);
-
                 await _usuarioRepository.Cadastrar(novoUsuario, file);
-                return StatusCode(201);
+
+                return StatusCode(201); 
             }
             catch (Exception erro)
             {
-                return BadRequest(erro.Message);
+                return BadRequest(erro.Message); 
             }
         }
-
-
 
         /// <summary>
         /// Endpoint GET para buscar um usuário pelo ID.
@@ -70,5 +68,20 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(_usuarioRepository.Listar());           
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
     }
 }

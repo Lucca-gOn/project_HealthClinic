@@ -20,8 +20,9 @@ namespace apiweb.healthclinic.manha.ViewModels
 
         [Required(ErrorMessage = "Campo de sexo obrigatório!")]
         public string Sexo { get; set; }
-        
+
         [Required(ErrorMessage = "Informe o tipo do usuário!")]
         public Guid IdTipoUsuario { get; set; }
+
     }
 }

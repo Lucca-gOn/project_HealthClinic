@@ -32,6 +32,10 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage = "Campo de sexo obrigatório!")]
         public string? Sexo { get; set; }
 
+        [Column(TypeName = "VARCHAR(MAX)")]
+        [Required(ErrorMessage = "Campo de imagem obrigatório!")]
+        public string? CaminhoImagem { get; set; }
+
         //Referencia com TiposUsuario
         [Required(ErrorMessage = "Informe o tipo do usuário!")]
         public Guid IdTipoUsuario { get; set; }

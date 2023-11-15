@@ -199,24 +199,31 @@
             <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
             <returns>StatusCode 200 se bem-sucedido.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.GetById(System.Guid)">
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Post(apiweb.healthclinic.manha.ViewModels.UsuarioDto,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
-            Endpoint POST para cadastrar um novo usuário com imagem.
+            Cadastrar um novo usuário com imagem.
             </summary>
-            <param name="novoUsuario">Objeto contendo informações do usuário.</param>
+            <param name="usuarioDto">DTO contendo informações do usuário.</param>
             <param name="file">Arquivo de imagem do usuário.</param>
             <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
         </member>
-        <member name="T:apiweb.healthclinic.manha.Migrations.Bd">
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.GetById(System.Guid)">
+            <summary>
+            Endpoint GET para buscar um usuário pelo ID.
+            </summary>
+            <param name="id">ID do usuário a ser buscado.</param>
+            <returns>Detalhes do usuário ou código 400 com a mensagem de erro.</returns>
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.BD">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bd.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BD.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bd.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BD.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bd.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:apiweb.healthclinic.manha.Migrations.BD.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

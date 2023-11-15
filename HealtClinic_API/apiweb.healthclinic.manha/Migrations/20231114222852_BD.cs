@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace apiweb.healthclinic.manha.Migrations
 {
     /// <inheritdoc />
-    public partial class Bd : Migration
+    public partial class BD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,6 +62,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     Senha = table.Column<string>(type: "VARCHAR(MAX)", maxLength: 60, nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
                     Sexo = table.Column<string>(type: "VARCHAR(20)", nullable: false),
+                    CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
                     IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

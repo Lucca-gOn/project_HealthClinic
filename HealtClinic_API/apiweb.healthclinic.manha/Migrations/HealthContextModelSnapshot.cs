@@ -222,6 +222,10 @@ namespace apiweb.healthclinic.manha.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CaminhoImagem")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(MAX)");
+
                     b.Property<DateTime?>("DataNascimento")
                         .IsRequired()
                         .HasColumnType("DATE");

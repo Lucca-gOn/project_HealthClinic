@@ -12,8 +12,8 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231114131857_Bd")]
-    partial class Bd
+    [Migration("20231114222852_BD")]
+    partial class BD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,6 +224,10 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.Property<Guid>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CaminhoImagem")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(MAX)");
 
                     b.Property<DateTime?>("DataNascimento")
                         .IsRequired()

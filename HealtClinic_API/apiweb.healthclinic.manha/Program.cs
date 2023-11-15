@@ -1,54 +1,36 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adiciona serviços ao container.
 
 builder.Services.AddControllers();
 
-//Adiciona serviço Jwt Bearer (forma de autenticação)
-//Deixar indentado assim:
+// Adiciona o serviço de autenticação JWT Bearer.
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultChallengeScheme = "JwtBearer";
     options.DefaultAuthenticateScheme = "JwtBearer";
 })
-
-//Deixar indentado assim:
 .AddJwtBearer("JwtBearer", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        //Valida quem esta solicitando 
         ValidateIssuer = true,
-
-        //Valida quem esta recebendo
         ValidateAudience = true,
-
-        //Define se o tempo de expiração será validado
         ValidateLifetime = true,
-
-        //Forma de criptografia que valida a chave de autentificação
         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("chave-autenticacao-code-first-webapi-projeto-healthclinic")),
-
-        //Valida o tempo de expiração do token
         ClockSkew = TimeSpan.FromMinutes(10),
-
-        //Nome do issuer (de onde esta vindo)
         ValidIssuer = "apiweb.healthclinic.manha",
-
-        //Nome do issuer (para onde esta indo)
         ValidAudience = "apiweb.healthclinic.manha"
     };
 });
 
-
 builder.Services.AddSwaggerGen(options =>
 {
-
-    //Adiciona informações sobre a API no Swagger
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
@@ -61,8 +43,6 @@ builder.Services.AddSwaggerGen(options =>
         },
     });
 
-    //Configura o swagger para usar o arquivo XML gerado
-    // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
@@ -73,8 +53,9 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Value: Bearer TokenJWT ",
+        Description = "Insira o token JWT desta maneira: Bearer {seu token}"
     });
+
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -86,19 +67,24 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
+
+    // Adiciona um filtro de operação para suportar o upload de arquivos no Swagger UI
+    options.OperationFilter<FileUploadOperation>();
 });
 
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Adiciona o serviço de exploração de API para o Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Adiciona o serviço SwaggerGen com configurações definidas
+// Removemos a chamada duplicada que estava aqui
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configura o pipeline de requisições HTTP.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -107,10 +93,38 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
+// A ordem correta é usar primeiro a autenticação e depois a autorização.
 app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+// Implementação do filtro de operação para upload de arquivos
+public class FileUploadOperation : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        var hasFormData = operation.RequestBody?.Content.Any(x => x.Key.Equals("multipart/form-data", StringComparison.OrdinalIgnoreCase));
+        if (hasFormData == true)
+        {
+            var formDataContent = operation.RequestBody.Content["multipart/form-data"];
+
+            // Verifica se a chave 'file' já existe antes de adicioná-la
+            if (!formDataContent.Schema.Properties.ContainsKey("file"))
+            {
+                formDataContent.Schema.Properties.Add("file", new OpenApiSchema
+                {
+                    Description = "Upload File",
+                    Type = "string",
+                    Format = "binary"
+                });
+            }
+        }
+    }
+}
+
+
+
