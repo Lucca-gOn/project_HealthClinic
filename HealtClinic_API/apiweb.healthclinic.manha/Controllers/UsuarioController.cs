@@ -1,6 +1,7 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.Utils;
 using apiweb.healthclinic.manha.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,30 +27,35 @@ namespace apiweb.healthclinic.manha.Controllers
         /// <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Post([FromForm] UsuarioDto usuarioDto, [FromForm] IFormFile file)
+        public async Task<IActionResult> Post([FromForm] UsuarioViewModel usuarioViewModel, [FromForm] IFormFile file, [FromForm] string CRM,
+    [FromForm] string especialidade)
         {
             try
             {
-                // Mapeia o DTO para a entidade Usuario
+                // Mapeia o ViewModel para a entidade Usuario
                 Usuario novoUsuario = new Usuario
                 {
-                    Nome = usuarioDto.Nome,
-                    Email = usuarioDto.Email,
-                    Senha = usuarioDto.Senha, // Aplicar criptografia de senha
-                    DataNascimento = usuarioDto.DataNascimento,
-                    Sexo = usuarioDto.Sexo,
-                    IdTipoUsuario = usuarioDto.IdTipoUsuario
+                    Nome = usuarioViewModel.Nome,
+                    Email = usuarioViewModel.Email,
+                    Senha = usuarioViewModel.Senha, // A senha será criptografada no método Cadastrar
+                    DataNascimento = usuarioViewModel.DataNascimento,
+                    Sexo = usuarioViewModel.Sexo,
+                    IdTipoUsuario = usuarioViewModel.IdTipoUsuario
+                    // Outros campos conforme necessário
                 };
 
-                await _usuarioRepository.Cadastrar(novoUsuario, file);
+                // Passa todos os argumentos necessários para o método Cadastrar
+                await _usuarioRepository.Cadastrar(novoUsuario, file, CRM, especialidade);
 
-                return StatusCode(201); 
+
+                return StatusCode(201);
             }
             catch (Exception erro)
             {
-                return BadRequest(erro.Message); 
+                return BadRequest(erro.Message);
             }
         }
+
 
         /// <summary>
         /// Endpoint GET para buscar um usuário pelo ID.
@@ -74,7 +80,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_usuarioRepository.Listar());           
+                return Ok(_usuarioRepository.Listar());
             }
             catch (Exception erro)
             {

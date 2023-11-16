@@ -20,7 +20,7 @@ namespace apiweb.healthclinic.manha.Contexts
         /// <param name="optionsBuilder">Objeto com as configurações definidas</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-4L0Q2S6\\SQLEXPRESSV2; Database=HealthClinic_manha_codefirst; User Id=sa; Pwd=senai@134; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=NOTE10-S14\\SQLEXPRESS; Database=HealthClinic_manha_codefirst; User Id=sa; Pwd=Senai@134; TrustServerCertificate=True;");
 
             base.OnConfiguring(optionsBuilder);
         }

@@ -1,8 +1,10 @@
 ﻿using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
+using apiweb.healthclinic.manha.Dto;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Utils;
 using apiweb.healthclinic.manha.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Repositories
@@ -88,19 +90,18 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public async Task Cadastrar(Usuario novoUsuario, IFormFile file)
+        public async Task Cadastrar(Usuario novoUsuario, IFormFile file, string CRM, string especialidade)
         {
             try
             {
-                //Cria diretorio se não criado
+                // Criação do diretório de uploads
                 var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
                 if (!Directory.Exists(uploadsFolderPath))
                 {
                     Directory.CreateDirectory(uploadsFolderPath);
                 }
 
-                //Evitar sobreposições
-
+                // Tratamento do arquivo de upload
                 if (file != null && file.Length > 0)
                 {
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -113,22 +114,68 @@ namespace apiweb.healthclinic.manha.Repositories
 
                     novoUsuario.CaminhoImagem = Path.Combine("uploads", fileName);
                 }
+                else
+                {
+                    novoUsuario.CaminhoImagem = null; // ou caminho padrão se aplicável
+                }
 
+                // Criptografando a senha do usuário
                 novoUsuario.Senha = Criptografia.GerarHash(novoUsuario.Senha);
 
+                // Salva o usuário no banco de dados
                 _healthContext.Usuario.Add(novoUsuario);
                 await _healthContext.SaveChangesAsync();
 
+                // Verifica se o usuário é um médico e cria um médico
+                var tipoUsuarioMedico = new Guid("E5E8FDAC-116B-48F5-8CC4-DAFDB2E8AA94"); // Substitua com o valor correto
+                if (novoUsuario.IdTipoUsuario == tipoUsuarioMedico)
+                {
+                    var novoMedico = new Medico
+                    {
+                        IdUsuario = novoUsuario.IdUsuario,
+                        CRM = CRM, 
+                        Especialidade = especialidade
+                                                                 
+                    };
+
+                    _healthContext.Medico.Add(novoMedico);
+                    await _healthContext.SaveChangesAsync();
+                }
             }
             catch (Exception)
             {
-                throw;
+                throw; 
             }
         }
 
-        public List<Usuario> Listar()
+
+        List<UsuarioListarDto> IUsuarioRepository.Listar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var listaUsuarios = _healthContext.Usuario
+                .Include(u => u.TiposUsuario)
+                .Select(u => new UsuarioListarDto
+                {
+                    IdUsuario = u.IdUsuario,
+                    Nome = u.Nome,
+                    CaminhoImagem = u.CaminhoImagem,
+                    TipoUsuario = u.TiposUsuario.Titulo,
+                    EspecialidadeMedico = _healthContext.Medico
+                                        .Where(m => m.IdUsuario == u.IdUsuario)
+                                        .Select(m => m.Especialidade)
+                                        .FirstOrDefault()!
+                })
+                .ToList();
+
+                return listaUsuarios;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

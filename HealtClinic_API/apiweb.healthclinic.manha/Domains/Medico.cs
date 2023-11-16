@@ -27,12 +27,5 @@ namespace apiweb.healthclinic.manha.Domains
         //ForeignKey com (IdUsuario))]
         public Usuario? Usuario { get; set; }
 
-        //Referencia com Clinica
-        [Required(ErrorMessage = "Informe a clinica!")]
-        public Guid IdClinica { get; set; }
-
-        [ForeignKey(nameof(IdClinica))]
-        //ForeignKey com (IdCLinica))]
-        public Clinica? Clinica { get; set; }
     }
 }

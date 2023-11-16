@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiweb.healthclinic.manha.Contexts;
 
@@ -11,9 +12,11 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    partial class HealthContextModelSnapshot : ModelSnapshot
+    [Migration("20231116125438_Bdv1")]
+    partial class Bdv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,6 +133,9 @@ namespace apiweb.healthclinic.manha.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(MAX)");
 
+                    b.Property<Guid>("IdClinica")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
@@ -137,6 +143,8 @@ namespace apiweb.healthclinic.manha.Migrations
 
                     b.HasIndex("CRM")
                         .IsUnique();
+
+                    b.HasIndex("IdClinica");
 
                     b.HasIndex("IdUsuario");
 
@@ -218,7 +226,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CaminhoImagem")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(MAX)");
 
                     b.Property<DateTime?>("DataNascimento")
@@ -308,11 +315,19 @@ namespace apiweb.healthclinic.manha.Migrations
 
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Medico", b =>
                 {
+                    b.HasOne("apiweb.healthclinic.manha.Domains.Clinica", "Clinica")
+                        .WithMany()
+                        .HasForeignKey("IdClinica")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Clinica");
 
                     b.Navigation("Usuario");
                 });
