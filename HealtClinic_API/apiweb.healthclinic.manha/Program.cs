@@ -1,3 +1,5 @@
+using apiweb.healthclinic.manha.Interfaces;
+using apiweb.healthclinic.manha.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -8,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Adiciona serviços ao container.
 
 builder.Services.AddControllers();
+
+// Aqui você registra as implementações dos seus repositórios
+builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+builder.Services.AddScoped<IMedicoServiceRepository, MedicoServiceRepository>();
 
 // Adiciona o serviço de autenticação JWT Bearer.
 builder.Services.AddAuthentication(options =>

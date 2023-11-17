@@ -199,7 +199,7 @@
             <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
             <returns>StatusCode 200 se bem-sucedido.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Post(apiweb.healthclinic.manha.ViewModels.UsuarioViewModel,Microsoft.AspNetCore.Http.IFormFile,System.String,System.String)">
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Post(apiweb.healthclinic.manha.ViewModels.UsuarioViewModel,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             Cadastrar um novo usuário com imagem.
             </summary>
@@ -224,18 +224,6 @@
             <inheritdoc />
         </member>
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv2">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

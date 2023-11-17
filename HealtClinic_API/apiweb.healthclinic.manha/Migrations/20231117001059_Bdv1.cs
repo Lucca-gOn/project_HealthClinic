@@ -53,38 +53,26 @@ namespace apiweb.healthclinic.manha.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comentario",
+                name: "Usuario",
                 columns: table => new
                 {
-                    IdComentario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DescricaoComentario = table.Column<string>(type: "TEXT", nullable: false),
-                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "VARCHAR(100)", nullable: false),
+                    Email = table.Column<string>(type: "VARCHAR(100)", nullable: false),
+                    Senha = table.Column<string>(type: "VARCHAR(MAX)", maxLength: 60, nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
+                    Sexo = table.Column<string>(type: "VARCHAR(20)", nullable: false),
+                    CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comentario", x => x.IdComentario);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Consulta",
-                columns: table => new
-                {
-                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DataConsulta = table.Column<DateTime>(type: "DATE", nullable: false),
-                    HorarioConsulta = table.Column<TimeSpan>(type: "TIME", nullable: false),
-                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Consulta", x => x.IdConsulta);
+                    table.PrimaryKey("PK_Usuario", x => x.IdUsuario);
                     table.ForeignKey(
-                        name: "FK_Consulta_Prontuario_IdProntuario",
-                        column: x => x.IdProntuario,
-                        principalTable: "Prontuario",
-                        principalColumn: "IdProntuario",
+                        name: "FK_Usuario_TiposUsuario_IdTipoUsuario",
+                        column: x => x.IdTipoUsuario,
+                        principalTable: "TiposUsuario",
+                        principalColumn: "IdTipoUsuario",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -95,48 +83,16 @@ namespace apiweb.healthclinic.manha.Migrations
                     IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CRM = table.Column<string>(type: "VARCHAR(8)", nullable: false),
                     Especialidade = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdClinica = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medico", x => x.IdMedico);
                     table.ForeignKey(
-                        name: "FK_Medico_Clinica_IdClinica",
-                        column: x => x.IdClinica,
-                        principalTable: "Clinica",
-                        principalColumn: "IdClinica",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Usuario",
-                columns: table => new
-                {
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    Email = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    Senha = table.Column<string>(type: "VARCHAR(MAX)", maxLength: 60, nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Sexo = table.Column<string>(type: "VARCHAR(20)", nullable: false),
-                    CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
-                    IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuario", x => x.IdUsuario);
-                    table.ForeignKey(
-                        name: "FK_Usuario_Medico_IdMedico",
-                        column: x => x.IdMedico,
-                        principalTable: "Medico",
-                        principalColumn: "IdMedico",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Usuario_TiposUsuario_IdTipoUsuario",
-                        column: x => x.IdTipoUsuario,
-                        principalTable: "TiposUsuario",
-                        principalColumn: "IdTipoUsuario",
+                        name: "FK_Medico_Usuario_IdUsuario",
+                        column: x => x.IdUsuario,
+                        principalTable: "Usuario",
+                        principalColumn: "IdUsuario",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -159,6 +115,66 @@ namespace apiweb.healthclinic.manha.Migrations
                         column: x => x.IdUsuario,
                         principalTable: "Usuario",
                         principalColumn: "IdUsuario",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Consulta",
+                columns: table => new
+                {
+                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DataConsulta = table.Column<DateTime>(type: "DATE", nullable: false),
+                    HorarioConsulta = table.Column<TimeSpan>(type: "TIME", nullable: false),
+                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consulta", x => x.IdConsulta);
+                    table.ForeignKey(
+                        name: "FK_Consulta_Medico_IdMedico",
+                        column: x => x.IdMedico,
+                        principalTable: "Medico",
+                        principalColumn: "IdMedico",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Consulta_Paciente_IdPaciente",
+                        column: x => x.IdPaciente,
+                        principalTable: "Paciente",
+                        principalColumn: "IdPaciente",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Consulta_Prontuario_IdProntuario",
+                        column: x => x.IdProntuario,
+                        principalTable: "Prontuario",
+                        principalColumn: "IdProntuario",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comentario",
+                columns: table => new
+                {
+                    IdComentario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DescricaoComentario = table.Column<string>(type: "TEXT", nullable: false),
+                    IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comentario", x => x.IdComentario);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Consulta_IdConsulta",
+                        column: x => x.IdConsulta,
+                        principalTable: "Consulta",
+                        principalColumn: "IdConsulta",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Paciente_IdPaciente",
+                        column: x => x.IdPaciente,
+                        principalTable: "Paciente",
+                        principalColumn: "IdPaciente",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -200,11 +216,6 @@ namespace apiweb.healthclinic.manha.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medico_IdClinica",
-                table: "Medico",
-                column: "IdClinica");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Medico_IdUsuario",
                 table: "Medico",
                 column: "IdUsuario");
@@ -233,62 +244,16 @@ namespace apiweb.healthclinic.manha.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuario_IdMedico",
-                table: "Usuario",
-                column: "IdMedico");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Usuario_IdTipoUsuario",
                 table: "Usuario",
                 column: "IdTipoUsuario");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comentario_Consulta_IdConsulta",
-                table: "Comentario",
-                column: "IdConsulta",
-                principalTable: "Consulta",
-                principalColumn: "IdConsulta",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comentario_Paciente_IdPaciente",
-                table: "Comentario",
-                column: "IdPaciente",
-                principalTable: "Paciente",
-                principalColumn: "IdPaciente",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Consulta_Medico_IdMedico",
-                table: "Consulta",
-                column: "IdMedico",
-                principalTable: "Medico",
-                principalColumn: "IdMedico",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Consulta_Paciente_IdPaciente",
-                table: "Consulta",
-                column: "IdPaciente",
-                principalTable: "Paciente",
-                principalColumn: "IdPaciente",
-                onDelete: ReferentialAction.NoAction);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Medico_Usuario_IdUsuario",
-                table: "Medico",
-                column: "IdUsuario",
-                principalTable: "Usuario",
-                principalColumn: "IdUsuario",
-                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Usuario_Medico_IdMedico",
-                table: "Usuario");
+            migrationBuilder.DropTable(
+                name: "Clinica");
 
             migrationBuilder.DropTable(
                 name: "Comentario");
@@ -297,16 +262,13 @@ namespace apiweb.healthclinic.manha.Migrations
                 name: "Consulta");
 
             migrationBuilder.DropTable(
+                name: "Medico");
+
+            migrationBuilder.DropTable(
                 name: "Paciente");
 
             migrationBuilder.DropTable(
                 name: "Prontuario");
-
-            migrationBuilder.DropTable(
-                name: "Medico");
-
-            migrationBuilder.DropTable(
-                name: "Clinica");
 
             migrationBuilder.DropTable(
                 name: "Usuario");

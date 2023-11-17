@@ -27,8 +27,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Post([FromForm] UsuarioViewModel usuarioViewModel, [FromForm] IFormFile file, [FromForm] string CRM,
-    [FromForm] string especialidade)
+        public async Task<IActionResult> Post([FromForm] UsuarioViewModel usuarioViewModel, [FromForm] IFormFile file)
         {
             try
             {
@@ -45,7 +44,7 @@ namespace apiweb.healthclinic.manha.Controllers
                 };
 
                 // Passa todos os argumentos necessários para o método Cadastrar
-                await _usuarioRepository.Cadastrar(novoUsuario, file, CRM, especialidade);
+                await _usuarioRepository.Cadastrar(novoUsuario, file);
 
 
                 return StatusCode(201);

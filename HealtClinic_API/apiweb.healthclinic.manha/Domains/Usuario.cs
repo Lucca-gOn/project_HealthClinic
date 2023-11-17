@@ -42,13 +42,5 @@ namespace apiweb.healthclinic.manha.Domains
         [ForeignKey(nameof(IdTipoUsuario))]
         //ForeignKey com (IdTipoUsuario))]
         public TiposUsuario? TiposUsuario { get; set; }
-
-        //Referencia com Medico
-        [Required(ErrorMessage = "Informe o tipo do médico!")]
-        public Guid IdMedico { get; set; }
-
-        [ForeignKey(nameof(IdMedico))]
-        //ForeignKey com (IdMedico))]
-        public Medico? Medico { get; set; }
     }
 }

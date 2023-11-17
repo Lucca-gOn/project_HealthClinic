@@ -8,7 +8,7 @@ namespace apiweb.healthclinic.manha.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task Cadastrar(Usuario novoUsuario, IFormFile file, string CRM, string especialidade);
+        Task Cadastrar(Usuario novoUsuario, IFormFile file);
 
         Usuario BuscarPorId(Guid id);
 

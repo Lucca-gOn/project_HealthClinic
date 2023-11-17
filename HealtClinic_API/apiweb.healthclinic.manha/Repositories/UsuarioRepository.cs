@@ -90,7 +90,7 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public async Task Cadastrar(Usuario novoUsuario, IFormFile file, string CRM, string especialidade)
+        public async Task Cadastrar(Usuario novoUsuario, IFormFile file)
         {
             try
             {
@@ -125,22 +125,6 @@ namespace apiweb.healthclinic.manha.Repositories
                 // Salva o usuário no banco de dados
                 _healthContext.Usuario.Add(novoUsuario);
                 await _healthContext.SaveChangesAsync();
-
-                // Verifica se o usuário é um médico e cria um médico
-                var tipoUsuarioMedico = new Guid("E5E8FDAC-116B-48F5-8CC4-DAFDB2E8AA94"); // Substitua com o valor correto
-                if (novoUsuario.IdTipoUsuario == tipoUsuarioMedico)
-                {
-                    var novoMedico = new Medico
-                    {
-                        IdUsuario = novoUsuario.IdUsuario,
-                        CRM = CRM, 
-                        Especialidade = especialidade
-                                                                 
-                    };
-
-                    _healthContext.Medico.Add(novoMedico);
-                    await _healthContext.SaveChangesAsync();
-                }
             }
             catch (Exception)
             {

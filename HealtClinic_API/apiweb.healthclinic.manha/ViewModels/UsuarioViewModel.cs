@@ -23,9 +23,5 @@ namespace apiweb.healthclinic.manha.ViewModels
 
         [Required(ErrorMessage = "Informe o tipo do usuário!")]
         public Guid IdTipoUsuario { get; set; }
-
-        // Campos específicos para o médico
-        public string CRM { get; set; }
-        public string Especialidade { get; set; }
     }
 }
