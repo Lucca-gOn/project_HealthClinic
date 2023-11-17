@@ -38,8 +38,8 @@ namespace apiweb.healthclinic.manha.Repositories
             {
 
                 throw;
-            }
-        }
+              }
+      }
 
         public List<Medico> Listar()
         {

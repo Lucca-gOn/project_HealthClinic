@@ -10,7 +10,6 @@ namespace apiweb.healthclinic.manha.Domains
         public Guid IdTipoUsuario { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "Título do usuario obrigatório!")]
         public string? Titulo { get; set; }
     }
 }

@@ -77,6 +77,26 @@
             <param name="id">O ID da consulta a ser deletada.</param>
             <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
         </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Post(apiweb.healthclinic.manha.Domains.Especialidade)">
+            <summary>
+            Cria uma nova especialidade na clínica.
+            </summary>
+            <param name="novaEspecialidade">A especialidade a ser criada.</param>
+            <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Get">
+            <summary>
+            Lista todas as especialidades disponíveis na clínica.
+            </summary>
+            <returns>Uma lista de especialidades ou um erro caso algo dê errado.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Delete(System.Guid)">
+            <summary>
+            Deleta uma especialidade específica com base no seu ID.
+            </summary>
+            <param name="id">O ID da especialidade a ser deletada.</param>
+            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.LoginController.Login(apiweb.healthclinic.manha.ViewModels.LoginViewModel)">
             <summary>
             Realiza o login do usuário utilizando seu email e senha, retornando um token JWT caso bem-sucedido.

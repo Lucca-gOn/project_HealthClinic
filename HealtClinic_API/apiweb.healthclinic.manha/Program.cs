@@ -11,9 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Aqui você registra as implementações dos seus repositórios
+// Registra as implementações dos seus repositórios
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
 
 builder.Services.AddScoped<IMedicoServiceRepository, MedicoServiceRepository>();
 

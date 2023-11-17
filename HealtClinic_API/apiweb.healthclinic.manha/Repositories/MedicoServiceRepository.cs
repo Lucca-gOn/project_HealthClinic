@@ -7,26 +7,23 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly IMedicoRepository _medicoRepository;
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IEspecialidadeRepository _especialidadeRepository;
 
-        public MedicoServiceRepository(IMedicoRepository medicoRepository, IUsuarioRepository usuarioRepository)
+
+        public MedicoServiceRepository(IMedicoRepository medicoRepository, IUsuarioRepository usuarioRepository, IEspecialidadeRepository especialidadeRepository)
         {
             _medicoRepository = medicoRepository;
             _usuarioRepository = usuarioRepository;
+            _especialidadeRepository = especialidadeRepository;
+
         }
 
-        public async Task CadastrarMedicoComUsuarioAsync(Medico novoMedico, Usuario novoUsuario, IFormFile file)
+        public void CadastrarMedicoComUsuario(Medico novoMedico, IFormFile file)
         {
-            // Implementação da lógica de cadastro do usuário e do médico
-            // Exemplo básico, você precisará adaptar de acordo com sua lógica de negócio e repositórios
-
-            // Primeiro, cadastrar o usuário
-            await _usuarioRepository.Cadastrar(novoUsuario, file);
-
-            // O IdUsuario do novoUsuario deve ser definido após o cadastro
-            novoMedico.IdUsuario = novoUsuario.IdUsuario;
-
-            // Depois, cadastrar o médico
-            _medicoRepository.Cadastrar(novoMedico);
+           _usuarioRepository.Cadastrar(novoMedico.Usuario, file);
+           _especialidadeRepository.Cadastrar(novoMedico.Especialidade);
+           _medicoRepository.Cadastrar(novoMedico);
+           
         }
     }
 }

@@ -116,6 +116,20 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.ToTable("Consulta");
                 });
 
+            modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Especialidade", b =>
+                {
+                    b.Property<Guid>("IdEspecialidade")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TituloEspecialidade")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdEspecialidade");
+
+                    b.ToTable("Especialidade");
+                });
+
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Medico", b =>
                 {
                     b.Property<Guid>("IdMedico")
@@ -123,12 +137,10 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CRM")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(8)");
 
-                    b.Property<string>("Especialidade")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(MAX)");
+                    b.Property<Guid>("IdEspecialidade")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
@@ -136,7 +148,10 @@ namespace apiweb.healthclinic.manha.Migrations
                     b.HasKey("IdMedico");
 
                     b.HasIndex("CRM")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CRM] IS NOT NULL");
+
+                    b.HasIndex("IdEspecialidade");
 
                     b.HasIndex("IdUsuario");
 
@@ -203,7 +218,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Titulo")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("IdTipoUsuario");
@@ -218,7 +232,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CaminhoImagem")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(MAX)");
 
                     b.Property<DateTime?>("DataNascimento")
@@ -303,11 +316,19 @@ namespace apiweb.healthclinic.manha.Migrations
 
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Medico", b =>
                 {
+                    b.HasOne("apiweb.healthclinic.manha.Domains.Especialidade", "Especialidade")
+                        .WithMany()
+                        .HasForeignKey("IdEspecialidade")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("apiweb.healthclinic.manha.Domains.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Especialidade");
 
                     b.Navigation("Usuario");
                 });

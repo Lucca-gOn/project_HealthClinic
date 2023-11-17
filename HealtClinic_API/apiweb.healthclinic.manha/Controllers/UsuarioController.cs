@@ -36,16 +36,14 @@ namespace apiweb.healthclinic.manha.Controllers
                 {
                     Nome = usuarioViewModel.Nome,
                     Email = usuarioViewModel.Email,
-                    Senha = usuarioViewModel.Senha, // A senha será criptografada no método Cadastrar
+                    Senha = Criptografia.GerarHash(usuarioViewModel.Senha), 
                     DataNascimento = usuarioViewModel.DataNascimento,
                     Sexo = usuarioViewModel.Sexo,
                     IdTipoUsuario = usuarioViewModel.IdTipoUsuario
-                    // Outros campos conforme necessário
                 };
 
-                // Passa todos os argumentos necessários para o método Cadastrar
+          
                 await _usuarioRepository.Cadastrar(novoUsuario, file);
-
 
                 return StatusCode(201);
             }
@@ -80,6 +78,20 @@ namespace apiweb.healthclinic.manha.Controllers
             try
             {
                 return Ok(_usuarioRepository.Listar());
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpGet("(GetAll)")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                return Ok(_usuarioRepository.ListarAll());
             }
             catch (Exception erro)
             {

@@ -1,8 +1,5 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Dto;
-using apiweb.healthclinic.manha.Repositories;
-using apiweb.healthclinic.manha.ViewModels;
-using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Interfaces
 {
@@ -15,6 +12,8 @@ namespace apiweb.healthclinic.manha.Interfaces
         Usuario BuscarPorEmailESenha (string email, string senha);
 
         List<UsuarioListarDto> Listar();
+
+        List<Usuario> ListarAll();
 
     }
 }

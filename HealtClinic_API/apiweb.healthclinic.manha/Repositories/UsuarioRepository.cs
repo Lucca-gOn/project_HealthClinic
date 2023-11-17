@@ -132,6 +132,18 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
+        public List<Usuario> ListarAll()
+        {
+            try
+            {
+                return _healthContext.Usuario.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         List<UsuarioListarDto> IUsuarioRepository.Listar()
         {
@@ -146,9 +158,10 @@ namespace apiweb.healthclinic.manha.Repositories
                     CaminhoImagem = u.CaminhoImagem,
                     TipoUsuario = u.TiposUsuario.Titulo,
                     EspecialidadeMedico = _healthContext.Medico
+                                        .Include(m => m.Especialidade) 
                                         .Where(m => m.IdUsuario == u.IdUsuario)
-                                        .Select(m => m.Especialidade)
-                                        .FirstOrDefault()!
+                                        .Select(m => m.Especialidade.TituloEspecialidade) 
+                                        .FirstOrDefault()
                 })
                 .ToList();
 
@@ -156,7 +169,6 @@ namespace apiweb.healthclinic.manha.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
 

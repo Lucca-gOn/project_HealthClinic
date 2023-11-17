@@ -33,10 +33,10 @@ namespace apiweb.healthclinic.manha.Domains
         public string? Sexo { get; set; }
 
         [Column(TypeName = "VARCHAR(MAX)")]
-        public string CaminhoImagem { get; set; }
+        public string? CaminhoImagem { get; set; }
 
         //Referencia com TiposUsuario
-        [Required(ErrorMessage = "Informe o tipo do usuário!")]
+        [Required(ErrorMessage = "IdTipoUsuario obrigatório!")]
         public Guid IdTipoUsuario { get; set; }
 
         [ForeignKey(nameof(IdTipoUsuario))]

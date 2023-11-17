@@ -12,20 +12,21 @@ namespace apiweb.healthclinic.manha.Domains
         public Guid IdMedico { get; set; }  = Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(8)")]
-        [Required(ErrorMessage = "CRM do médico obrigatório!")]
         public string? CRM { get; set; }
 
-        [Column(TypeName = "VARCHAR(MAX)")]
-        [Required(ErrorMessage = "Especialidade do médico obrigatória!")]
-        public string? Especialidade { get; set; }
-
         //Referencia com Usuario
-        [Required(ErrorMessage = "Informe o usuário!")]
         public Guid IdUsuario { get; set; }
 
         [ForeignKey(nameof(IdUsuario))]
         //ForeignKey com (IdUsuario))]
         public Usuario? Usuario { get; set; }
+
+        //Referencia com Especialidade
+        public Guid IdEspecialidade { get; set; }
+
+        [ForeignKey(nameof(IdEspecialidade))]
+        //ForeignKey com (IdUsuario))]
+        public Especialidade? Especialidade { get; set; }
 
     }
 }

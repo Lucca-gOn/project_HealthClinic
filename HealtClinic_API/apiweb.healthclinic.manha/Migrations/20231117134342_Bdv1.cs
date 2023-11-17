@@ -29,6 +29,18 @@ namespace apiweb.healthclinic.manha.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Especialidade",
+                columns: table => new
+                {
+                    IdEspecialidade = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TituloEspecialidade = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Especialidade", x => x.IdEspecialidade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Prontuario",
                 columns: table => new
                 {
@@ -45,7 +57,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Titulo = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                    Titulo = table.Column<string>(type: "VARCHAR(100)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,7 +74,7 @@ namespace apiweb.healthclinic.manha.Migrations
                     Senha = table.Column<string>(type: "VARCHAR(MAX)", maxLength: 60, nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
                     Sexo = table.Column<string>(type: "VARCHAR(20)", nullable: false),
-                    CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
                     IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -81,13 +93,19 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CRM = table.Column<string>(type: "VARCHAR(8)", nullable: false),
-                    Especialidade = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CRM = table.Column<string>(type: "VARCHAR(8)", nullable: true),
+                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdEspecialidade = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medico", x => x.IdMedico);
+                    table.ForeignKey(
+                        name: "FK_Medico_Especialidade_IdEspecialidade",
+                        column: x => x.IdEspecialidade,
+                        principalTable: "Especialidade",
+                        principalColumn: "IdEspecialidade",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Medico_Usuario_IdUsuario",
                         column: x => x.IdUsuario,
@@ -213,7 +231,13 @@ namespace apiweb.healthclinic.manha.Migrations
                 name: "IX_Medico_CRM",
                 table: "Medico",
                 column: "CRM",
-                unique: true);
+                unique: true,
+                filter: "[CRM] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Medico_IdEspecialidade",
+                table: "Medico",
+                column: "IdEspecialidade");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Medico_IdUsuario",
@@ -269,6 +293,9 @@ namespace apiweb.healthclinic.manha.Migrations
 
             migrationBuilder.DropTable(
                 name: "Prontuario");
+
+            migrationBuilder.DropTable(
+                name: "Especialidade");
 
             migrationBuilder.DropTable(
                 name: "Usuario");
