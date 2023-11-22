@@ -16,12 +16,9 @@ namespace apiweb.healthclinic.manha.Controllers
     {
         private IProntuarioRepository _prontuarioRepository;
 
-        /// <summary>
-        /// Construtor padrão que inicializa o repositório de prontuários.
-        /// </summary>
-        public ProntuarioController()
+        public ProntuarioController(IProntuarioRepository prontuarioRepository)
         {
-            _prontuarioRepository = new ProntuarioRepository();
+            _prontuarioRepository = prontuarioRepository;
         }
 
         /// <summary>

@@ -9,8 +9,8 @@ namespace apiweb.healthclinic.manha.Domains
         [Key]
         public Guid IdEspecialidade { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName = "TEXT")]
-        public string? TituloEspecialidade { get; set; }
+        [Column(TypeName = "VARCHAR(100)")]
+        public string TituloEspecialidade { get; set; }
 
     }
 }

@@ -11,5 +11,6 @@ namespace apiweb.healthclinic.manha.Interfaces
         TiposUsuario BuscarPorId(Guid id);
 
         void Atualizar(Guid id, TiposUsuario tipoUsuario);
+        TiposUsuario? BuscarTipoUsuarioPorTitulo(string titulo);
     }
 }

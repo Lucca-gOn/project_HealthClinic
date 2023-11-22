@@ -9,10 +9,11 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public TiposUsuarioRepository()
+        public TiposUsuarioRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public void Atualizar(Guid id, TiposUsuario tipoUsuario)
         {
             try
@@ -32,7 +33,7 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
-            
+
         }
 
         public TiposUsuario BuscarPorId(Guid id)
@@ -46,8 +47,19 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
-            
 
+
+        }
+
+        public TiposUsuario? BuscarTipoUsuarioPorTitulo(string titulo)
+        {
+            // TODO: remover o ToList e alterar o tipo TEXT da prop Titulo
+            #warning remover o ToList e alterar o tipo TEXT da prop Titulo
+
+            return _healthContext.TiposUsuario
+                .ToList()
+                .Where(tu => tu.Titulo == titulo)
+                .FirstOrDefault();
         }
 
         public void Cadastrar(TiposUsuario novoTipoUsuario)
@@ -62,14 +74,14 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
-            
+
         }
 
         public List<TiposUsuario> Listar()
         {
             try
             {
-               return _healthContext.TiposUsuario.ToList();
+                return _healthContext.TiposUsuario.ToList();
             }
             catch (Exception)
             {

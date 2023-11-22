@@ -12,10 +12,12 @@ namespace apiweb.healthclinic.manha.Controllers
     public class TiposUsuarioController : ControllerBase
     {
         private ITiposUsuarioRepository _tiposUsuarioRepository;
-        public TiposUsuarioController()
+
+        public TiposUsuarioController(ITiposUsuarioRepository tiposUsuarioRepository)
         {
-            _tiposUsuarioRepository = new TiposUsuarioRepository();
+            _tiposUsuarioRepository = tiposUsuarioRepository;
         }
+
 
         /// <summary>
         /// Cadastra um novo tipo de usuário.

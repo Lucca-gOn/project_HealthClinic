@@ -9,10 +9,11 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public MedicoRepository()
+        public MedicoRepository(HealthContext healthContext)
         {
-                _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public void Cadastrar(Medico novoMedico)
         {
             try
@@ -31,15 +32,15 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                _healthContext.Medico.Where(e => e.IdMedico ==id).ExecuteDelete();
+                _healthContext.Medico.Where(e => e.IdMedico == id).ExecuteDelete();
                 _healthContext.SaveChanges();
             }
             catch (Exception)
             {
 
                 throw;
-              }
-      }
+            }
+        }
 
         public List<Medico> Listar()
         {

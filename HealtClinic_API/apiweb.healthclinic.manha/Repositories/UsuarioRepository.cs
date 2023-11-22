@@ -1,6 +1,6 @@
 ﻿using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto;
+using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Utils;
 using apiweb.healthclinic.manha.ViewModels;
@@ -13,9 +13,9 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public UsuarioRepository()
+        public UsuarioRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
 
         public void Atualizar(Guid id, Usuario usuario, string novoCaminhoImagem)
@@ -90,46 +90,9 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public async Task Cadastrar(Usuario novoUsuario, IFormFile file)
+        public void Cadastrar(Usuario novoUsuario)
         {
-            try
-            {
-                // Criação do diretório de uploads
-                var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
-                if (!Directory.Exists(uploadsFolderPath))
-                {
-                    Directory.CreateDirectory(uploadsFolderPath);
-                }
-
-                // Tratamento do arquivo de upload
-                if (file != null && file.Length > 0)
-                {
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var filePath = Path.Combine(uploadsFolderPath, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    novoUsuario.CaminhoImagem = Path.Combine("uploads", fileName);
-                }
-                else
-                {
-                    novoUsuario.CaminhoImagem = null; // ou caminho padrão se aplicável
-                }
-
-                // Criptografando a senha do usuário
-                novoUsuario.Senha = Criptografia.GerarHash(novoUsuario.Senha);
-
-                // Salva o usuário no banco de dados
-                _healthContext.Usuario.Add(novoUsuario);
-                await _healthContext.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                throw; 
-            }
+            _healthContext.Add(novoUsuario);
         }
 
         public List<Usuario> ListarAll()
@@ -143,35 +106,6 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
-        }
-
-        List<UsuarioListarDto> IUsuarioRepository.Listar()
-        {
-            try
-            {
-                var listaUsuarios = _healthContext.Usuario
-                .Include(u => u.TiposUsuario)
-                .Select(u => new UsuarioListarDto
-                {
-                    IdUsuario = u.IdUsuario,
-                    Nome = u.Nome,
-                    CaminhoImagem = u.CaminhoImagem,
-                    TipoUsuario = u.TiposUsuario.Titulo,
-                    EspecialidadeMedico = _healthContext.Medico
-                                        .Include(m => m.Especialidade) 
-                                        .Where(m => m.IdUsuario == u.IdUsuario)
-                                        .Select(m => m.Especialidade.TituloEspecialidade) 
-                                        .FirstOrDefault()
-                })
-                .ToList();
-
-                return listaUsuarios;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
         }
     }
 }

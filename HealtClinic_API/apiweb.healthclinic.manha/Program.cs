@@ -1,24 +1,60 @@
+using apiweb.healthclinic.manha;
+using apiweb.healthclinic.manha.Contexts;
+using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona serviços ao container.
+// Adiciona serviï¿½os ao container.
 
 builder.Services.AddControllers();
 
-// Registra as implementações dos seus repositórios
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy",
+        policyBuilder =>
+        {
+            policyBuilder.WithOrigins("http://localhost:3000")
+                         .AllowAnyHeader()
+                         .AllowAnyMethod();
+        });
+});
+
+// Registra as implementaÃ§oes dos seus repositorios
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
 
-builder.Services.AddScoped<IMedicoServiceRepository, MedicoServiceRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
+builder.Services.AddScoped<ITiposUsuarioRepository, TiposUsuarioRepository>();
 
-// Adiciona o serviço de autenticação JWT Bearer.
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IConsultaService, ConsultaService>();
+builder.Services.AddScoped<IImagemService, ImagemService>();
+builder.Services.AddScoped<IProntuarioRepository, ProntuarioRepository>();
+builder.Services.AddScoped<IClinicaRepository, ClinicaRepository>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+string x = builder.Configuration["ConnectionStrings:Default"];
+
+builder.Services.AddDbContext<HealthContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
+
+// Adiciona o serviï¿½o de autenticaï¿½ï¿½o JWT Bearer.
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultChallengeScheme = "JwtBearer";
@@ -44,11 +80,11 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "API HealthClinic",
-        Description = "API para o gerenciamentos de consultas médicas - HealthClinic WEB.API",
+        Description = "API Para Gerenciamento de Consultas MÃ©dicas - HealthClinic WEB.API",
         Contact = new OpenApiContact
         {
-            Name = "Lucas Oliveira - Senai Informática",
-            Url = new Uri("https://github.com/Lucca-gOn")
+            Name = "Lucas Oliveira E Paulo Oliveira - Senai InformÃ¡tica",
+            Url = new Uri("https://github.com/MagiLogus/HealthClinic")
         },
     });
 
@@ -80,19 +116,19 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    // Adiciona um filtro de operação para suportar o upload de arquivos no Swagger UI
+    // Adiciona um filtro de operaï¿½ï¿½o para suportar o upload de arquivos no Swagger UI
     options.OperationFilter<FileUploadOperation>();
 });
 
-// Adiciona o serviço de exploração de API para o Swagger
+// Adiciona o serviï¿½o de exploraï¿½ï¿½o de API para o Swagger
 builder.Services.AddEndpointsApiExplorer();
 
-// Adiciona o serviço SwaggerGen com configurações definidas
+// Adiciona o serviï¿½o SwaggerGen com configuraï¿½ï¿½es definidas
 // Removemos a chamada duplicada que estava aqui
 
 var app = builder.Build();
 
-// Configura o pipeline de requisições HTTP.
+// Configura o pipeline de requisiï¿½ï¿½es HTTP.
 
 if (app.Environment.IsDevelopment())
 {
@@ -102,16 +138,23 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// A ordem correta é usar primeiro a autenticação e depois a autorização.
+app.UseCors("MyPolicy");
+
+// A ordem correta ï¿½ usar primeiro a autenticaï¿½ï¿½o e depois a autorizaï¿½ï¿½o.
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
+//Para aceitar o caminho do file estatico;
+app.UseStaticFiles();
+
+app.Urls.Add("http://192.168.15.8:5000");
+
 app.Run();
 
-// Implementação do filtro de operação para upload de arquivos
+// Implementaï¿½ï¿½o do filtro de operaï¿½ï¿½o para upload de arquivos
 public class FileUploadOperation : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
@@ -121,7 +164,7 @@ public class FileUploadOperation : IOperationFilter
         {
             var formDataContent = operation.RequestBody.Content["multipart/form-data"];
 
-            // Verifica se a chave 'file' já existe antes de adicioná-la
+            // Verifica se a chave 'file' jï¿½ existe antes de adicionï¿½-la
             if (!formDataContent.Schema.Properties.ContainsKey("file"))
             {
                 formDataContent.Schema.Properties.Add("file", new OpenApiSchema

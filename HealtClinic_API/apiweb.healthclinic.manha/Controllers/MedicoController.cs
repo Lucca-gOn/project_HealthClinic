@@ -13,9 +13,10 @@ namespace apiweb.healthclinic.manha.Controllers
     public class MedicoController : ControllerBase
     {
         private readonly IMedicoRepository _medicoRepository;
-        public MedicoController()
+
+        public MedicoController(IMedicoRepository medicoRepository)
         {
-            _medicoRepository = new MedicoRepository();
+            _medicoRepository = medicoRepository;
         }
 
         /// <summary>

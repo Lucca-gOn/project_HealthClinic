@@ -4,12 +4,6 @@
         <name>apiweb.healthclinic.manha</name>
     </assembly>
     <members>
-        <member name="M:apiweb.healthclinic.manha.Contexts.HealthContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
-            <summary>
-            Define as opções de construção do banco (String Conexão)
-            </summary>
-            <param name="optionsBuilder">Objeto com as configurações definidas</param>
-        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ClinicaController.Post(apiweb.healthclinic.manha.Domains.Clinica)">
             <summary>
             Cadastra uma nova clínica.
@@ -164,11 +158,6 @@
             Controlador responsável pelas operações envolvendo os prontuários.
             </summary>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.ProntuarioController.#ctor">
-            <summary>
-            Construtor padrão que inicializa o repositório de prontuários.
-            </summary>
-        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ProntuarioController.Post(apiweb.healthclinic.manha.Domains.Prontuario)">
             <summary>
             Cadastra um novo prontuário.
@@ -219,14 +208,6 @@
             <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
             <returns>StatusCode 200 se bem-sucedido.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Post(apiweb.healthclinic.manha.ViewModels.UsuarioViewModel,Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            Cadastrar um novo usuário com imagem.
-            </summary>
-            <param name="usuarioDto">DTO contendo informações do usuário.</param>
-            <param name="file">Arquivo de imagem do usuário.</param>
-            <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
-        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.GetById(System.Guid)">
             <summary>
             Endpoint GET para buscar um usuário pelo ID.
@@ -244,6 +225,18 @@
             <inheritdoc />
         </member>
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv2">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

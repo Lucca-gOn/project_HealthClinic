@@ -1,6 +1,8 @@
 ﻿using apiweb.healthclinic.manha.Domains;
+using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.Services;
 using apiweb.healthclinic.manha.Utils;
 using apiweb.healthclinic.manha.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -13,43 +15,32 @@ namespace apiweb.healthclinic.manha.Controllers
     [Produces("application/json")]
     public class UsuarioController : ControllerBase
     {
+        private readonly IUsuarioService _service;
         private readonly IUsuarioRepository _usuarioRepository;
-        public UsuarioController()
+
+        public UsuarioController(
+            IUsuarioService service,
+            IUsuarioRepository usuarioRepository)
         {
-            _usuarioRepository = new UsuarioRepository();
+            _service = service;
+            _usuarioRepository = usuarioRepository;
         }
 
-        /// <summary>
-        /// Cadastrar um novo usuário com imagem.
-        /// </summary>
-        /// <param name="usuarioDto">DTO contendo informações do usuário.</param>
-        /// <param name="file">Arquivo de imagem do usuário.</param>
-        /// <returns>Código de status 201 em caso de sucesso ou 400 com a mensagem de erro.</returns>
         [HttpPost]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Post([FromForm] UsuarioViewModel usuarioViewModel, [FromForm] IFormFile file)
+        public IActionResult CriarUsuario([FromForm] CriarUsuarioRequest request)
         {
             try
             {
-                // Mapeia o ViewModel para a entidade Usuario
-                Usuario novoUsuario = new Usuario
-                {
-                    Nome = usuarioViewModel.Nome,
-                    Email = usuarioViewModel.Email,
-                    Senha = Criptografia.GerarHash(usuarioViewModel.Senha), 
-                    DataNascimento = usuarioViewModel.DataNascimento,
-                    Sexo = usuarioViewModel.Sexo,
-                    IdTipoUsuario = usuarioViewModel.IdTipoUsuario
-                };
+                var response = _service.CriarUsuario(request);
 
-          
-                await _usuarioRepository.Cadastrar(novoUsuario, file);
-
-                return StatusCode(201);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = response.Id },
+                    response);
             }
-            catch (Exception erro)
+            catch (Exception e)
             {
-                return BadRequest(erro.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -77,7 +68,8 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_usuarioRepository.Listar());
+                var listarUsuario = _service.ListarUsuarios();
+                return Ok(listarUsuario.Itens);
             }
             catch (Exception erro)
             {

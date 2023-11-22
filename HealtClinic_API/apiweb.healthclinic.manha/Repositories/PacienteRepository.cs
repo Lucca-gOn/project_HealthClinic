@@ -8,24 +8,20 @@ namespace apiweb.healthclinic.manha.Repositories
     public class PacienteRepository : IPacienteRepository
     {
         private readonly HealthContext _healthContext;
-        public PacienteRepository()
+
+        public PacienteRepository(HealthContext healthContext)
         {
-                _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public void Atualizar(Guid id, Paciente paciente)
         {
             try
             {
                 Paciente buscarPaciente = _healthContext.Paciente.Find(id)!;
-                if (buscarPaciente != null)
-                {
-                    buscarPaciente.Telefone = paciente.Telefone;
-                    buscarPaciente.Endereco = paciente.Endereco;
 
-                    _healthContext.Update(buscarPaciente);
-
-                    _healthContext.SaveChanges();
-                }
+                _healthContext.Update(buscarPaciente);
+                _healthContext.SaveChanges();
             }
             catch (Exception)
             {

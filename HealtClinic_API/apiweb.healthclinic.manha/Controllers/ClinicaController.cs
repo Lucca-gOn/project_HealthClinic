@@ -13,9 +13,9 @@ namespace apiweb.healthclinic.manha.Controllers
     {
         private IClinicaRepository _clinicaRepository;
 
-        public ClinicaController()
+        public ClinicaController(IClinicaRepository clinicaRepository)
         {
-               _clinicaRepository = new ClinicaRepository();
+            _clinicaRepository = clinicaRepository;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// </summary>
         /// <returns>Retorna uma lista contendo todas as clínicas.</returns>
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
             try
             {

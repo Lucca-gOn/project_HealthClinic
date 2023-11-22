@@ -13,9 +13,9 @@ namespace apiweb.healthclinic.manha.Controllers
     {
         private readonly IEspecialidadeRepository _especialidadeRepository;
 
-        public EspecialidadeController()
+        public EspecialidadeController(IEspecialidadeRepository especialidadeRepository)
         {
-            _especialidadeRepository = new EspecialidadeRepository();
+            _especialidadeRepository = especialidadeRepository;
         }
 
         /// <summary>

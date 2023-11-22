@@ -12,9 +12,10 @@ namespace apiweb.healthclinic.manha.Controllers
     public class PacienteController : ControllerBase
     {
         private readonly IPacienteRepository _pacienteRepository;
-        public PacienteController()
+
+        public PacienteController(IPacienteRepository pacienteRepository)
         {
-            _pacienteRepository = new PacienteRepository();
+            _pacienteRepository = pacienteRepository;
         }
 
         /// <summary>

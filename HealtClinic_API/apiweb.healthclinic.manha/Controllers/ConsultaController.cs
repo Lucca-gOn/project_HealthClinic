@@ -11,11 +11,15 @@ namespace apiweb.healthclinic.manha.Controllers
     [Produces("application/json")]
     public class ConsultaController : ControllerBase
     {
+        private readonly IConsultaService _consultaService;
         private readonly IConsultaRepository _consultaRepository;
 
-        public ConsultaController()
+        public ConsultaController(
+            IConsultaService consultaService,
+            IConsultaRepository consultaRepository)
         {
-            _consultaRepository = new ConsultaRepository();
+            _consultaService = consultaService;
+            _consultaRepository = consultaRepository;
         }
 
         /// <summary>
@@ -47,7 +51,8 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_consultaRepository.Listar());
+                var consultas = _consultaService.ListarConsultas();
+                return Ok(consultas.Itens);
 
             }
             catch (Exception erro)
@@ -63,7 +68,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// <param name="IdPaciente">O ID do paciente para buscar suas consultas.</param>
         /// <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
         [HttpGet("{idpaciente}")]
-        public IActionResult GetByPaciente(Guid IdPaciente) 
+        public IActionResult GetByPaciente(Guid IdPaciente)
         {
             try
             {

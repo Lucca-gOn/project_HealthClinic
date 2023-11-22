@@ -13,9 +13,9 @@ namespace apiweb.healthclinic.manha.Controllers
     {
         private readonly IComentarioRepository _comentarioRepository;
 
-        public ComentarioController()
+        public ComentarioController(IComentarioRepository comentarioRepository)
         {
-            _comentarioRepository = new ComentarioRepository();
+            _comentarioRepository = comentarioRepository;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// <param name="id">O ID do comentário a ser excluído.</param>
         /// <returns>Retorna um código de status indicando o resultado da operação.</returns>
         [HttpDelete]
-        public IActionResult Delete(Guid id) 
+        public IActionResult Delete(Guid id)
         {
             try
             {

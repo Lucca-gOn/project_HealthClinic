@@ -8,10 +8,11 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public ProntuarioRepository()
+        public ProntuarioRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public void Atualizar(Guid id, Prontuario prontuario)
         {
             try

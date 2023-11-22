@@ -12,7 +12,7 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231117134342_Bdv1")]
+    [Migration("20231119023102_Bdv1")]
     partial class Bdv1
     {
         /// <inheritdoc />
@@ -126,7 +126,8 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TituloEspecialidade")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("IdEspecialidade");
 
@@ -168,33 +169,31 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CPF")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(12)");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("RG")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(12)");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(30)");
 
                     b.HasKey("IdPaciente");
 
                     b.HasIndex("CPF")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CPF] IS NOT NULL");
 
                     b.HasIndex("IdUsuario");
 
                     b.HasIndex("RG")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[RG] IS NOT NULL");
 
                     b.ToTable("Paciente");
                 });

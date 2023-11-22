@@ -8,10 +8,11 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public ClinicaRepository()
+        public ClinicaRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public void Cadastrar(Clinica novaClinica)
         {
             try
@@ -37,7 +38,7 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
-            
+
         }
     }
 }

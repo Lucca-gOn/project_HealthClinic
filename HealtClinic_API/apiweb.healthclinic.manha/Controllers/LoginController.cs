@@ -18,9 +18,9 @@ namespace apiweb.healthclinic.manha.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public LoginController()
+        public LoginController(IUsuarioRepository usuarioRepository)
         {
-            _usuarioRepository = new UsuarioRepository();
+            _usuarioRepository = usuarioRepository;
         }
 
         /// <summary>

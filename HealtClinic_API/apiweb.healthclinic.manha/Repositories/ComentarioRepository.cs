@@ -9,10 +9,11 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public ComentarioRepository()
+        public ComentarioRepository(HealthContext healthContext)
         {
-                _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
         public Comentario BuscarPorId(Guid id)
         {
             try
@@ -58,7 +59,7 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-               return _healthContext.Comentario.ToList();    
+                return _healthContext.Comentario.ToList();
             }
             catch (Exception)
             {

@@ -1,17 +1,15 @@
 ﻿using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto;
+using apiweb.healthclinic.manha.Dto.Usuarios;
 
 namespace apiweb.healthclinic.manha.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task Cadastrar(Usuario novoUsuario, IFormFile file);
+        void Cadastrar(Usuario novoUsuario);
 
         Usuario BuscarPorId(Guid id);
 
         Usuario BuscarPorEmailESenha (string email, string senha);
-
-        List<UsuarioListarDto> Listar();
 
         List<Usuario> ListarAll();
 

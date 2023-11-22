@@ -9,10 +9,19 @@ namespace apiweb.healthclinic.manha.Repositories
     {
         private readonly HealthContext _healthContext;
 
-        public EspecialidadeRepository()
+        public EspecialidadeRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
+
+        public Especialidade? BuscarEspecialidadePorTitulo(string titulo)
+        {
+
+            return _healthContext.Especialidade
+                .Where(e => e.TituloEspecialidade == titulo)
+                .FirstOrDefault();
+        }
+
         public void Cadastrar(Especialidade novaEspecialidade)
         {
             try

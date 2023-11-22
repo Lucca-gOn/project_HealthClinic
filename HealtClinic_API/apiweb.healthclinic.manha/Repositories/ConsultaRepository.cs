@@ -8,9 +8,10 @@ namespace apiweb.healthclinic.manha.Repositories
     public class ConsultaRepository : IConsultaRepository
     {
         private readonly HealthContext _healthContext;
-        public ConsultaRepository()
+
+        public ConsultaRepository(HealthContext healthContext)
         {
-            _healthContext = new HealthContext();
+            _healthContext = healthContext;
         }
 
         public Consulta BuscarPorId(Guid id)
@@ -58,11 +59,17 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                return _healthContext.Consulta.ToList();
+                return _healthContext.Consulta
+                    .Include(c => c.Paciente)
+                        .ThenInclude(p => p.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Especialidade) 
+                    .ToList();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
