@@ -92,14 +92,9 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public void Cadastrar(Usuario novoUsuario)
         {
-            _healthContext.Add(novoUsuario);
-        }
-
-        public List<Usuario> ListarAll()
-        {
             try
             {
-                return _healthContext.Usuario.ToList();
+                _healthContext.Add(novoUsuario);
             }
             catch (Exception)
             {
@@ -107,5 +102,20 @@ namespace apiweb.healthclinic.manha.Repositories
                 throw;
             }
         }
+
+        public void Deletar(Guid id)
+        {
+            try
+            {
+                _healthContext.Usuario.Where(e => e.IdUsuario == id).ExecuteDelete();
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

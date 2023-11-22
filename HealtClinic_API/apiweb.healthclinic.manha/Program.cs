@@ -11,12 +11,9 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona servi�os ao container.
-
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
@@ -147,10 +144,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//Para aceitar o caminho do file estatico;
+// Configuração do middleware para servir arquivos estáticos.
 app.UseStaticFiles();
 
-app.Urls.Add("http://192.168.15.8:5000");
+/*app.Urls.Add("http://192.168.15.8:5000");*/  //Casa
+app.Urls.Add("http://172.16.35.116:5000");  //Senai
 
 app.Run();
 

@@ -1,4 +1,5 @@
 using apiweb.healthclinic.manha.Domains;
+using apiweb.healthclinic.manha.Dto.Consultas;
 using apiweb.healthclinic.manha.Interfaces;
 
 namespace apiweb.healthclinic.manha.Services;
@@ -6,10 +7,25 @@ namespace apiweb.healthclinic.manha.Services;
 public class ConsultaService : IConsultaService
 {
     private readonly IConsultaRepository _consultaRepository;
+    private readonly IPacienteRepository _pacienteRepository;
+    private readonly IMedicoRepository _medicoRepository;
+    private readonly IEspecialidadeRepository _especialidadeRepository;
 
-    public ConsultaService(IConsultaRepository consultaRepository)
+    public ConsultaService(
+        IConsultaRepository consultaRepository, 
+        IPacienteRepository pacienteRepository, 
+        IMedicoRepository medicoRepository, 
+        IEspecialidadeRepository especialidadeRepository)
     {
         _consultaRepository = consultaRepository;
+        _pacienteRepository = pacienteRepository;
+        _medicoRepository = medicoRepository;
+        _especialidadeRepository = especialidadeRepository;
+    }
+
+    public CriarConsultaResponse CriarConsulta(CriarConsultaRequest request)
+    {
+        throw new NotImplementedException();
     }
 
     public ListarConsultasResponse ListarConsultas()

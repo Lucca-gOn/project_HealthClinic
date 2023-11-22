@@ -64,7 +64,7 @@ public class UsuarioService : IUsuarioService
 
         switch (tituloTipoUsuario)
         {
-            case "Medico":
+            case "Médico":
                 CriarMedico(request, usuario);
                 break;
             case "Paciente":
@@ -158,6 +158,9 @@ public class UsuarioService : IUsuarioService
         .Select(u => new ListarUsuariosResponseItem(
             u.IdUsuario,
             u.Nome,
+            u.Email,
+            u.DataNascimento,
+            u.Sexo,
             u.CaminhoImagem,
             u.TiposUsuario.Titulo,
             _healthContext.Medico

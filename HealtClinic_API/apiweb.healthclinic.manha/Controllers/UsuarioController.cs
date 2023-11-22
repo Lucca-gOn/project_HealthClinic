@@ -68,8 +68,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                var listarUsuario = _service.ListarUsuarios();
-                return Ok(listarUsuario.Itens);
+                return Ok(_service.ListarUsuarios().Itens);
             }
             catch (Exception erro)
             {
@@ -78,16 +77,16 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        [HttpGet("(GetAll)")]
-        public IActionResult GetAll()
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
         {
             try
             {
-                return Ok(_usuarioRepository.ListarAll());
+                _usuarioRepository.Deletar(id);
+                return Ok();
             }
             catch (Exception erro)
             {
-
                 return BadRequest(erro.Message);
             }
         }

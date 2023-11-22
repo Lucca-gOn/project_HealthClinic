@@ -11,7 +11,6 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         Usuario BuscarPorEmailESenha (string email, string senha);
 
-        List<Usuario> ListarAll();
-
+        void Deletar(Guid id);
     }
 }
