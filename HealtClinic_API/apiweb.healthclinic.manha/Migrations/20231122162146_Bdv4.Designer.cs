@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apiweb.healthclinic.manha.Contexts;
 
@@ -11,9 +12,11 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    partial class HealthContextModelSnapshot : ModelSnapshot
+    [Migration("20231122162146_Bdv4")]
+    partial class Bdv4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,7 +169,7 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CPF")
-                        .HasColumnType("VARCHAR(15)");
+                        .HasColumnType("VARCHAR(12)");
 
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");

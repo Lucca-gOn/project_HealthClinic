@@ -11,7 +11,7 @@ namespace apiweb.healthclinic.manha.Domains
         [Key]
         public Guid IdPaciente { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName = "VARCHAR(12)")]
+        [Column(TypeName = "VARCHAR(15)")]
         public string? CPF { get; set; }
 
         //Referencia com Usuario

@@ -2,8 +2,8 @@
 using System.Text.Json.Serialization;
 public record CriarConsultaRequest(
     [property: JsonPropertyName("patient")] Paciente Paciente,
-    [property: JsonPropertyName("esp")] string Esp,
-    [property: JsonPropertyName("doctor")] string Doutor,
+    [property: JsonPropertyName("esp")] Especialidade Esp,
+    [property: JsonPropertyName("doctor")] Medico Medico,
     [property: JsonPropertyName("consultationDate")] DateTime DateConsulta,
     [property: JsonPropertyName("consultationTime")] DateTime TimeConsulta);
 
