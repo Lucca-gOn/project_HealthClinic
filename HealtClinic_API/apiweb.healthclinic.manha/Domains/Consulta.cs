@@ -36,7 +36,6 @@ namespace apiweb.healthclinic.manha.Domains
         public Medico? Medico { get; set; }
 
         //Referencia com Prontuario
-        [Required(ErrorMessage = "Prontuario obrigatório!")]
         public Guid IdProntuario { get; set; }
 
         [ForeignKey(nameof(IdProntuario))]

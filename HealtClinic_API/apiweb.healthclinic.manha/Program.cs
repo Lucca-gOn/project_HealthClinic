@@ -115,6 +115,7 @@ builder.Services.AddSwaggerGen(options =>
 
     // Adiciona um filtro de opera��o para suportar o upload de arquivos no Swagger UI
     options.OperationFilter<FileUploadOperation>();
+    options.CustomSchemaIds(type => type.ToString());
 });
 
 // Adiciona o servi�o de explora��o de API para o Swagger
@@ -147,7 +148,7 @@ app.MapControllers();
 // Configuração do middleware para servir arquivos estáticos.
 app.UseStaticFiles();
 
-app.Urls.Add("http://192.168.15.8:5000");  //Casa
+app.Urls.Add("http://172.16.52.162:5000");  //Casa
 //app.Urls.Add("http://172.16.35.116:5000");  //Senai
 
 app.Run();

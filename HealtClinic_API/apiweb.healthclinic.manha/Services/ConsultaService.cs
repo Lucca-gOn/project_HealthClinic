@@ -25,7 +25,18 @@ public class ConsultaService : IConsultaService
 
     public CriarConsultaResponse CriarConsulta(CriarConsultaRequest request)
     {
-        throw new NotImplementedException();
+        Consulta novaConsulta = new Consulta
+        {
+            DataConsulta = request.DateConsulta,
+            HorarioConsulta = request.TimeConsulta.TimeOfDay,
+            IdMedico =  Guid.Parse(request.Medico.Value),
+            IdPaciente = Guid.Parse(request.Paciente.Value),
+            IdProntuario = Guid.Parse(request.Prontuario.Value)
+        };
+
+        _consultaRepository.Cadastrar(novaConsulta);
+
+        return new CriarConsultaResponse(Guid.NewGuid());
     }
 
     public ListarConsultasResponse ListarConsultas()

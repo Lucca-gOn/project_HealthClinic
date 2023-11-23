@@ -100,5 +100,24 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
+
+        /// <summary>
+        /// Cria uma consulta recebendo um objeto CriarConsultaRequest.
+        /// </summary>
+        /// <param name="request">O objeto para criar a consulta.</param>
+        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        [HttpPost("CriarConsulta")]
+        public IActionResult CriarConsulta(CriarConsultaRequest request)
+        {
+            try
+            {
+                var response = _consultaService.CriarConsulta(request);
+                return StatusCode(201, response);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
     }
 }
