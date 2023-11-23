@@ -6,6 +6,8 @@ using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
 using apiweb.healthclinic.manha.Utils;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Services;
 
@@ -173,5 +175,39 @@ public class UsuarioService : IUsuarioService
         .AsReadOnly();
 
         return new ListarUsuariosResponse(listaUsuarios);
+    }
+
+    public AtualizarUsuarioResponse AtualizarUsuario(Guid idUsuario, AtualizarUsuarioRequest request)
+    {
+        string hashSenha = Criptografia.GerarHash(request.Senha);
+        string tituloTipoUsuario = request.TipoUsuario.Value;
+
+        TiposUsuario tipo = BuscarOuCriarTipoUsuario(tituloTipoUsuario);
+
+        var usuario = _usuarioRepository.BuscarPorId(idUsuario);
+
+        if (usuario == null)
+        {
+            // A classe de exceção específica foi removida do exemplo anterior.
+            throw new Exception("Usuário não encontrado");
+        }
+
+        usuario.Nome = request.Nome;
+        usuario.Email = request.Email;
+        usuario.Senha = hashSenha;
+        usuario.DataNascimento = request.DataNascimento;
+        usuario.Sexo = request.Sexo.Value;
+        usuario.IdTipoUsuario = tipo.IdTipoUsuario;
+
+        if (request.Imagem != null)
+        {
+            ImagemPersistida imagem = _imageService.PersistirImagem(request.Imagem);
+            usuario.CaminhoImagem = imagem.Src;
+        }
+
+        _usuarioRepository.Atualizar(usuario);
+        _unitOfWork.Commit();
+
+        return new AtualizarUsuarioResponse(usuario.IdUsuario);
     }
 }

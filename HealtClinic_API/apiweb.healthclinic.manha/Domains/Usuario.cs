@@ -36,7 +36,6 @@ namespace apiweb.healthclinic.manha.Domains
         public string? CaminhoImagem { get; set; }
 
         //Referencia com TiposUsuario
-        [Required(ErrorMessage = "IdTipoUsuario obrigatório!")]
         public Guid IdTipoUsuario { get; set; }
 
         [ForeignKey(nameof(IdTipoUsuario))]

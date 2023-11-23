@@ -7,4 +7,6 @@ public interface IUsuarioService
     CriarUsuarioResponse CriarUsuario(CriarUsuarioRequest request);
 
     ListarUsuariosResponse ListarUsuarios();
+
+    AtualizarUsuarioResponse AtualizarUsuario(Guid idUsuario, AtualizarUsuarioRequest request);
 }
