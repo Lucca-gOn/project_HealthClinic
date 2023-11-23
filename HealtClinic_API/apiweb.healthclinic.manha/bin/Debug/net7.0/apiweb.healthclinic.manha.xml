@@ -282,5 +282,29 @@
         <member name="M:apiweb.healthclinic.manha.Migrations.AddMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv5">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv5.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv5.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv5.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.bdv6">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.bdv6.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.bdv6.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.bdv6.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

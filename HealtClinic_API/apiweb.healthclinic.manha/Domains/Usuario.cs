@@ -28,7 +28,7 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage = "Data de nascimento obrigatória!")]
         public DateTime? DataNascimento { get; set; }
 
-        [Column(TypeName = "VARCHAR(20)")]
+        [Column(TypeName = "VARCHAR(50)")]
         [Required(ErrorMessage = "Campo de sexo obrigatório!")]
         public string? Sexo { get; set; }
 

@@ -105,16 +105,7 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public void Deletar(Guid id)
         {
-            try
-            {
-                _healthContext.Usuario.Where(e => e.IdUsuario == id).ExecuteDelete();
-                _healthContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            
         }
 
     }
