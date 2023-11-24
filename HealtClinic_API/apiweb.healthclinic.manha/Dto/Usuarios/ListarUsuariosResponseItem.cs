@@ -8,5 +8,6 @@ public record ListarUsuariosResponseItem(
     [property: JsonPropertyName("sex")] string Sexo,
     [property: JsonPropertyName("image_src")] string CaminhoImagem,
     [property: JsonPropertyName("userType")] string NomeUser,
-    [property: JsonPropertyName("specialty")] string Especialidade
-);
+    [property: JsonPropertyName("specialty")] string Especialidade,
+    [property: JsonPropertyName("cpf")] string Cpf = "",
+    [property: JsonPropertyName("crm")] string Crm = "");

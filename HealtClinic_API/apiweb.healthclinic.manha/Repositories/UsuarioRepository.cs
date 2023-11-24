@@ -167,7 +167,7 @@ namespace apiweb.healthclinic.manha.Repositories
             }
             catch (Exception)
             {
-                
+
             }
         }
 

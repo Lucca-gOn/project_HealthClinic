@@ -16,12 +16,16 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdClinica = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Endereco = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    HorarioAbertura = table.Column<TimeSpan>(type: "TIME", nullable: false),
-                    HorarioFechamento = table.Column<TimeSpan>(type: "TIME", nullable: false),
-                    CNPJ = table.Column<string>(type: "VARCHAR(14)", maxLength: 14, nullable: false),
                     NomeFantasia = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    RazaoSocial = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                    RazaoSocial = table.Column<string>(type: "VARCHAR(100)", nullable: false),
+                    Endereco = table.Column<string>(type: "VARCHAR(100)", nullable: false),
+                    CEP = table.Column<string>(type: "VARCHAR(8)", nullable: false),
+                    Numero = table.Column<string>(type: "VARCHAR(30)", nullable: false),
+                    PrimeiroDiaSemana = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    SegundoDiaSemana = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    CNPJ = table.Column<string>(type: "VARCHAR(14)", maxLength: 14, nullable: false),
+                    HorarioAbertura = table.Column<TimeSpan>(type: "TIME", nullable: false),
+                    HorarioFechamento = table.Column<TimeSpan>(type: "TIME", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +49,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DescricaoProntuario = table.Column<string>(type: "TEXT", nullable: false)
+                    DescricaoProntuario = table.Column<string>(type: "VARCHAR(MAX)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,8 +76,8 @@ namespace apiweb.healthclinic.manha.Migrations
                     Nome = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     Email = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     Senha = table.Column<string>(type: "VARCHAR(MAX)", maxLength: 60, nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Sexo = table.Column<string>(type: "VARCHAR(20)", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "DATE", nullable: true),
+                    Sexo = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     CaminhoImagem = table.Column<string>(type: "VARCHAR(MAX)", nullable: true),
                     IdTipoUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -119,10 +123,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CPF = table.Column<string>(type: "VARCHAR(12)", nullable: true),
-                    RG = table.Column<string>(type: "VARCHAR(12)", nullable: true),
-                    Telefone = table.Column<string>(type: "VARCHAR(30)", nullable: true),
-                    Endereco = table.Column<string>(type: "VARCHAR(100)", nullable: true),
+                    CPF = table.Column<string>(type: "VARCHAR(15)", nullable: true),
                     IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -255,13 +256,6 @@ namespace apiweb.healthclinic.manha.Migrations
                 name: "IX_Paciente_IdUsuario",
                 table: "Paciente",
                 column: "IdUsuario");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Paciente_RG",
-                table: "Paciente",
-                column: "RG",
-                unique: true,
-                filter: "[RG] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuario_Email",

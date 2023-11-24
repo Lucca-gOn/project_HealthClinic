@@ -7,6 +7,7 @@ using apiweb.healthclinic.manha.Repositories;
 using apiweb.healthclinic.manha.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Services;
@@ -154,7 +155,6 @@ public class UsuarioService : IUsuarioService
 
     public ListarUsuariosResponse ListarUsuarios()
     {
-
         var listaUsuarios = _healthContext.Usuario
         .Include(u => u.TiposUsuario)
         .Select(u => new ListarUsuariosResponseItem(
@@ -166,10 +166,17 @@ public class UsuarioService : IUsuarioService
             u.CaminhoImagem,
             u.TiposUsuario.Titulo,
             _healthContext.Medico
-                .Include(m => m.Especialidade)
                 .Where(m => m.IdUsuario == u.IdUsuario)
                 .Select(m => m.Especialidade.TituloEspecialidade)
-                .FirstOrDefault() ?? "Especialidade não informada"
+                .FirstOrDefault()!,
+            _healthContext.Paciente
+                .Where(p => p.IdUsuario == u.IdUsuario)
+                .Select(p => p.CPF)
+                .FirstOrDefault()!,
+            _healthContext.Medico
+                .Where(m => m.IdUsuario == u.IdUsuario)
+                .Select(m => m.CRM)
+                .FirstOrDefault()!
         ))
         .ToList()
         .AsReadOnly();
@@ -181,7 +188,7 @@ public class UsuarioService : IUsuarioService
     {
         string hashSenha = Criptografia.GerarHash(request.Senha);
         ImagemPersistida imagem = _imageService.PersistirImagem(request.Imagem);
-        
+
         var usuario = _usuarioRepository.BuscarPorId(idUsuario);
         if (usuario == null)
         {

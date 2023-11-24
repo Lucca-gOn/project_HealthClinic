@@ -28,6 +28,10 @@ namespace apiweb.healthclinic.manha.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CEP")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(8)");
+
                     b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasMaxLength(14)
@@ -47,9 +51,21 @@ namespace apiweb.healthclinic.manha.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
+
+                    b.Property<string>("PrimeiroDiaSemana")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(MAX)");
+
                     b.Property<string>("RazaoSocial")
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)");
+
+                    b.Property<string>("SegundoDiaSemana")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(MAX)");
 
                     b.HasKey("IdClinica");
 

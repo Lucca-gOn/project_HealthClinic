@@ -7,5 +7,9 @@ namespace apiweb.healthclinic.manha.Interfaces
         void Cadastrar(Clinica novaClinica);
 
         List<Clinica> Listar();
+
+        void Deletar(Guid id);
+
+        void Atualizar(Guid id, Clinica clinica);
     }
 }

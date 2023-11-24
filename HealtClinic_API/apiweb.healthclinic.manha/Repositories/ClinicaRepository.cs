@@ -13,6 +13,11 @@ namespace apiweb.healthclinic.manha.Repositories
             _healthContext = healthContext;
         }
 
+        public void Atualizar(Guid id, Clinica clinica)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Cadastrar(Clinica novaClinica)
         {
             try
@@ -25,6 +30,11 @@ namespace apiweb.healthclinic.manha.Repositories
 
                 throw;
             }
+        }
+
+        public void Deletar(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Clinica> Listar()
