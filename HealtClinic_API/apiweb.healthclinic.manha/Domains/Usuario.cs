@@ -25,16 +25,15 @@ namespace apiweb.healthclinic.manha.Domains
         public string? Senha { get; set; }
 
         [Column(TypeName = "DATE")]
-        [Required(ErrorMessage = "Data de nascimento obrigatória!")]
         public DateTime? DataNascimento { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "Campo de sexo obrigatório!")]
         public string? Sexo { get; set; }
 
         [Column(TypeName = "VARCHAR(MAX)")]
         public string? CaminhoImagem { get; set; }
 
+        [Required(ErrorMessage = "Informe o tipo de usuário!")]
         //Referencia com TiposUsuario
         public Guid IdTipoUsuario { get; set; }
 

@@ -77,13 +77,7 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        /// <summary>
-        /// Atualiza as informações de um usuário específico.
-        /// </summary>
-        /// <param name="id">ID do usuário a ser atualizado.</param>
-        /// <param name="tipoUsuario">Objeto contendo as informações atualizadas do usuario.</param>
-        /// <returns>StatusCode 200 se bem-sucedido.</returns>
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Put(Guid idUsuario,[FromForm] AtualizarUsuarioRequest request)
         {
             try

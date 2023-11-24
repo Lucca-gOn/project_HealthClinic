@@ -7,10 +7,4 @@ public record AtualizarUsuarioRequest(
     [property: JsonPropertyName("name")] string Nome,
     [property: JsonPropertyName("email")] string Email,
     [property: JsonPropertyName("password")] string Senha,
-    [property: JsonPropertyName("confirm_password")] string ConfirmacaoSenha,
-    [property: JsonPropertyName("userType")] TipoUsuario TipoUsuario,
-    [property: JsonPropertyName("sex")] Sexo Sexo,
-    [property: JsonPropertyName("birthDate")] DateTime DataNascimento,
-    [property: JsonPropertyName("cpf")] string Cpf = "",
-    [property: JsonPropertyName("crm")] string Crm = "",
-    [property: JsonPropertyName("esp")] string Esp = "");
+    [property: JsonPropertyName("confirm_password")] string ConfirmacaoSenha);

@@ -9,7 +9,7 @@ namespace apiweb.healthclinic.manha.Domains
         [Key] 
         public Guid IdProntuario { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName ="TEXT")]
+        [Column(TypeName ="VARCHAR(MAX)")]
         [Required(ErrorMessage = "Descrição do prontuário obrigatória!")]
         public string? DescricaoProntuario { get; set; }
     }

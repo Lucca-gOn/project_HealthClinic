@@ -13,57 +13,44 @@ namespace apiweb.healthclinic.manha.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly HealthContext _healthContext;
-        private readonly IImagemService _imageService;
 
-        public UsuarioRepository(HealthContext healthContext, IImagemService imageService)
+        public UsuarioRepository(HealthContext healthContext)
         {
             _healthContext = healthContext;
-            _imageService = imageService;
         }
 
-        public void Atualizar(Guid id, Usuario usuario,IFormFile novaImagem)
+        public void Atualizar(Usuario usuario)
         {
             try
             {
-                Usuario buscarUsuario = _healthContext.Usuario.Find(id);
-                if (buscarUsuario != null)
+                Usuario usuarioExistente = _healthContext.Usuario.Find(usuario.IdUsuario);
+                if (usuarioExistente != null)
                 {
-                    buscarUsuario!.Nome = usuario.Nome;
-                    buscarUsuario!.Email = usuario.Email;
-                    buscarUsuario!.Senha = usuario.Senha; 
-                    buscarUsuario!.Sexo = usuario.Sexo;
+                    // Armazena os valores atuais que não devem ser alterados
+                    var dataNascimentoAtual = usuarioExistente.DataNascimento;
+                    var sexoAtual = usuarioExistente.Sexo;
+                    var idTipoUsuarioAtual = usuarioExistente.IdTipoUsuario;
 
-                    if (novaImagem != null)
-                    {
-                        var imagemPersistida = _imageService.PersistirImagem(novaImagem);
-                        buscarUsuario.CaminhoImagem = imagemPersistida.Src;
-                    }
+                    // Atualiza o usuário existente com os novos valores
+                    _healthContext.Entry(usuarioExistente).CurrentValues.SetValues(usuario);
+
+                    // Restaura os valores que não devem ser alterados
+                    usuarioExistente.DataNascimento = dataNascimentoAtual;
+                    usuarioExistente.Sexo = sexoAtual;
+                    usuarioExistente.IdTipoUsuario = idTipoUsuarioAtual;
+
+                    // Persiste as alterações no banco de dados
                     _healthContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Usuário não encontrado.");
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-        }
-
-        public void Atualizar(Usuario usuario)
-        {
-            if (usuario == null)
-            {
-                throw new ArgumentNullException(nameof(usuario));
-            }
-
-            Usuario usuarioExistente = _healthContext.Usuario.Find(usuario.IdUsuario);
-            if (usuarioExistente == null)
-            {
-                throw new KeyNotFoundException("Usuário não encontrado com o ID fornecido.");
-            }
-
-            // Atualiza as propriedades do usuário existente com as do usuário fornecido
-            _healthContext.Entry(usuarioExistente).CurrentValues.SetValues(usuario);
-
-            _healthContext.SaveChanges();
         }
 
         public Usuario BuscarPorEmailESenha(string email, string senha)

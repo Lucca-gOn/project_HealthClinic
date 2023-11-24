@@ -222,14 +222,6 @@
             <param name="id">ID do usuário a ser buscado.</param>
             <returns>Detalhes do usuário ou código 400 com a mensagem de erro.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Put(System.Guid,apiweb.healthclinic.manha.Dto.Usuarios.AtualizarUsuarioRequest)">
-            <summary>
-            Atualiza as informações de um usuário específico.
-            </summary>
-            <param name="id">ID do usuário a ser atualizado.</param>
-            <param name="tipoUsuario">Objeto contendo as informações atualizadas do usuario.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
-        </member>
         <member name="T:apiweb.healthclinic.manha.Migrations.Bdv1">
             <inheritdoc />
         </member>
@@ -324,6 +316,42 @@
             <inheritdoc />
         </member>
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv7.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv8">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv8.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv8.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv8.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bd9">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bd9.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bd9.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bd9.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv10">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv10.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv10.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv10.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

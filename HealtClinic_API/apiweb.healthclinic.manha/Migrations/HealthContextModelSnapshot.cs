@@ -190,7 +190,7 @@ namespace apiweb.healthclinic.manha.Migrations
 
                     b.Property<string>("DescricaoProntuario")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCHAR(MAX)");
 
                     b.HasKey("IdProntuario");
 
@@ -221,7 +221,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("VARCHAR(MAX)");
 
                     b.Property<DateTime?>("DataNascimento")
-                        .IsRequired()
                         .HasColumnType("DATE");
 
                     b.Property<string>("Email")
@@ -241,7 +240,6 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("VARCHAR(MAX)");
 
                     b.Property<string>("Sexo")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("IdUsuario");
