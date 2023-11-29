@@ -3,6 +3,7 @@ using apiweb.healthclinic.manha.Dto.Imagens;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.ViewModels;
 using Azure.Core;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -45,7 +46,7 @@ namespace apiweb.healthclinic.manha.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti,usuarioBuscado.IdUsuario.ToString()),
                     new Claim(JwtRegisteredClaimNames.Name,usuarioBuscado.Nome!),
                     new Claim(JwtRegisteredClaimNames.Email,usuarioBuscado.Email!),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.TiposUsuario!.Titulo!),
+                    new Claim("Role", usuarioBuscado.TiposUsuario!.Titulo!),
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("chave-autenticacao-code-first-webapi-projeto-healthclinic"));
