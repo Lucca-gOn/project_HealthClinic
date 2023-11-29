@@ -61,7 +61,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DescricaoProntuario = table.Column<string>(type: "VARCHAR(MAX)", nullable: false)
+                    DescricaoProntuario = table.Column<string>(type: "VARCHAR(MAX)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -70,7 +70,8 @@ public class UsuarioService : IUsuarioService
                 CriarPaciente(request, usuario);
                 break;
             case "Administrador":
-                CriarPaciente(request, usuario);
+                // _= : Ignora variáveis que não serão utilizadas
+                _ = (request, usuario);
                 break;
             default:
                 throw new InvalidOperationException("Tipo de Usuário não reconhecido");
@@ -235,7 +236,7 @@ public class UsuarioService : IUsuarioService
 
     public ListarUsuariosResponse ListarAdministradores()
     {
-        var listaUsuarios = _healthContext.Usuario
+        var listaUsuariosAdministradores = _healthContext.Usuario
         .Include(u => u.TiposUsuario)
         .Where(u => u.TiposUsuario.Titulo == "Administrador")
         .Select(u => new ListarUsuariosResponseItem(
@@ -262,6 +263,6 @@ public class UsuarioService : IUsuarioService
         .ToList()
         .AsReadOnly();
 
-        return new ListarUsuariosResponse(listaUsuarios);
+        return new ListarUsuariosResponse(listaUsuariosAdministradores);
     }
 }

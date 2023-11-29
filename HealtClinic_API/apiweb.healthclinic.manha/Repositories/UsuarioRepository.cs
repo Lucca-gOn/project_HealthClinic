@@ -60,6 +60,7 @@ namespace apiweb.healthclinic.manha.Repositories
                         Nome = u.Nome,
                         Email = u.Email,
                         Senha = u.Senha,
+                        CaminhoImagem = u.CaminhoImagem,
 
                         TiposUsuario = new TiposUsuario
                         {

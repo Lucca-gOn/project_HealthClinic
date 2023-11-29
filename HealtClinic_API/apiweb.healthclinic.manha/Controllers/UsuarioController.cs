@@ -62,7 +62,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_service.ListarUsuarios().Itens);
+                return Ok(_service.ListarUsuarios());
             }
             catch (Exception erro)
             {

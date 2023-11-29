@@ -52,13 +52,18 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public TiposUsuario? BuscarTipoUsuarioPorTitulo(string titulo)
         {
-            // TODO: remover o ToList e alterar o tipo TEXT da prop Titulo
-            #warning remover o ToList e alterar o tipo TEXT da prop Titulo
-
-            return _healthContext.TiposUsuario
+            try
+            {
+                return _healthContext.TiposUsuario
                 .ToList()
                 .Where(tu => tu.Titulo == titulo)
                 .FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Cadastrar(TiposUsuario novoTipoUsuario)

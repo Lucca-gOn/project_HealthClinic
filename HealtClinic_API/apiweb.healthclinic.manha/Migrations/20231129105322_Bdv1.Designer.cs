@@ -12,8 +12,8 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231128221559_Bdv2")]
-    partial class Bdv2
+    [Migration("20231129105322_Bdv1")]
+    partial class Bdv1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

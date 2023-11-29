@@ -16,10 +16,17 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public Especialidade? BuscarEspecialidadePorTitulo(string titulo)
         {
-
-            return _healthContext.Especialidade
+            try
+            {
+                return _healthContext.Especialidade
                 .Where(e => e.TituloEspecialidade == titulo)
                 .FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            } 
         }
 
         public void Cadastrar(Especialidade novaEspecialidade)
