@@ -1,10 +1,8 @@
 using apiweb.healthclinic.manha;
 using apiweb.healthclinic.manha.Contexts;
-using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
 using apiweb.healthclinic.manha.Services;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -31,6 +29,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>();
 
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
@@ -149,7 +148,8 @@ app.MapControllers();
 app.UseStaticFiles();
 
 //app.Urls.Add("http://192.168.15.8:5000"); //Casa
-app.Urls.Add("http://172.16.34.155:5000");  //Senai
+//app.Urls.Add("http://172.16.34.155:5000");  //Senai
+app.Urls.Add("http://172.16.26.30:5000");  //Code
 
 app.Run();
 

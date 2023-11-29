@@ -41,5 +41,12 @@ namespace apiweb.healthclinic.manha.Domains
         [ForeignKey(nameof(IdProntuario))]
         //ForeignKey com (IdProntuario))]
         public Prontuario? Prontuario { get; set; }
+
+        //Referencia com Comentario
+        public Guid IdComentario { get; set; }
+
+        [ForeignKey(nameof(IdConsulta))]
+        //ForeignKey com (IdComentario))]
+        public Comentario? Comentario { get; set; }
     }
 }

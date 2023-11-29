@@ -1,7 +1,5 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers
@@ -41,7 +39,6 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
-
         /// <summary>
         /// Lista todas as consultas disponíveis na clínica.
         /// </summary>
@@ -61,18 +58,35 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
-
         /// <summary>
         /// Lista todas as consultas de um paciente específico.
         /// </summary>
         /// <param name="IdPaciente">O ID do paciente para buscar suas consultas.</param>
         /// <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
-        [HttpGet("{idpaciente}")]
+        [HttpGet("paciente/{IdPaciente}")]
         public IActionResult GetByPaciente(Guid IdPaciente)
         {
             try
             {
                 return Ok(_consultaRepository.ListarPorPaciente(IdPaciente));
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+        /// <summary>
+        /// Lista todas as consultas de um medico específico.
+        /// </summary>
+        /// <param name="IdMedico">O ID do paciente para buscar suas consultas.</param>
+        /// <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
+        [HttpGet("medico/{IdMedico}")]
+        public IActionResult GetByMedico(Guid IdMedico)
+        {
+            try
+            {
+                return Ok(_consultaRepository.ListarPorMedico(IdMedico));
             }
             catch (Exception erro)
             {
@@ -113,6 +127,61 @@ namespace apiweb.healthclinic.manha.Controllers
             {
                 var response = _consultaService.CriarConsulta(request);
                 return StatusCode(201, response);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
+
+        /// <summary>
+        /// Atualiza o comentário de uma consulta recebendo um objeto AtualizarProntuarioConsultaRequest.
+        /// </summary>
+        /// <param name="request">O objeto para atualizar o prontuario da consulta.</param>
+        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        [HttpPut("AtualizarProntuario")]
+        public IActionResult AtualizarProntuario(AtualizarProntuarioConsultaRequest request)
+        {
+            try
+            {
+                _consultaRepository.AtualizarProntuario(request);
+                return StatusCode(201);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
+
+        /// <summary>
+        /// Atualiza o comentário de uma consulta recebendo um objeto AtualizarComentarioConsultaRequest.
+        /// </summary>
+        /// <param name="request">O objeto para atualizar o comentario da consulta.</param>
+        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        [HttpPut("AtualizarComentario")]
+        public IActionResult AtualizarComentario(AtualizarComentarioConsultaRequest request)
+        {
+            try
+            {
+                _consultaRepository.AtualizarComentario(request);
+                return StatusCode(201);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
+
+        /// <summary>
+        /// Pega uma consulta específica com base no seu ID retornando também o prontuário e o comentario.
+        /// </summary>
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                var consulta = _consultaRepository.BuscarPorId(id);
+                return Ok(consulta);
             }
             catch (Exception erro)
             {

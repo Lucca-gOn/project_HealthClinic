@@ -23,7 +23,7 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage = "Endereço obrigatório!")]
         public string? Endereco { get; set; }
 
-        [Column(TypeName = "VARCHAR(8)")]
+        [Column(TypeName = "VARCHAR(20)")]
         [Required(ErrorMessage = "CEP obrigatório!")]
         public string? CEP { get; set; }
 
@@ -39,9 +39,9 @@ namespace apiweb.healthclinic.manha.Domains
         [Required(ErrorMessage = "Segundo dia semana obrigatório!")]
         public string? SegundoDiaSemana { get; set; }
 
-        [Column(TypeName = "VARCHAR(14)")]
+        [Column(TypeName = "VARCHAR(25)")]
         [Required(ErrorMessage = "CNPJ obrigatório!")]
-        [StringLength(14)]
+        [StringLength(25)]
         public string? CNPJ { get; set; }
 
         [Column(TypeName = "TIME")]

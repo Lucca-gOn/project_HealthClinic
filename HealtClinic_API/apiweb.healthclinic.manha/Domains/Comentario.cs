@@ -9,25 +9,7 @@ namespace apiweb.healthclinic.manha.Domains
         [Key]
         public Guid IdComentario { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName = "TEXT")]
-        [Required(ErrorMessage = "Descrição do comentário obrigatória!")]
+        [Column(TypeName = "VARCHAR(MAX)")]
         public string? DescricaoComentario { get; set; }
-
-        //Referencia com Paciente
-        [Required(ErrorMessage = "Informe o paciente!")]
-        public Guid IdPaciente { get; set; }
-
-        [ForeignKey(nameof(IdPaciente))]
-        //ForeignKey com (IdPaciente))]
-        public Paciente? Paciente { get; set; }
-
-
-        //Referencia com Consulta
-        [Required(ErrorMessage = "Consulta obrigatória!")]
-        public Guid IdConsulta { get; set; }
-
-        [ForeignKey(nameof(IdConsulta))]
-        //ForeignKey com (IdConsulta))]
-        public Consulta? Consulta { get; set; }
     }
 }

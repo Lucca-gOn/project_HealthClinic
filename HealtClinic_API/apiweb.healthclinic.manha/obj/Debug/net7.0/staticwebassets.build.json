@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UargCL+ySC36ajeWW2aum+4V+H528a2RETQAl8qNlrQ=",
+  "Hash": "vgaBW1OZmvYmuh1O1E/CQG933rQzy/HYfHqcd4mqGBc=",
   "Source": "apiweb.healthclinic.manha",
   "BasePath": "_content/apiweb.healthclinic.manha",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "apiweb.healthclinic.manha\\wwwroot",
       "Source": "apiweb.healthclinic.manha",
-      "ContentRoot": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\wwwroot\\",
       "BasePath": "_content/apiweb.healthclinic.manha",
       "Pattern": "**"
     }

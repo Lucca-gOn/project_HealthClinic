@@ -1,12 +1,7 @@
 ﻿using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Services;
 using apiweb.healthclinic.manha.Utils;
-using apiweb.healthclinic.manha.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
@@ -99,6 +94,10 @@ namespace apiweb.healthclinic.manha.Repositories
                     {
                         IdUsuario = u.IdUsuario,
                         Nome = u.Nome,
+                        Email =u.Email,
+                        DataNascimento = u.DataNascimento,
+                        Sexo = u.Sexo,
+                        CaminhoImagem = u.CaminhoImagem,
 
                         TiposUsuario = new TiposUsuario
                         {
@@ -170,6 +169,5 @@ namespace apiweb.healthclinic.manha.Repositories
 
             }
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.healthclinic.manha.Repositories
 {
@@ -15,7 +16,32 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public void Atualizar(Guid id, Clinica clinica)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Clinica buscarClinica = _healthContext.Clinica.Find(id)!;
+                if (buscarClinica != null)
+                {
+                    buscarClinica.NomeFantasia = clinica.NomeFantasia;
+                    buscarClinica.RazaoSocial = clinica.RazaoSocial;
+                    buscarClinica.Endereco = clinica.Endereco;
+                    buscarClinica.CEP = clinica.CEP;
+                    buscarClinica.Numero = clinica.Numero;
+                    buscarClinica.PrimeiroDiaSemana = clinica.PrimeiroDiaSemana;
+                    buscarClinica.SegundoDiaSemana = clinica.SegundoDiaSemana;
+                    buscarClinica.CNPJ = clinica.CNPJ;
+                    buscarClinica.HorarioAbertura = clinica.HorarioAbertura;
+                    buscarClinica.HorarioFechamento = clinica.HorarioFechamento;
+
+                    _healthContext.Update(buscarClinica);
+
+                    _healthContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Cadastrar(Clinica novaClinica)
@@ -34,7 +60,16 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _healthContext.Clinica.Where(e => e.IdClinica == id).ExecuteDelete();
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Clinica> Listar()

@@ -1,7 +1,5 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers
@@ -52,6 +50,34 @@ namespace apiweb.healthclinic.manha.Controllers
             catch (Exception erro)
             {
 
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put(Guid id, Clinica clinica)
+        {
+            try
+            {
+                _clinicaRepository.Atualizar(id, clinica);
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _clinicaRepository.Deletar(id);
+                return Ok();
+            }
+            catch (Exception erro)
+            {
                 return BadRequest(erro.Message);
             }
         }

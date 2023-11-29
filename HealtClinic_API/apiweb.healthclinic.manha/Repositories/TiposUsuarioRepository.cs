@@ -1,7 +1,6 @@
 ﻿using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.healthclinic.manha.Repositories
 {

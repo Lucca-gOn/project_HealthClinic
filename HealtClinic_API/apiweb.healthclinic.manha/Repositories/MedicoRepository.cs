@@ -14,6 +14,19 @@ namespace apiweb.healthclinic.manha.Repositories
             _healthContext = healthContext;
         }
 
+        public Medico BuscarPorId(Guid id)
+        {
+            try
+            {
+                return _healthContext.Medico.Include(m => m.Usuario).FirstOrDefault(e => e.IdMedico == id)!;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Cadastrar(Medico novoMedico)
         {
             try
@@ -46,7 +59,7 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                return _healthContext.Medico.ToList();
+                return _healthContext.Medico.Include(p => p.Usuario).ToList();
             }
             catch (Exception)
             {

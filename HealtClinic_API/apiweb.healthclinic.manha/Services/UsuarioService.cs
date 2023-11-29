@@ -3,12 +3,8 @@ using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Dto.Imagens;
 using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
 using apiweb.healthclinic.manha.Utils;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace apiweb.healthclinic.manha.Services;
 
@@ -204,5 +200,68 @@ public class UsuarioService : IUsuarioService
         _unitOfWork.Commit();
 
         return new AtualizarUsuarioResponse(usuario.IdUsuario);
+    }
+
+    public ListarUsuarioPorIdResponseItem ListarPorId(Guid idUsuario)
+    {
+        var usuario = _healthContext.Usuario
+        .Include(u => u.TiposUsuario)
+        .Where(u => u.IdUsuario == idUsuario)
+        .Select(u => new ListarUsuarioPorIdResponseItem(
+            u.IdUsuario,
+            u.Nome,
+            u.Email,
+            u.DataNascimento,
+            u.Sexo,
+            u.CaminhoImagem,
+            u.TiposUsuario.Titulo,
+            _healthContext.Medico
+                .Where(m => m.IdUsuario == u.IdUsuario)
+                .Select(m => m.Especialidade.TituloEspecialidade)
+                .FirstOrDefault()!,
+            _healthContext.Paciente
+                .Where(p => p.IdUsuario == u.IdUsuario)
+                .Select(p => p.CPF)
+                .FirstOrDefault()!,
+            _healthContext.Medico
+                .Where(m => m.IdUsuario == u.IdUsuario)
+                .Select(m => m.CRM)
+                .FirstOrDefault()!
+        ))
+        .FirstOrDefault();
+
+        return usuario;
+    }
+
+    public ListarUsuariosResponse ListarAdministradores()
+    {
+        var listaUsuarios = _healthContext.Usuario
+        .Include(u => u.TiposUsuario)
+        .Where(u => u.TiposUsuario.Titulo == "Administrador")
+        .Select(u => new ListarUsuariosResponseItem(
+            u.IdUsuario,
+            u.Nome,
+            u.Email,
+            u.DataNascimento,
+            u.Sexo,
+            u.CaminhoImagem,
+            u.TiposUsuario.Titulo,
+            _healthContext.Medico
+                .Where(m => m.IdUsuario == u.IdUsuario)
+                .Select(m => m.Especialidade.TituloEspecialidade)
+                .FirstOrDefault()!,
+            _healthContext.Paciente
+                .Where(p => p.IdUsuario == u.IdUsuario)
+                .Select(p => p.CPF)
+                .FirstOrDefault()!,
+            _healthContext.Medico
+                .Where(m => m.IdUsuario == u.IdUsuario)
+                .Select(m => m.CRM)
+                .FirstOrDefault()!
+        ))
+        .ToList()
+        .AsReadOnly();
+
+        return new ListarUsuariosResponse(listaUsuarios);
     }
 }

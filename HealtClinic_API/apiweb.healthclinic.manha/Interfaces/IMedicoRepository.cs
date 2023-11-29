@@ -8,6 +8,8 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         void Deletar(Guid id);
 
+        Medico BuscarPorId(Guid id);
+
         List<Medico> Listar();
     }
 }

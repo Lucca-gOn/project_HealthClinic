@@ -1,11 +1,5 @@
-﻿using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto.Usuarios;
+﻿using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
-using apiweb.healthclinic.manha.Services;
-using apiweb.healthclinic.manha.Utils;
-using apiweb.healthclinic.manha.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers
@@ -55,7 +49,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_usuarioRepository.BuscarPorId(id));
+                return Ok(_service.ListarPorId(id));
             }
             catch (Exception erro)
             {
@@ -106,5 +100,17 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        [HttpGet("ListarAdministradores")]
+        public IActionResult ListarAdministradores()
+        {
+            try
+            {
+                return Ok(_service.ListarAdministradores());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
     }
 }

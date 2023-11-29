@@ -64,6 +64,13 @@
             <param name="IdPaciente">O ID do paciente para buscar suas consultas.</param>
             <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
         </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetByMedico(System.Guid)">
+            <summary>
+            Lista todas as consultas de um medico específico.
+            </summary>
+            <param name="IdMedico">O ID do paciente para buscar suas consultas.</param>
+            <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
+        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Delete(System.Guid)">
             <summary>
             Deleta uma consulta específica com base no seu ID.
@@ -77,6 +84,25 @@
             </summary>
             <param name="request">O objeto para criar a consulta.</param>
             <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.AtualizarProntuario(AtualizarProntuarioConsultaRequest)">
+            <summary>
+            Atualiza o comentário de uma consulta recebendo um objeto AtualizarProntuarioConsultaRequest.
+            </summary>
+            <param name="request">O objeto para atualizar o prontuario da consulta.</param>
+            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.AtualizarComentario(AtualizarComentarioConsultaRequest)">
+            <summary>
+            Atualiza o comentário de uma consulta recebendo um objeto AtualizarComentarioConsultaRequest.
+            </summary>
+            <param name="request">O objeto para atualizar o comentario da consulta.</param>
+            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetById(System.Guid)">
+            <summary>
+            Pega uma consulta específica com base no seu ID retornando também o prontuário e o comentario.
+            </summary>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Post(apiweb.healthclinic.manha.Domains.Especialidade)">
             <summary>
@@ -232,6 +258,18 @@
             <inheritdoc />
         </member>
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv2">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

@@ -34,7 +34,7 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                return _healthContext.Paciente.FirstOrDefault(e => e.IdPaciente == id)!;
+                return _healthContext.Paciente.Include(p => p.Usuario).FirstOrDefault(e => e.IdPaciente == id)!;
             }
             catch (Exception)
             {
@@ -75,7 +75,7 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                return _healthContext.Paciente.ToList();
+                return _healthContext.Paciente.Include(p => p.Usuario).ToList();
             }
             catch (Exception)
             {

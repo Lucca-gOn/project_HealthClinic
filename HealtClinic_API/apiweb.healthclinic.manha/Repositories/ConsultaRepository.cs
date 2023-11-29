@@ -14,6 +14,44 @@ namespace apiweb.healthclinic.manha.Repositories
             _healthContext = healthContext;
         }
 
+        public void AtualizarComentario(AtualizarComentarioConsultaRequest consultaAtualizada)
+        {
+            try
+            {
+                var consulta = _healthContext.Consulta
+                    .Include(c => c.Comentario)
+                    .FirstOrDefault(e => e.IdConsulta == consultaAtualizada.Id)!;
+
+                consulta.Comentario.DescricaoComentario = consultaAtualizada.Comentario;
+                _healthContext.Consulta.Update(consulta);
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void AtualizarProntuario(AtualizarProntuarioConsultaRequest consultaAtualizada)
+        {
+            try
+            {
+                var consulta = _healthContext.Consulta
+                    .Include(c => c.Prontuario)
+                    .FirstOrDefault(e => e.IdConsulta == consultaAtualizada.Id)!;
+
+                consulta.Prontuario.DescricaoProntuario = consultaAtualizada.Prontuario;
+                _healthContext.Consulta.Update(consulta);
+                _healthContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Consulta BuscarPorId(Guid id)
         {
             try
@@ -65,7 +103,29 @@ namespace apiweb.healthclinic.manha.Repositories
                     .Include(c => c.Medico)
                         .ThenInclude(m => m.Usuario)
                     .Include(c => c.Medico)
-                        .ThenInclude(m => m.Especialidade) 
+                        .ThenInclude(m => m.Especialidade)
+                    .Include(c => c.Prontuario)
+                    .Include(c => c.Comentario) 
+                    .ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Consulta> ListarPorMedico(Guid IdMedico)
+        {
+            try
+            {
+                return _healthContext.Consulta
+                    .Include(c => c.Paciente)
+                        .ThenInclude(p => p.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Especialidade)
+                    .Where(c => c.IdMedico == IdMedico)
                     .ToList();
             }
             catch (Exception)
@@ -76,7 +136,22 @@ namespace apiweb.healthclinic.manha.Repositories
 
         public List<Consulta> ListarPorPaciente(Guid IdPaciente)
         {
-            return _healthContext.Consulta.Where(e => e.IdPaciente == IdPaciente).ToList();
+            try
+            {
+                return _healthContext.Consulta
+                    .Include(c => c.Paciente)
+                        .ThenInclude(p => p.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Usuario)
+                    .Include(c => c.Medico)
+                        .ThenInclude(m => m.Especialidade)
+                    .Where(c => c.IdPaciente == IdPaciente)
+                    .ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

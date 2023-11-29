@@ -8,5 +8,9 @@ public interface IUsuarioService
 
     ListarUsuariosResponse ListarUsuarios();
 
+    ListarUsuariosResponse ListarAdministradores();
+
     AtualizarUsuarioResponse AtualizarUsuario(Guid idUsuario, AtualizarUsuarioRequest request);
+
+    ListarUsuarioPorIdResponseItem ListarPorId(Guid idUsuario);
 }

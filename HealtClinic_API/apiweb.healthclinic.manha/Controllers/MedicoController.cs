@@ -1,9 +1,7 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace apiweb.healthclinic.manha.Controllers
 {
@@ -48,6 +46,19 @@ namespace apiweb.healthclinic.manha.Controllers
             try
             {
                 return Ok(_medicoRepository.Listar());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_medicoRepository.BuscarPorId(id));
             }
             catch (Exception erro)
             {

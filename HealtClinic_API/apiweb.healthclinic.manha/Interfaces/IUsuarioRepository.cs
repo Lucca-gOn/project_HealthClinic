@@ -1,5 +1,4 @@
 ﻿using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto.Usuarios;
 
 namespace apiweb.healthclinic.manha.Interfaces
 {

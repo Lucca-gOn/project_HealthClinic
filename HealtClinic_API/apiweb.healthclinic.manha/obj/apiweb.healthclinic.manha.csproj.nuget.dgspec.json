@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj": {}
+    "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj": {}
   },
   "projects": {
-    "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj": {
+    "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj",
+        "projectUniqueName": "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj",
         "projectName": "apiweb.healthclinic.manha",
-        "projectPath": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj",
+        "projectPath": "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\apiweb.healthclinic.manha.csproj",
         "packagesPath": "C:\\Users\\51021784826\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\51021784826\\Desktop\\project_HealthClinic\\HealtClinic_API\\apiweb.healthclinic.manha\\obj\\",
+        "outputPath": "C:\\Users\\51021784826\\Desktop\\apiweb.healthclinic.manha\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\51021784826\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -100,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
