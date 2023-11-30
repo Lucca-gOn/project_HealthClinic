@@ -7,6 +7,5 @@ public record CriarConsultaRequest(
     [property: JsonPropertyName("doctor")] Medico Medico,
     [property: JsonPropertyName("prontuario")] string Prontuario,
     [property: JsonPropertyName("comentario")] string Comentario,
-    [property: JsonPropertyName("consultationDate")] DateTime DateConsulta,
-    [property: JsonPropertyName("consultationTime")] DateTime TimeConsulta);
+    [property: JsonPropertyName("consultationDateTime")] string DataHorarioConsulta);
 

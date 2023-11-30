@@ -7,28 +7,21 @@ namespace apiweb.healthclinic.manha.Services;
 public class ConsultaService : IConsultaService
 {
     private readonly IConsultaRepository _consultaRepository;
-    private readonly IPacienteRepository _pacienteRepository;
-    private readonly IMedicoRepository _medicoRepository;
-    private readonly IEspecialidadeRepository _especialidadeRepository;
 
-    public ConsultaService(
-        IConsultaRepository consultaRepository,
-        IPacienteRepository pacienteRepository,
-        IMedicoRepository medicoRepository,
-        IEspecialidadeRepository especialidadeRepository)
+    public ConsultaService
+    (
+        IConsultaRepository consultaRepository
+    )
     {
         _consultaRepository = consultaRepository;
-        _pacienteRepository = pacienteRepository;
-        _medicoRepository = medicoRepository;
-        _especialidadeRepository = especialidadeRepository;
+
     }
 
     public CriarConsultaResponse CriarConsulta(CriarConsultaRequest request)
     {
         Consulta novaConsulta = new Consulta
         {
-            DataConsulta = request.DateConsulta,
-            HorarioConsulta = request.TimeConsulta.TimeOfDay,
+            DataHorarioConsulta = DateTime.Parse(request.DataHorarioConsulta),
             IdMedico = Guid.Parse(request.Medico.Value),
             IdPaciente = Guid.Parse(request.Paciente.Value),
             Prontuario = new Domains.Prontuario()
@@ -60,12 +53,11 @@ public class ConsultaService : IConsultaService
                 NomeMedico: c.Medico.Usuario.Nome,
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
-                DataConsulta: DateOnly.FromDateTime(c.DataConsulta),
-                HoraConsulta: TimeOnly.FromTimeSpan(c.HorarioConsulta),
+                DataHorarioConsulta : c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
-                IdProntuario: c.Prontuario?.IdProntuario, 
+                IdProntuario: c.Prontuario?.IdProntuario,
                 DescricaoComentario: c.Comentario?.DescricaoComentario,
-                IdComentario: c.Comentario?.IdComentario)) 
+                IdComentario: c.Comentario?.IdComentario))
             .ToList()
             .AsReadOnly();
 
@@ -84,12 +76,34 @@ public class ConsultaService : IConsultaService
                 NomeMedico: c.Medico.Usuario.Nome,
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
-                DataConsulta: DateOnly.FromDateTime(c.DataConsulta),
-                HoraConsulta: TimeOnly.FromTimeSpan(c.HorarioConsulta),
+                DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
-                IdProntuario: c.Prontuario?.IdProntuario, 
+                IdProntuario: c.Prontuario?.IdProntuario,
                 DescricaoComentario: c.Comentario?.DescricaoComentario,
-                IdComentario: c.Comentario?.IdComentario)) 
+                IdComentario: c.Comentario?.IdComentario))
+            .ToList()
+            .AsReadOnly();
+
+        return new ListarConsultasResponse(itens);
+    }
+
+    public ListarConsultasResponse ListarConsultarPorMedico(Guid idMedico)
+    {
+        List<Consulta> consultas = _consultaRepository.ListarPorMedico(idMedico);
+
+        var itens = consultas
+            .Select(c => new ListarConsultasResponseItem(
+                Id: c.IdConsulta,
+                Nome: c.Paciente.Usuario.Nome,
+                CaminhoImagem: c.Paciente.Usuario.CaminhoImagem,
+                NomeMedico: c.Medico.Usuario.Nome,
+                CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
+                Especialidade: c.Medico.Especialidade.TituloEspecialidade,
+                DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
+                DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
+                IdProntuario: c.Prontuario?.IdProntuario,
+                DescricaoComentario: c.Comentario?.DescricaoComentario,
+                IdComentario: c.Comentario?.IdComentario))
             .ToList()
             .AsReadOnly();
 

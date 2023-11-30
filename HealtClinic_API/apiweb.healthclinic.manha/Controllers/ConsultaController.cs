@@ -48,9 +48,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                var consultas = _consultaService.ListarConsultas();
-                return Ok(consultas.Itens);
-
+                return Ok(_consultaService.ListarConsultas().Itens);
             }
             catch (Exception erro)
             {
@@ -68,7 +66,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_consultaRepository.ListarPorPaciente(IdPaciente));
+                return Ok(_consultaService.ListarConsultasPorPaciente(IdPaciente).Itens);
             }
             catch (Exception erro)
             {
@@ -86,7 +84,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_consultaRepository.ListarPorMedico(IdMedico));
+                return Ok(_consultaService.ListarConsultarPorMedico(IdMedico).Itens);
             }
             catch (Exception erro)
             {

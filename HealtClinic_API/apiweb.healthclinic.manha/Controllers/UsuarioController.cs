@@ -9,14 +9,14 @@ namespace apiweb.healthclinic.manha.Controllers
     [Produces("application/json")]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioService _service;
+        private readonly IUsuarioService _usuarioService;
         private readonly IUsuarioRepository _usuarioRepository;
 
         public UsuarioController(
-            IUsuarioService service,
+            IUsuarioService usuarioService,
             IUsuarioRepository usuarioRepository)
         {
-            _service = service;
+            _usuarioService = usuarioService;
             _usuarioRepository = usuarioRepository;
         }
 
@@ -25,7 +25,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                var response = _service.CriarUsuario(request);
+                var response = _usuarioService.CriarUsuario(request);
 
                 return CreatedAtAction(
                     nameof(GetById),
@@ -49,7 +49,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_service.ListarPorId(id));
+                return Ok(_usuarioService.ListarPorId(id));
             }
             catch (Exception erro)
             {
@@ -62,7 +62,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_service.ListarUsuarios());
+                return Ok(_usuarioService.ListarUsuarios().Itens);
             }
             catch (Exception erro)
             {
@@ -76,7 +76,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                var response = _service.AtualizarUsuario(idUsuario, request);
+                var response = _usuarioService.AtualizarUsuario(idUsuario, request);
 
                 return Ok(response);
             }
@@ -105,7 +105,7 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                return Ok(_service.ListarAdministradores());
+                return Ok(_usuarioService.ListarAdministradores().Itens);
             }
             catch (Exception erro)
             {

@@ -69,7 +69,7 @@ namespace apiweb.healthclinic.manha.Repositories
         public void Cadastrar(TiposUsuario novoTipoUsuario)
         {
             try
-            {
+            {       
                 _healthContext.TiposUsuario.Add(novoTipoUsuario);
                 _healthContext.SaveChanges();
             }

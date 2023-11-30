@@ -125,6 +125,8 @@ namespace apiweb.healthclinic.manha.Repositories
                         .ThenInclude(m => m.Usuario)
                     .Include(c => c.Medico)
                         .ThenInclude(m => m.Especialidade)
+                    .Include(c => c.Prontuario) 
+                    .Include(c => c.Comentario)  
                     .Where(c => c.IdMedico == IdMedico)
                     .ToList();
             }
@@ -145,6 +147,8 @@ namespace apiweb.healthclinic.manha.Repositories
                         .ThenInclude(m => m.Usuario)
                     .Include(c => c.Medico)
                         .ThenInclude(m => m.Especialidade)
+                    .Include(c => c.Prontuario) 
+                    .Include(c => c.Comentario) 
                     .Where(c => c.IdPaciente == IdPaciente)
                     .ToList();
             }

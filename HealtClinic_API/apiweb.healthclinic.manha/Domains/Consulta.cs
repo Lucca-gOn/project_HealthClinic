@@ -9,15 +9,10 @@ namespace apiweb.healthclinic.manha.Domains
         [Key] 
         public Guid IdConsulta { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName ="DATE")]
-        [Required(ErrorMessage ="Data da consulta obrigatória!")]
-        public DateTime DataConsulta { get; set; }
-
-        [Column(TypeName = "TIME")]
-        [Required(ErrorMessage = "Horário da consulta obrigatório!")]
-        [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"hh\:mm")]
-        public TimeSpan HorarioConsulta { get; set; }
+        [Required(ErrorMessage = "Data e horário da consulta obrigatórios!")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
+        public DateTime DataHorarioConsulta { get; set; }
 
         //Referencia com Paciente
         [Required(ErrorMessage = "Informe o paciente!")]

@@ -8,5 +8,7 @@ public interface IConsultaService
 
     ListarConsultasResponse ListarConsultasPorPaciente(Guid idPaciente);
 
+    ListarConsultasResponse ListarConsultarPorMedico(Guid idMedico);
+
     CriarConsultaResponse CriarConsulta(CriarConsultaRequest request);
 }

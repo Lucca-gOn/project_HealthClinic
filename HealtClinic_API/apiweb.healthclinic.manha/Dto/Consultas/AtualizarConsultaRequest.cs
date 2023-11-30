@@ -7,5 +7,4 @@ public record AtualizarConsultaRequest(
     [property: JsonPropertyName("doctor")] Medico Medico,
     [property: JsonPropertyName("prontuario")] Prontuario Prontuario,
     [property: JsonPropertyName("comentario")] Comentario Comentario,
-    [property: JsonPropertyName("consultationDate")] DateTime DateConsulta,
-    [property: JsonPropertyName("consultationTime")] DateTime TimeConsulta);
+    [property: JsonPropertyName("consultationDateTime")] string DataHorarioConsulta);

@@ -59,7 +59,37 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                return _healthContext.Medico.Include(p => p.Usuario).ToList();
+                return _healthContext.Medico
+                    .Include(m => m.Usuario)
+                        .ThenInclude(m => m.TiposUsuario)
+                    .Include(m => m.Especialidade)
+                    .Select(m => new Medico
+                    {
+                        IdMedico = m.IdMedico,
+                        CRM = m.CRM,
+                        IdUsuario = m.Usuario!.IdUsuario,
+                        Usuario = new Usuario
+                        {
+                            IdUsuario = m.Usuario.IdUsuario,
+                            Nome = m.Usuario.Nome,
+                            Email = m.Usuario.Email,
+                            DataNascimento = m.Usuario.DataNascimento,
+                            Sexo = m.Usuario.Sexo,
+                            CaminhoImagem = m.Usuario.CaminhoImagem,
+
+                            TiposUsuario = new TiposUsuario
+                            {
+                                IdTipoUsuario = m.Usuario.IdTipoUsuario,
+                                Titulo = m.Usuario.TiposUsuario!.Titulo
+                            }
+                        },
+                        Especialidade = new Especialidade
+                        {
+                            IdEspecialidade = m.IdEspecialidade,
+                            TituloEspecialidade = m.Especialidade!.TituloEspecialidade
+                        }
+
+                    }).ToList();
             }
             catch (Exception)
             {
