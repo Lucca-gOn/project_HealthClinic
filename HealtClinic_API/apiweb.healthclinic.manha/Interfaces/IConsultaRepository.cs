@@ -12,8 +12,6 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         void Deletar(Guid id);
 
-        Consulta BuscarPorId(Guid id);
-
         List<Consulta> Listar();
 
         List<Consulta> ListarPorPaciente(Guid IdPaciente);

@@ -137,37 +137,56 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                // Busca os pacientes associados ao usuário
-                var pacientes = _healthContext.Paciente
-                    .Where(p => p.IdUsuario == idUsuario)
+                // Obter os IDs dos pacientes relacionados ao usuário
+                var idsDosPacientes = _healthContext.Paciente
+                    .Where(paciente => paciente.IdUsuario == idUsuario)
+                    .Select(paciente => paciente.IdPaciente) 
                     .ToList();
 
-                // Para cada paciente, buscar e deletar todas as consultas relacionadas
-                foreach (var paciente in pacientes)
-                {
-                    var consultas = _healthContext.Consulta
-                        .Where(c => c.IdPaciente == paciente.IdPaciente)
-                        .ToList();
+                // Remover pacientes
+                _healthContext.Paciente.RemoveRange(
+                    _healthContext.Paciente.Where(paciente => idsDosPacientes.Contains(paciente.IdPaciente))
+                );
 
-                    //RemoverRange deleta uma coleção de objetos do contexto de uma só vez. 
-                    _healthContext.Consulta.RemoveRange(consultas);
+                // Obter os IDs das consultas relacionadas aos pacientes
+                var idsDasConsultas = _healthContext.Consulta
+                    .Where(consulta => idsDosPacientes.Contains(consulta.IdPaciente))
+                    .Select(consulta => consulta.IdConsulta) 
+                    .ToList();
+
+                // Remover prontuários relacionados às consultas
+                _healthContext.Prontuario.RemoveRange(
+                    _healthContext.Prontuario.Where(prontuario => idsDasConsultas.Contains(prontuario.IdProntuario)) 
+                );
+
+                // Remover comentários relacionados às consultas
+                _healthContext.Comentario.RemoveRange(
+                    _healthContext.Comentario.Where(comentario => idsDasConsultas.Contains(comentario.IdComentario)) 
+                );
+
+                // Remover consultas
+                _healthContext.Consulta.RemoveRange(
+                    _healthContext.Consulta.Where(consulta => idsDasConsultas.Contains(consulta.IdConsulta))
+                );
+
+                // Remover médicos relacionados ao usuário
+                _healthContext.Medico.RemoveRange(
+                    _healthContext.Medico.Where(medico => medico.IdUsuario == idUsuario)
+                );
+
+                // Remover o usuário
+                var usuarioParaRemover = _healthContext.Usuario.Find(idUsuario);
+                if (usuarioParaRemover != null)
+                {
+                    _healthContext.Usuario.Remove(usuarioParaRemover);
                 }
 
-                // Deletar os pacientes
-                _healthContext.Paciente.RemoveRange(pacientes);
-
-                // Deletar o usuário
-                var usuario = _healthContext.Usuario.Find(idUsuario);
-                if (usuario != null)
-                {
-                    _healthContext.Usuario.Remove(usuario);
-                }
-
+                // Salvar todas as alterações no banco de dados
                 _healthContext.SaveChanges();
             }
             catch (Exception)
             {
-
+                throw;
             }
         }
     }

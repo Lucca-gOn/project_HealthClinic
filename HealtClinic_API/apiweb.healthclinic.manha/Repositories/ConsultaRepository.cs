@@ -52,19 +52,6 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public Consulta BuscarPorId(Guid id)
-        {
-            try
-            {
-                return _healthContext.Consulta.FirstOrDefault(e => e.IdConsulta == id)!;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public void Cadastrar(Consulta novaConsulta)
         {
             try

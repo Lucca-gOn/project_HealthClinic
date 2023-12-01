@@ -123,8 +123,8 @@ namespace apiweb.healthclinic.manha.Controllers
         {
             try
             {
-                var response = _consultaService.CriarConsulta(request);
-                return StatusCode(201, response);
+                _consultaService.CriarConsulta(request);
+                return StatusCode(201);
             }
             catch (Exception erro)
             {
@@ -170,21 +170,5 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        /// <summary>
-        /// Pega uma consulta específica com base no seu ID retornando também o prontuário e o comentario.
-        /// </summary>
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
-        {
-            try
-            {
-                var consulta = _consultaRepository.BuscarPorId(id);
-                return Ok(consulta);
-            }
-            catch (Exception erro)
-            {
-                return BadRequest(erro.Message);
-            }
-        }
     }
 }
