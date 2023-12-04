@@ -23,7 +23,6 @@ namespace apiweb.healthclinic.manha.Repositories
                     buscarProntuario.DescricaoProntuario = prontuario.DescricaoProntuario;
 
                     _healthContext.Update(buscarProntuario);
-
                     _healthContext.SaveChanges();
                 }
             }

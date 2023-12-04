@@ -21,25 +21,18 @@ namespace apiweb.healthclinic.manha.Repositories
                 Usuario usuarioExistente = _healthContext.Usuario.Find(usuario.IdUsuario);
                 if (usuarioExistente != null)
                 {
-                    // Armazena os valores atuais que não devem ser alterados
                     var dataNascimentoAtual = usuarioExistente.DataNascimento;
                     var sexoAtual = usuarioExistente.Sexo;
                     var idTipoUsuarioAtual = usuarioExistente.IdTipoUsuario;
 
-                    // Atualiza o usuário existente com os novos valores
                     _healthContext.Entry(usuarioExistente).CurrentValues.SetValues(usuario);
 
-                    // Restaura os valores que não devem ser alterados
+                    // Restaurar os valores que não devem ser alterados
                     usuarioExistente.DataNascimento = dataNascimentoAtual;
                     usuarioExistente.Sexo = sexoAtual;
                     usuarioExistente.IdTipoUsuario = idTipoUsuarioAtual;
 
-                    // Persiste as alterações no banco de dados
                     _healthContext.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Usuário não encontrado.");
                 }
             }
             catch (Exception)
@@ -137,51 +130,39 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                // Obter os IDs dos pacientes relacionados ao usuário
-                var idsDosPacientes = _healthContext.Paciente
-                    .Where(paciente => paciente.IdUsuario == idUsuario)
-                    .Select(paciente => paciente.IdPaciente) 
+                var consultasRelacionadas = _healthContext.Consulta
+                    .Where(consulta => consulta.Medico.IdUsuario == idUsuario || consulta.Paciente.IdUsuario == idUsuario)
                     .ToList();
 
-                // Remover pacientes
-                _healthContext.Paciente.RemoveRange(
-                    _healthContext.Paciente.Where(paciente => idsDosPacientes.Contains(paciente.IdPaciente))
-                );
+                // Extrair os IDs dos prontuários e comentários das consultas relacionadas
+                var idsDosProntuarios = consultasRelacionadas.Select(consulta => consulta.IdProntuario).Distinct().ToList();
+                var idsDosComentarios = consultasRelacionadas.Select(consulta => consulta.IdComentario).Distinct().ToList();
 
-                // Obter os IDs das consultas relacionadas aos pacientes
-                var idsDasConsultas = _healthContext.Consulta
-                    .Where(consulta => idsDosPacientes.Contains(consulta.IdPaciente))
-                    .Select(consulta => consulta.IdConsulta) 
-                    .ToList();
+                _healthContext.Prontuario.RemoveRange(_healthContext.Prontuario.Where(prontuario => idsDosProntuarios.Contains(prontuario.IdProntuario)));
+                _healthContext.Comentario.RemoveRange(_healthContext.Comentario.Where(comentario => idsDosComentarios.Contains(comentario.IdComentario)));
 
-                // Remover prontuários relacionados às consultas
-                _healthContext.Prontuario.RemoveRange(
-                    _healthContext.Prontuario.Where(prontuario => idsDasConsultas.Contains(prontuario.IdProntuario)) 
-                );
+                // Remover as consultas relacionadas
+                _healthContext.Consulta.RemoveRange(consultasRelacionadas);
 
-                // Remover comentários relacionados às consultas
-                _healthContext.Comentario.RemoveRange(
-                    _healthContext.Comentario.Where(comentario => idsDasConsultas.Contains(comentario.IdComentario)) 
-                );
-
-                // Remover consultas
-                _healthContext.Consulta.RemoveRange(
-                    _healthContext.Consulta.Where(consulta => idsDasConsultas.Contains(consulta.IdConsulta))
-                );
-
-                // Remover médicos relacionados ao usuário
-                _healthContext.Medico.RemoveRange(
-                    _healthContext.Medico.Where(medico => medico.IdUsuario == idUsuario)
-                );
-
-                // Remover o usuário
-                var usuarioParaRemover = _healthContext.Usuario.Find(idUsuario);
-                if (usuarioParaRemover != null)
+                var pacienteRemover = _healthContext.Paciente.FirstOrDefault(paciente => paciente.IdUsuario == idUsuario);
+                if (pacienteRemover != null)
                 {
-                    _healthContext.Usuario.Remove(usuarioParaRemover);
+                    _healthContext.Paciente.Remove(pacienteRemover);
                 }
 
-                // Salvar todas as alterações no banco de dados
+                var medicoRemover = _healthContext.Medico.FirstOrDefault(medico => medico.IdUsuario == idUsuario);
+                if (medicoRemover != null)
+                {
+                    _healthContext.Medico.Remove(medicoRemover);
+                }
+
+                // Remover o usuário
+                var usuarioARemover = _healthContext.Usuario.Find(idUsuario);
+                if (usuarioARemover != null)
+                {
+                    _healthContext.Usuario.Remove(usuarioARemover);
+                }
+
                 _healthContext.SaveChanges();
             }
             catch (Exception)

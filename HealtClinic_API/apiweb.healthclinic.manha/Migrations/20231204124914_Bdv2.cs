@@ -5,7 +5,7 @@
 namespace apiweb.healthclinic.manha.Migrations
 {
     /// <inheritdoc />
-    public partial class Bdv3 : Migration
+    public partial class Bdv2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

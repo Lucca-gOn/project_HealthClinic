@@ -32,9 +32,9 @@ namespace apiweb.healthclinic.manha.Controllers
                     new { id = response.Id },
                     response);
             }
-            catch (Exception e)
+            catch (Exception erro)
             {
-                return BadRequest(e.Message);
+                return BadRequest(erro.Message);
             }
         }
 

@@ -40,7 +40,7 @@ namespace apiweb.healthclinic.manha.Domains
         //Referencia com Comentario
         public Guid IdComentario { get; set; }
 
-        [ForeignKey(nameof(IdConsulta))]
+        [ForeignKey(nameof(IdComentario))]
         //ForeignKey com (IdComentario))]
         public Comentario? Comentario { get; set; }
     }

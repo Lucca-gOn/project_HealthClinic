@@ -29,10 +29,10 @@ namespace apiweb.healthclinic.manha.Controllers
                 _clinicaRepository.Cadastrar(novaClinica);
                 return StatusCode(201);
             }
-            catch (Exception)
+            catch (Exception erro)
             {
 
-                throw;
+                return BadRequest(erro.Message);
             }
         }
 

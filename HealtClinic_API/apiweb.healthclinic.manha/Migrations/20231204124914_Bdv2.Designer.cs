@@ -12,7 +12,7 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231201105833_Bdv2")]
+    [Migration("20231204124914_Bdv2")]
     partial class Bdv2
     {
         /// <inheritdoc />
@@ -95,6 +95,7 @@ namespace apiweb.healthclinic.manha.Migrations
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Consulta", b =>
                 {
                     b.Property<Guid>("IdConsulta")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataHorarioConsulta")
@@ -113,6 +114,8 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdConsulta");
+
+                    b.HasIndex("IdComentario");
 
                     b.HasIndex("IdMedico");
 
@@ -262,7 +265,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 {
                     b.HasOne("apiweb.healthclinic.manha.Domains.Comentario", "Comentario")
                         .WithMany()
-                        .HasForeignKey("IdConsulta")
+                        .HasForeignKey("IdComentario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

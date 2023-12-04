@@ -48,10 +48,13 @@ public class ConsultaService : IConsultaService
         var itens = consultas
             .Select(c => new ListarConsultasResponseItem(
                 Id: c.IdConsulta,
+                IdPaciente: c.Paciente.IdPaciente,
                 Nome: c.Paciente.Usuario.Nome,
                 CaminhoImagem: c.Paciente.Usuario.CaminhoImagem,
+                IdMedico: c.Medico.IdMedico,
                 NomeMedico: c.Medico.Usuario.Nome,
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
+                IdEspecialidade: c.Medico.Especialidade.IdEspecialidade,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
                 DataHorarioConsulta : c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
@@ -71,10 +74,13 @@ public class ConsultaService : IConsultaService
         var itens = consultas
             .Select(c => new ListarConsultasResponseItem(
                 Id: c.IdConsulta,
+                IdPaciente: c.Paciente.IdPaciente,
                 Nome: c.Paciente.Usuario.Nome,
                 CaminhoImagem: c.Paciente.Usuario.CaminhoImagem,
+                IdMedico: c.Medico.IdMedico,
                 NomeMedico: c.Medico.Usuario.Nome,
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
+                IdEspecialidade: c.Medico.Especialidade.IdEspecialidade,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
                 DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
@@ -94,10 +100,13 @@ public class ConsultaService : IConsultaService
         var itens = consultas
             .Select(c => new ListarConsultasResponseItem(
                 Id: c.IdConsulta,
+                IdPaciente: c.Paciente.IdPaciente,
                 Nome: c.Paciente.Usuario.Nome,
                 CaminhoImagem: c.Paciente.Usuario.CaminhoImagem,
+                IdMedico: c.Medico.IdMedico,
                 NomeMedico: c.Medico.Usuario.Nome,
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
+                IdEspecialidade: c.Medico.Especialidade.IdEspecialidade,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
                 DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,

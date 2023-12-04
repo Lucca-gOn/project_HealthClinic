@@ -92,6 +92,7 @@ namespace apiweb.healthclinic.manha.Migrations
             modelBuilder.Entity("apiweb.healthclinic.manha.Domains.Consulta", b =>
                 {
                     b.Property<Guid>("IdConsulta")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataHorarioConsulta")
@@ -110,6 +111,8 @@ namespace apiweb.healthclinic.manha.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdConsulta");
+
+                    b.HasIndex("IdComentario");
 
                     b.HasIndex("IdMedico");
 
@@ -259,7 +262,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 {
                     b.HasOne("apiweb.healthclinic.manha.Domains.Comentario", "Comentario")
                         .WithMany()
-                        .HasForeignKey("IdConsulta")
+                        .HasForeignKey("IdComentario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

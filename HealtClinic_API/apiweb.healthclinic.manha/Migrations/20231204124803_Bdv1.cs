@@ -154,8 +154,7 @@ namespace apiweb.healthclinic.manha.Migrations
                 columns: table => new
                 {
                     IdConsulta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DataConsulta = table.Column<DateTime>(type: "DATE", nullable: false),
-                    HorarioConsulta = table.Column<TimeSpan>(type: "TIME", nullable: false),
+                    DataHorarioConsulta = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdPaciente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdMedico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdProntuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -165,8 +164,8 @@ namespace apiweb.healthclinic.manha.Migrations
                 {
                     table.PrimaryKey("PK_Consulta", x => x.IdConsulta);
                     table.ForeignKey(
-                        name: "FK_Consulta_Comentario_IdConsulta",
-                        column: x => x.IdConsulta,
+                        name: "FK_Consulta_Comentario_IdComentario",
+                        column: x => x.IdComentario,
                         principalTable: "Comentario",
                         principalColumn: "IdComentario",
                         onDelete: ReferentialAction.Cascade);
@@ -195,6 +194,11 @@ namespace apiweb.healthclinic.manha.Migrations
                 table: "Clinica",
                 column: "CNPJ",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consulta_IdComentario",
+                table: "Consulta",
+                column: "IdComentario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consulta_IdMedico",

@@ -267,17 +267,5 @@
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv3">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
     </members>
 </doc>

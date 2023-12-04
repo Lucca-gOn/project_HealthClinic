@@ -70,8 +70,25 @@ namespace apiweb.healthclinic.manha.Repositories
         {
             try
             {
-                _healthContext.Consulta.Where(e => e.IdConsulta == id).ExecuteDelete();
-                _healthContext.SaveChanges();
+                var consultaDeletar = _healthContext.Consulta
+                    .Include(c => c.Comentario) 
+                    .Include(c => c.Prontuario) 
+                    .FirstOrDefault(e => e.IdConsulta == id);
+
+                if (consultaDeletar != null)
+                {
+                    // Remover o comentário relacionado/prontuario
+                    if (consultaDeletar.Comentario != null)
+                    {
+                        _healthContext.Comentario.Remove(consultaDeletar.Comentario);
+                    }if (consultaDeletar.Prontuario != null)
+                    {
+                        _healthContext.Prontuario.Remove(consultaDeletar.Prontuario);
+                    }
+
+                    _healthContext.Consulta.Remove(consultaDeletar);
+                    _healthContext.SaveChanges();
+                }
             }
             catch (Exception)
             {

@@ -23,7 +23,6 @@ namespace apiweb.healthclinic.manha.Repositories
                     buscarTiposUsuario!.Titulo = tipoUsuario.Titulo;
 
                     _healthContext.Update(buscarTiposUsuario);
-
                     _healthContext.SaveChanges();
                 }
             }
