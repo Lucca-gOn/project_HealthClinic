@@ -181,12 +181,12 @@ public class UsuarioService : IUsuarioService
         return new ListarUsuariosResponse(listaUsuarios);
     }
 
-    public AtualizarUsuarioResponse AtualizarUsuario(Guid idUsuario, AtualizarUsuarioRequest request)
+    public AtualizarUsuarioResponse AtualizarUsuario(Guid id, AtualizarUsuarioRequest request)
     {
         string hashSenha = Criptografia.GerarHash(request.Senha);
         ImagemPersistida imagem = _imageService.PersistirImagem(request.Imagem);
 
-        var usuario = _usuarioRepository.BuscarPorId(idUsuario);
+        var usuario = _usuarioRepository.BuscarPorId(id);
         if (usuario == null)
         {
             throw new Exception("Usuário não encontrado");

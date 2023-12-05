@@ -5,6 +5,4 @@ public record AtualizarConsultaRequest(
     [property: JsonPropertyName("patient")] Paciente Paciente,
     [property: JsonPropertyName("esp")] string Esp,
     [property: JsonPropertyName("doctor")] Medico Medico,
-    [property: JsonPropertyName("prontuario")] Prontuario Prontuario,
-    [property: JsonPropertyName("comentario")] Comentario Comentario,
     [property: JsonPropertyName("consultationDateTime")] string DataHorarioConsulta);

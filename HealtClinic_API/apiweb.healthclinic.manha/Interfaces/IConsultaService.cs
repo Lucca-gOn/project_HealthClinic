@@ -11,4 +11,6 @@ public interface IConsultaService
     ListarConsultasResponse ListarConsultarPorMedico(Guid idMedico);
 
     CriarConsultaResponse CriarConsulta(CriarConsultaRequest request);
+
+    AtualizarConsultaResponse AtualizarConsulta(Guid id, AtualizarConsultaRequest request);
 }

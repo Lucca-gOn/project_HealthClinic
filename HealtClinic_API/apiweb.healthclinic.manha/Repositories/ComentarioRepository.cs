@@ -14,6 +14,26 @@ namespace apiweb.healthclinic.manha.Repositories
             _healthContext = healthContext;
         }
 
+        public void Atualizar(Guid id, Comentario comentario)
+        {
+            try
+            {
+                Comentario buscarComentario = _healthContext.Comentario.Find(id)!;
+                if (buscarComentario != null)
+                {
+                    buscarComentario.DescricaoComentario = comentario.DescricaoComentario;
+
+                    _healthContext.Update(buscarComentario);
+                    _healthContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Comentario BuscarPorId(Guid id)
         {
             try

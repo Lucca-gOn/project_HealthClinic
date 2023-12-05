@@ -12,7 +12,7 @@ using apiweb.healthclinic.manha.Contexts;
 namespace apiweb.healthclinic.manha.Migrations
 {
     [DbContext(typeof(HealthContext))]
-    [Migration("20231204124803_Bdv1")]
+    [Migration("20231204144238_Bdv1")]
     partial class Bdv1
     {
         /// <inheritdoc />

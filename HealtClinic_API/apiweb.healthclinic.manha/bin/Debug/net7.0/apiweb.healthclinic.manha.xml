@@ -44,6 +44,14 @@
             <param name="id">O ID do comentário a ser excluído.</param>
             <returns>Retorna um código de status indicando o resultado da operação.</returns>
         </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ComentarioController.Put(System.Guid,apiweb.healthclinic.manha.Domains.Comentario)">
+            <summary>
+            Atualiza as informações de um comentario específico.
+            </summary>
+            <param name="id">ID do comentario a ser atualizado.</param>
+            <param name="comentario">Objeto contendo as informações atualizadas do comentario.</param>
+            <returns>StatusCode 200 se bem-sucedido.</returns>
+        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Post(apiweb.healthclinic.manha.Domains.Consulta)">
             <summary>
             Cria uma nova consulta na clínica.
@@ -83,20 +91,6 @@
             Cria uma consulta recebendo um objeto CriarConsultaRequest.
             </summary>
             <param name="request">O objeto para criar a consulta.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.AtualizarProntuario(AtualizarProntuarioConsultaRequest)">
-            <summary>
-            Atualiza o comentário de uma consulta recebendo um objeto AtualizarProntuarioConsultaRequest.
-            </summary>
-            <param name="request">O objeto para atualizar o prontuario da consulta.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.AtualizarComentario(AtualizarComentarioConsultaRequest)">
-            <summary>
-            Atualiza o comentário de uma consulta recebendo um objeto AtualizarComentarioConsultaRequest.
-            </summary>
-            <param name="request">O objeto para atualizar o comentario da consulta.</param>
             <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Post(apiweb.healthclinic.manha.Domains.Especialidade)">

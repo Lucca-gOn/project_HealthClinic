@@ -10,6 +10,8 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         List<Comentario> Listar();
 
+        void Atualizar(Guid id, Comentario comentario);
+
         Comentario BuscarPorId(Guid id);
     }
 }

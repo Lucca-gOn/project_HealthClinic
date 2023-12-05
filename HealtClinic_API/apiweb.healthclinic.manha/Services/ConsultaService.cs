@@ -1,19 +1,27 @@
+using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Dto.Consultas;
+using apiweb.healthclinic.manha.Dto.Imagens;
+using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
+using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.Utils;
 
 namespace apiweb.healthclinic.manha.Services;
 
 public class ConsultaService : IConsultaService
 {
     private readonly IConsultaRepository _consultaRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public ConsultaService
     (
-        IConsultaRepository consultaRepository
+        IConsultaRepository consultaRepository,
+        IUnitOfWork unitOfWork
     )
     {
         _consultaRepository = consultaRepository;
+        _unitOfWork = unitOfWork;
 
     }
 
@@ -56,7 +64,7 @@ public class ConsultaService : IConsultaService
                 CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
                 IdEspecialidade: c.Medico.Especialidade.IdEspecialidade,
                 Especialidade: c.Medico.Especialidade.TituloEspecialidade,
-                DataHorarioConsulta : c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
+                DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
                 DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
                 IdProntuario: c.Prontuario?.IdProntuario,
                 DescricaoComentario: c.Comentario?.DescricaoComentario,
@@ -118,4 +126,21 @@ public class ConsultaService : IConsultaService
 
         return new ListarConsultasResponse(itens);
     }
+
+    public AtualizarConsultaResponse AtualizarConsulta(Guid id, AtualizarConsultaRequest request)
+    {
+        var consultaBuscada = _consultaRepository.BuscarPorId(id);
+        if (consultaBuscada == null)
+        {
+            throw new Exception("Consulta não encontrada");
+        }
+
+        consultaBuscada.DataHorarioConsulta = DateTime.Parse(request.DataHorarioConsulta);
+        consultaBuscada.IdMedico = Guid.Parse(request.Medico.Value);
+        consultaBuscada.IdPaciente = Guid.Parse(request.Paciente.Value);
+
+        _consultaRepository.Atualizar(consultaBuscada);
+        return new AtualizarConsultaResponse(consultaBuscada.IdConsulta);
+    }
 }
+

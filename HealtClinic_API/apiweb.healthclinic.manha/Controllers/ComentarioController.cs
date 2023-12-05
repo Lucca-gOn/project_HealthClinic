@@ -1,5 +1,6 @@
 ﻿using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Interfaces;
+using apiweb.healthclinic.manha.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers
@@ -89,6 +90,26 @@ namespace apiweb.healthclinic.manha.Controllers
             catch (Exception erro)
             {
 
+                return BadRequest(erro.Message);
+            }
+        }
+
+        /// <summary>
+        /// Atualiza as informações de um comentario específico.
+        /// </summary>
+        /// <param name="id">ID do comentario a ser atualizado.</param>
+        /// <param name="comentario">Objeto contendo as informações atualizadas do comentario.</param>
+        /// <returns>StatusCode 200 se bem-sucedido.</returns>
+        [HttpPut]
+        public IActionResult Put(Guid id, Comentario comentario)
+        {
+            try
+            {
+                _comentarioRepository.Atualizar(id, comentario);
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
                 return BadRequest(erro.Message);
             }
         }

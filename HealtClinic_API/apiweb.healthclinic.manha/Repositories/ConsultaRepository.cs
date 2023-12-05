@@ -14,17 +14,16 @@ namespace apiweb.healthclinic.manha.Repositories
             _healthContext = healthContext;
         }
 
-        public void AtualizarComentario(AtualizarComentarioConsultaRequest consultaAtualizada)
+        public void Atualizar(Consulta consulta)
         {
             try
             {
-                var consulta = _healthContext.Consulta
-                    .Include(c => c.Comentario)
-                    .FirstOrDefault(e => e.IdConsulta == consultaAtualizada.Id)!;
-
-                consulta.Comentario.DescricaoComentario = consultaAtualizada.Comentario;
-                _healthContext.Consulta.Update(consulta);
-                _healthContext.SaveChanges();
+                var consultaExistente = _healthContext.Consulta.Find(consulta.IdConsulta);
+                if (consultaExistente != null)
+                {
+                    _healthContext.Entry(consultaExistente).CurrentValues.SetValues(consulta);
+                    _healthContext.SaveChanges();
+                }
             }
             catch (Exception)
             {
@@ -33,17 +32,11 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public void AtualizarProntuario(AtualizarProntuarioConsultaRequest consultaAtualizada)
+        public Consulta BuscarPorId(Guid id)
         {
             try
             {
-                var consulta = _healthContext.Consulta
-                    .Include(c => c.Prontuario)
-                    .FirstOrDefault(e => e.IdConsulta == consultaAtualizada.Id)!;
-
-                consulta.Prontuario.DescricaoProntuario = consultaAtualizada.Prontuario;
-                _healthContext.Consulta.Update(consulta);
-                _healthContext.SaveChanges();
+                return _healthContext.Consulta.FirstOrDefault(e => e.IdConsulta == id)!;
             }
             catch (Exception)
             {

@@ -1,5 +1,8 @@
 ﻿using apiweb.healthclinic.manha.Domains;
+using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
+using apiweb.healthclinic.manha.Repositories;
+using apiweb.healthclinic.manha.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers
@@ -132,18 +135,12 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        /// <summary>
-        /// Atualiza o comentário de uma consulta recebendo um objeto AtualizarProntuarioConsultaRequest.
-        /// </summary>
-        /// <param name="request">O objeto para atualizar o prontuario da consulta.</param>
-        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        [HttpPut("AtualizarProntuario")]
-        public IActionResult AtualizarProntuario(AtualizarProntuarioConsultaRequest request)
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
         {
             try
             {
-                _consultaRepository.AtualizarProntuario(request);
-                return StatusCode(201);
+                return Ok(_consultaRepository.BuscarPorId(id));
             }
             catch (Exception erro)
             {
@@ -151,24 +148,18 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        /// <summary>
-        /// Atualiza o comentário de uma consulta recebendo um objeto AtualizarComentarioConsultaRequest.
-        /// </summary>
-        /// <param name="request">O objeto para atualizar o comentario da consulta.</param>
-        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        [HttpPut("AtualizarComentario")]
-        public IActionResult AtualizarComentario(AtualizarComentarioConsultaRequest request)
+        [HttpPut]
+        public IActionResult Put(Guid id, AtualizarConsultaRequest request)
         {
             try
             {
-                _consultaRepository.AtualizarComentario(request);
-                return StatusCode(201);
+                var response = _consultaService.AtualizarConsulta(id, request);
+                return Ok(response);
             }
             catch (Exception erro)
             {
                 return BadRequest(erro.Message);
             }
         }
-
     }
 }
