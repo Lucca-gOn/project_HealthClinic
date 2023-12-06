@@ -17,6 +17,20 @@
             </summary>
             <returns>Retorna uma lista contendo todas as clínicas.</returns>
         </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ClinicaController.Put(System.Guid,apiweb.healthclinic.manha.Domains.Clinica)">
+            <summary>
+            Atualiza os dados de uma clínica existente.
+            </summary>
+            <param name="id">Identificador único da clínica a ser atualizada.</param>
+            <param name="clinica">Objeto contendo as novas informações da clínica.</param>
+            <returns>Retorna um código de status indicando o resultado da operação. Status 200 para sucesso na atualização ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ClinicaController.Delete(System.Guid)">
+            <summary>
+            Remove uma clínica cadastrada do sistema.
+            </summary>
+            <param name="id">Identificador único da clínica a ser removida.</param>
+        </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ComentarioController.Post(apiweb.healthclinic.manha.Domains.Comentario)">
             <summary>
             Adiciona um novo comentário.
@@ -26,13 +40,13 @@
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ComentarioController.Get">
             <summary>
-            Recupera todos os comentários disponíveis.
+            Lista todos os comentários disponíveis.
             </summary>
             <returns>Retorna uma lista de comentários.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ComentarioController.GetById(System.Guid)">
             <summary>
-            Recupera um comentário específico com base em seu ID.
+            Lista um comentário específico com base em seu ID.
             </summary>
             <param name="id">O ID do comentário a ser recuperado.</param>
             <returns>Retorna o comentário especificado.</returns>
@@ -50,68 +64,76 @@
             </summary>
             <param name="id">ID do comentario a ser atualizado.</param>
             <param name="comentario">Objeto contendo as informações atualizadas do comentario.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
+            <returns>Retorna um código de status indicando o resultado da operação.StatusCode 200 se bem-sucedido.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Post(apiweb.healthclinic.manha.Domains.Consulta)">
             <summary>
-            Cria uma nova consulta na clínica.
+            Cadastra uma nova consulta no sistema.
             </summary>
-            <param name="novaConsulta">A consulta a ser criada.</param>
-            <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
+            <param name="novaConsulta">Dados da nova consulta a ser cadastrada.</param>
+            <returns>Retorna um código de status 201 se a consulta foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Get">
             <summary>
-            Lista todas as consultas disponíveis na clínica.
+            Lista todas as consultas cadastradas no sistema.
             </summary>
-            <returns>Uma lista de consultas ou um erro caso algo dê errado.</returns>
+            <returns>Retorna uma lista de consultas ou um código de status BadRequest em caso de erro.</returns>
         </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetByPaciente(System.Guid)">
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetByConsulta(System.Guid)">
             <summary>
-            Lista todas as consultas de um paciente específico.
+            Lista todas as consultas associadas a um usuário específico.
             </summary>
-            <param name="IdPaciente">O ID do paciente para buscar suas consultas.</param>
-            <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetByMedico(System.Guid)">
-            <summary>
-            Lista todas as consultas de um medico específico.
-            </summary>
-            <param name="IdMedico">O ID do paciente para buscar suas consultas.</param>
-            <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
+            <param name="IdUsuario">Identificador único do usuário.</param>
+            <returns>Retorna uma lista de consultas relacionadas ao usuário ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Delete(System.Guid)">
             <summary>
-            Deleta uma consulta específica com base no seu ID.
+            Remove uma consulta específica do sistema.
             </summary>
-            <param name="id">O ID da consulta a ser deletada.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+            <param name="id">Identificador único da consulta a ser removida.</param>
+            <returns>Retorna um código de status OK se a consulta foi removida com sucesso ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.CriarConsulta(CriarConsultaRequest)">
             <summary>
-            Cria uma consulta recebendo um objeto CriarConsultaRequest.
+            Cadastra uma nova consulta no sistema com um Objeto contendo dados específicos.
             </summary>
-            <param name="request">O objeto para criar a consulta.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+            <param name="request">Dados detalhados da consulta a ser cadastrada.</param>
+            <returns>Retorna um código de status 201 se a consulta foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.GetById(System.Guid)">
+            <summary>
+            Busca uma consulta específica por seu identificador único.
+            </summary>
+            <param name="id">Identificador único da consulta.</param>
+            <returns>Retorna a consulta correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.ConsultaController.Put(System.Guid,AtualizarConsultaRequest)">
+            <summary>
+            Atualiza os detalhes de uma consulta existente.
+            </summary>
+            <param name="id">Identificador único da consulta a ser atualizada.</param>
+            <param name="request">Dados atualizados da consulta.</param>
+            <returns>Retorna um código de status OK se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Post(apiweb.healthclinic.manha.Domains.Especialidade)">
             <summary>
-            Cria uma nova especialidade na clínica.
+            Cadastra uma nova especialidade no sistema.
             </summary>
-            <param name="novaEspecialidade">A especialidade a ser criada.</param>
-            <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
+            <param name="novaEspecialidade">Dados da nova especialidade a ser cadastrada.</param>
+            <returns>Retorna um código de status 201 se a especialidade foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Get">
             <summary>
-            Lista todas as especialidades disponíveis na clínica.
+            Lista todas as especialidades cadastradas no sistema.
             </summary>
-            <returns>Uma lista de especialidades ou um erro caso algo dê errado.</returns>
+            <returns>Retorna uma lista de especialidades ou um código de status BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.EspecialidadeController.Delete(System.Guid)">
             <summary>
-            Deleta uma especialidade específica com base no seu ID.
+            Remove uma especialidade específica do sistema.
             </summary>
-            <param name="id">O ID da especialidade a ser deletada.</param>
-            <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+            <param name="id">Identificador único da especialidade a ser removida.</param>
+            <returns>Retorna um código de status OK se a especialidade foi removida com sucesso ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.LoginController.Login(apiweb.healthclinic.manha.ViewModels.LoginViewModel)">
             <summary>
@@ -122,58 +144,65 @@
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.MedicoController.Post(apiweb.healthclinic.manha.Domains.Medico)">
             <summary>
-            Cadastra um novo médico.
+            Cadastra um novo médico no sistema.
             </summary>
-            <param name="novoMedico">Objeto contendo informações do médico a ser cadastrado.</param>
-            <returns>StatusCode 201 se bem-sucedido.</returns>
+            <param name="novoMedico">Dados do novo médico a ser cadastrado.</param>
+            <returns>Retorna um código de status 201 se o médico foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.MedicoController.Get">
             <summary>
-            Lista todos os médicos.
+            Lista todos os médicos cadastrados no sistema.
             </summary>
-            <returns>Lista de médicos.</returns>
+            <returns>Retorna uma lista de médicos ou um código de status BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.MedicoController.GetById(System.Guid)">
+            <summary>
+            Busca um médico específico por seu identificador único.
+            </summary>
+            <param name="id">Identificador único do médico.</param>
+            <returns>Retorna os detalhes do médico correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.MedicoController.Delete(System.Guid)">
             <summary>
-            Deleta um médico específico baseado em seu ID.
+            Remove um médico específico do sistema.
             </summary>
-            <param name="id">ID do médico a ser deletado.</param>
-            <returns>Status 200 OK se bem-sucedido.</returns>
+            <param name="id">Identificador único do médico a ser removido.</param>
+            <returns>Retorna um código de status OK se o médico foi removido com sucesso ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.PacienteController.Post(apiweb.healthclinic.manha.Domains.Paciente)">
             <summary>
-            Cadastra um novo paciente.
+            Cadastra um novo paciente no sistema.
             </summary>
-            <param name="novoPaciente">Objeto contendo informações do paciente a ser cadastrado.</param>
-            <returns>StatusCode 201 se bem-sucedido.</returns>
+            <param name="novoPaciente">Dados do novo paciente a ser cadastrado.</param>
+            <returns>Retorna um código de status 201 se o paciente foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.PacienteController.Get">
             <summary>
-            Lista todos os pacientes.
+            Lista todos os pacientes cadastrados no sistema.
             </summary>
-            <returns>Lista de pacientes.</returns>
+            <returns>Retorna uma lista de pacientes ou um código de status BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.PacienteController.GetById(System.Guid)">
             <summary>
-            Obtém um paciente específico baseado em seu ID.
+            Busca um paciente específico por seu identificador único.
             </summary>
-            <param name="id">ID do paciente a ser obtido.</param>
-            <returns>Detalhes do paciente específico.</returns>
+            <param name="id">Identificador único do paciente.</param>
+            <returns>Retorna os detalhes do paciente correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.PacienteController.Put(System.Guid,apiweb.healthclinic.manha.Domains.Paciente)">
             <summary>
-            Atualiza as informações de um paciente específico.
+            Atualiza os dados de um paciente existente.
             </summary>
-            <param name="id">ID do paciente a ser atualizado.</param>
-            <param name="paciente">Objeto contendo as informações atualizadas do paciente.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
+            <param name="id">Identificador único do paciente a ser atualizado.</param>
+            <param name="paciente">Dados atualizados do paciente.</param>
+            <returns>Retorna um código de status 200 se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.PacienteController.Delete(System.Guid)">
             <summary>
-            Deleta um paciente específico baseado em seu ID.
+            Remove um paciente específico do sistema.
             </summary>
-            <param name="id">ID do paciente a ser deletado.</param>
-            <returns>Status 200 OK se bem-sucedido.</returns>
+            <param name="id">Identificador único do paciente a ser removido.</param>
+            <returns>Retorna um código de status OK se o paciente foi removido com sucesso ou BadRequest em caso de erro.</returns>
         </member>
         <member name="T:apiweb.healthclinic.manha.Controllers.ProntuarioController">
             <summary>
@@ -182,60 +211,94 @@
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ProntuarioController.Post(apiweb.healthclinic.manha.Domains.Prontuario)">
             <summary>
-            Cadastra um novo prontuário.
+            Cadastra um novo prontuário no sistema.
             </summary>
-            <param name="novoProntuario">Objeto contendo informações do prontuário a ser cadastrado.</param>
-            <returns>StatusCode 201 se bem-sucedido.</returns>
+            <param name="novoProntuario">Dados do novo prontuário a ser cadastrado.</param>
+            <returns>Retorna um código de status 201 se o prontuário foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ProntuarioController.GetById(System.Guid)">
             <summary>
-            Obtém um prontuário específico baseado em seu ID.
+            Busca um prontuário específico por seu identificador único.
             </summary>
-            <param name="id">ID do prontuário a ser obtido.</param>
-            <returns>Detalhes do prontuário específico.</returns>
+            <param name="id">Identificador único do prontuário.</param>
+            <returns>Retorna os detalhes do prontuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.ProntuarioController.Put(System.Guid,apiweb.healthclinic.manha.Domains.Prontuario)">
             <summary>
-            Atualiza as informações de um prontuário específico.
+            Atualiza os dados de um prontuário existente.
             </summary>
-            <param name="id">ID do prontuário a ser atualizado.</param>
-            <param name="prontuario">Objeto contendo as informações atualizadas do prontuário.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
+            <param name="id">Identificador único do prontuário a ser atualizado.</param>
+            <param name="prontuario">Dados atualizados do prontuário.</param>
+            <returns>Retorna um código de status 200 se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.TiposUsuarioController.Post(apiweb.healthclinic.manha.Domains.TiposUsuario)">
             <summary>
-            Cadastra um novo tipo de usuário.
+            Cadastra um novo tipo de usuário no sistema.
             </summary>
-            <param name="novoTipoUsuario">Objeto contendo informações do tipo de usuário a ser cadastrado.</param>
-            <returns>StatusCode 201 se bem-sucedido.</returns>
+            <param name="novoTipoUsuario">Dados do novo tipo de usuário a ser cadastrado.</param>
+            <returns>Retorna um código de status 201 se o tipo de usuário foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.TiposUsuarioController.Get">
             <summary>
-            Lista todos os tipos de usuários cadastrados.
+            Lista todos os tipos de usuários cadastrados no sistema.
             </summary>
-            <returns>Uma lista de tipos de usuários.</returns>
+            <returns>Retorna uma lista de tipos de usuários ou um código de status BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.TiposUsuarioController.GetById(System.Guid)">
             <summary>
-            Obtém um tipo de usuário específico baseado em seu ID.
+            Busca um tipo de usuário específico por seu identificador único.
             </summary>
-            <param name="id">ID do tipo de usuário a ser obtido.</param>
-            <returns>Detalhes do tipo de usuário específico.</returns>
+            <param name="id">Identificador único do tipo de usuário.</param>
+            <returns>Retorna os detalhes do tipo de usuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.TiposUsuarioController.Put(System.Guid,apiweb.healthclinic.manha.Domains.TiposUsuario)">
             <summary>
-            Atualiza as informações de um tipo de usuário específico.
+            Atualiza os dados de um tipo de usuário existente.
             </summary>
-            <param name="id">ID do tipo de usuário a ser atualizado.</param>
-            <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
-            <returns>StatusCode 200 se bem-sucedido.</returns>
+            <param name="id">Identificador único do tipo de usuário a ser atualizado.</param>
+            <param name="tipoUsuario">Dados atualizados do tipo de usuário.</param>
+            <returns>Retorna um código de status 200 se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.CriarUsuario(apiweb.healthclinic.manha.Dto.Usuarios.CriarUsuarioRequest)">
+            <summary>
+            Cadastra um novo usuário no sistema.
+            </summary>
+            <param name="request">Dados do usuário a ser cadastrado.</param>
+            <returns>Retorna uma resposta contendo o ID do usuário criado e seus detalhes, ou BadRequest em caso de erro.</returns>
         </member>
         <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.GetById(System.Guid)">
             <summary>
-            Endpoint GET para buscar um usuário pelo ID.
+            Busca um usuário específico por seu identificador único.
             </summary>
-            <param name="id">ID do usuário a ser buscado.</param>
-            <returns>Detalhes do usuário ou código 400 com a mensagem de erro.</returns>
+            <param name="id">Identificador único do usuário.</param>
+            <returns>Retorna os detalhes do usuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Get">
+            <summary>
+            Lista todos os usuários cadastrados no sistema.
+            </summary>
+            <returns>Retorna uma lista de usuários ou um código de status BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Put(System.Guid,apiweb.healthclinic.manha.Dto.Usuarios.AtualizarUsuarioRequest)">
+            <summary>
+            Atualiza os dados de um usuário existente.
+            </summary>
+            <param name="idUsuario">Identificador único do usuário a ser atualizado.</param>
+            <param name="request">Dados atualizados do usuário.</param>
+            <returns>Retorna uma resposta com os detalhes atualizados do usuário ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.Delete(System.Guid)">
+            <summary>
+            Remove um usuário específico do sistema.
+            </summary>
+            <param name="id">Identificador único do usuário a ser removido.</param>
+            <returns>Retorna um código de status OK se o usuário foi removido com sucesso ou BadRequest em caso de erro.</returns>
+        </member>
+        <member name="M:apiweb.healthclinic.manha.Controllers.UsuarioController.ListarAdministradores">
+            <summary>
+            Lista todos os usuários com perfil de administrador no sistema.
+            </summary>
+            <returns>Retorna uma lista de usuários administradores ou um código de status BadRequest em caso de erro.</returns>
         </member>
         <member name="T:apiweb.healthclinic.manha.Migrations.Bdv1">
             <inheritdoc />
@@ -247,18 +310,6 @@
             <inheritdoc />
         </member>
         <member name="M:apiweb.healthclinic.manha.Migrations.Bdv1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:apiweb.healthclinic.manha.Migrations.Bdv2">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:apiweb.healthclinic.manha.Migrations.Bdv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

@@ -24,10 +24,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Cria uma nova consulta na clínica.
+        /// Cadastra uma nova consulta no sistema.
         /// </summary>
-        /// <param name="novaConsulta">A consulta a ser criada.</param>
-        /// <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
+        /// <param name="novaConsulta">Dados da nova consulta a ser cadastrada.</param>
+        /// <returns>Retorna um código de status 201 se a consulta foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult Post(Consulta novaConsulta)
         {
@@ -42,10 +42,11 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
+
         /// <summary>
-        /// Lista todas as consultas disponíveis na clínica.
+        /// Lista todas as consultas cadastradas no sistema.
         /// </summary>
-        /// <returns>Uma lista de consultas ou um erro caso algo dê errado.</returns>
+        /// <returns>Retorna uma lista de consultas ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -59,35 +60,18 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
-        /// <summary>
-        /// Lista todas as consultas de um paciente específico.
-        /// </summary>
-        /// <param name="IdPaciente">O ID do paciente para buscar suas consultas.</param>
-        /// <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
-        [HttpGet("paciente/{IdPaciente}")]
-        public IActionResult GetByPaciente(Guid IdPaciente)
-        {
-            try
-            {
-                return Ok(_consultaService.ListarConsultasPorPaciente(IdPaciente).Itens);
-            }
-            catch (Exception erro)
-            {
 
-                return BadRequest(erro.Message);
-            }
-        }
         /// <summary>
-        /// Lista todas as consultas de um medico específico.
+        /// Lista todas as consultas associadas a um usuário específico.
         /// </summary>
-        /// <param name="IdMedico">O ID do paciente para buscar suas consultas.</param>
-        /// <returns>Uma lista de consultas do paciente ou um erro caso algo dê errado.</returns>
-        [HttpGet("medico/{IdMedico}")]
-        public IActionResult GetByMedico(Guid IdMedico)
+        /// <param name="IdUsuario">Identificador único do usuário.</param>
+        /// <returns>Retorna uma lista de consultas relacionadas ao usuário ou BadRequest em caso de erro.</returns>
+        [HttpGet("Usuario/{IdUsuario}")]
+        public IActionResult GetByConsulta(Guid IdUsuario)
         {
             try
             {
-                return Ok(_consultaService.ListarConsultarPorMedico(IdMedico).Itens);
+                return Ok(_consultaService.ListarConsultasPorUsuario(IdUsuario).Itens);
             }
             catch (Exception erro)
             {
@@ -97,11 +81,11 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Deleta uma consulta específica com base no seu ID.
+        /// Remove uma consulta específica do sistema.
         /// </summary>
-        /// <param name="id">O ID da consulta a ser deletada.</param>
-        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        [HttpDelete]
+        /// <param name="id">Identificador único da consulta a ser removida.</param>
+        /// <returns>Retorna um código de status OK se a consulta foi removida com sucesso ou BadRequest em caso de erro.</returns>
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
@@ -117,10 +101,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Cria uma consulta recebendo um objeto CriarConsultaRequest.
+        /// Cadastra uma nova consulta no sistema com um Objeto contendo dados específicos.
         /// </summary>
-        /// <param name="request">O objeto para criar a consulta.</param>
-        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
+        /// <param name="request">Dados detalhados da consulta a ser cadastrada.</param>
+        /// <returns>Retorna um código de status 201 se a consulta foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost("CriarConsulta")]
         public IActionResult CriarConsulta(CriarConsultaRequest request)
         {
@@ -135,6 +119,12 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca uma consulta específica por seu identificador único.
+        /// </summary>
+        /// <param name="id">Identificador único da consulta.</param>
+        /// <returns>Retorna a consulta correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
+
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -147,6 +137,13 @@ namespace apiweb.healthclinic.manha.Controllers
                 return BadRequest(erro.Message);
             }
         }
+
+        /// <summary>
+        /// Atualiza os detalhes de uma consulta existente.
+        /// </summary>
+        /// <param name="id">Identificador único da consulta a ser atualizada.</param>
+        /// <param name="request">Dados atualizados da consulta.</param>
+        /// <returns>Retorna um código de status OK se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
 
         [HttpPut]
         public IActionResult Put(Guid id, AtualizarConsultaRequest request)

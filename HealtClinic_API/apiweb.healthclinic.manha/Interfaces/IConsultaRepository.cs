@@ -12,9 +12,7 @@ namespace apiweb.healthclinic.manha.Interfaces
 
         List<Consulta> Listar();
 
-        List<Consulta> ListarPorPaciente(Guid IdPaciente);
-
-        List<Consulta> ListarPorMedico(Guid IdMedico);
+        List<Consulta> ListarPorUsuario(Guid IdUsuario);
 
         void Atualizar(Consulta consulta);
     }

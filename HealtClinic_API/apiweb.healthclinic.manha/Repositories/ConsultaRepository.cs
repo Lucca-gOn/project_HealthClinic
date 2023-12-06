@@ -111,7 +111,7 @@ namespace apiweb.healthclinic.manha.Repositories
             }
         }
 
-        public List<Consulta> ListarPorMedico(Guid IdMedico)
+        public List<Consulta> ListarPorUsuario(Guid IdUsuario)
         {
             try
             {
@@ -122,31 +122,9 @@ namespace apiweb.healthclinic.manha.Repositories
                         .ThenInclude(m => m.Usuario)
                     .Include(c => c.Medico)
                         .ThenInclude(m => m.Especialidade)
-                    .Include(c => c.Prontuario) 
-                    .Include(c => c.Comentario)  
-                    .Where(c => c.IdMedico == IdMedico)
-                    .ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public List<Consulta> ListarPorPaciente(Guid IdPaciente)
-        {
-            try
-            {
-                return _healthContext.Consulta
-                    .Include(c => c.Paciente)
-                        .ThenInclude(p => p.Usuario)
-                    .Include(c => c.Medico)
-                        .ThenInclude(m => m.Usuario)
-                    .Include(c => c.Medico)
-                        .ThenInclude(m => m.Especialidade)
-                    .Include(c => c.Prontuario) 
-                    .Include(c => c.Comentario) 
-                    .Where(c => c.IdPaciente == IdPaciente)
+                    .Include(c => c.Prontuario)
+                    .Include(c => c.Comentario)
+                    .Where(c => c.Medico.Usuario.IdUsuario == IdUsuario || c.Paciente.Usuario.IdUsuario == IdUsuario)
                     .ToList();
             }
             catch (Exception)

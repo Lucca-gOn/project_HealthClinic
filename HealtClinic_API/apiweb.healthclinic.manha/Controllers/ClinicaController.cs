@@ -54,6 +54,12 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados de uma clínica existente.
+        /// </summary>
+        /// <param name="id">Identificador único da clínica a ser atualizada.</param>
+        /// <param name="clinica">Objeto contendo as novas informações da clínica.</param>
+        /// <returns>Retorna um código de status indicando o resultado da operação. Status 200 para sucesso na atualização ou BadRequest em caso de erro.</returns>
         [HttpPut]
         public IActionResult Put(Guid id, Clinica clinica)
         {
@@ -68,7 +74,11 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        [HttpDelete]
+        /// <summary>
+        /// Remove uma clínica cadastrada do sistema.
+        /// </summary>
+        /// <param name="id">Identificador único da clínica a ser removida.</param>
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try

@@ -17,10 +17,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Cria uma nova especialidade na clínica.
+        /// Cadastra uma nova especialidade no sistema.
         /// </summary>
-        /// <param name="novaEspecialidade">A especialidade a ser criada.</param>
-        /// <returns>Retorna o status 201 se bem-sucedido, ou um erro caso contrário.</returns>
+        /// <param name="novaEspecialidade">Dados da nova especialidade a ser cadastrada.</param>
+        /// <returns>Retorna um código de status 201 se a especialidade foi cadastrada com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult Post(Especialidade novaEspecialidade)
         {
@@ -37,9 +37,9 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Lista todas as especialidades disponíveis na clínica.
+        /// Lista todas as especialidades cadastradas no sistema.
         /// </summary>
-        /// <returns>Uma lista de especialidades ou um erro caso algo dê errado.</returns>
+        /// <returns>Retorna uma lista de especialidades ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -56,11 +56,11 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Deleta uma especialidade específica com base no seu ID.
+        /// Remove uma especialidade específica do sistema.
         /// </summary>
-        /// <param name="id">O ID da especialidade a ser deletada.</param>
-        /// <returns>Retorna o status OK se bem-sucedido, ou um erro caso contrário.</returns>
-        [HttpDelete]
+        /// <param name="id">Identificador único da especialidade a ser removida.</param>
+        /// <returns>Retorna um código de status OK se a especialidade foi removida com sucesso ou BadRequest em caso de erro.</returns>
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try

@@ -147,8 +147,8 @@ app.MapControllers();
 // Configuração do middleware para servir arquivos estáticos.
 app.UseStaticFiles();
 
-app.Urls.Add("http://192.168.15.7:5000"); // CASA
-//app.Urls.Add("http://172.16.35.116:5000");  //SENAI TECNICO
+//app.Urls.Add("http://192.168.15.7:5000"); // CASA
+app.Urls.Add("http://172.16.34.155:5000");  //SENAI TECNICO
 //app.Urls.Add("http://172.16.26.30:5000");  //SENAI CODE
 
 app.Run();

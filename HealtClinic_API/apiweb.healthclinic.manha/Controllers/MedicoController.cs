@@ -18,10 +18,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Cadastra um novo médico.
+        /// Cadastra um novo médico no sistema.
         /// </summary>
-        /// <param name="novoMedico">Objeto contendo informações do médico a ser cadastrado.</param>
-        /// <returns>StatusCode 201 se bem-sucedido.</returns>
+        /// <param name="novoMedico">Dados do novo médico a ser cadastrado.</param>
+        /// <returns>Retorna um código de status 201 se o médico foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult Post(Medico novoMedico)
         {
@@ -37,9 +37,9 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Lista todos os médicos.
+        /// Lista todos os médicos cadastrados no sistema.
         /// </summary>
-        /// <returns>Lista de médicos.</returns>
+        /// <returns>Retorna uma lista de médicos ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -53,6 +53,11 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um médico específico por seu identificador único.
+        /// </summary>
+        /// <param name="id">Identificador único do médico.</param>
+        /// <returns>Retorna os detalhes do médico correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -67,11 +72,11 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Deleta um médico específico baseado em seu ID.
+        /// Remove um médico específico do sistema.
         /// </summary>
-        /// <param name="id">ID do médico a ser deletado.</param>
-        /// <returns>Status 200 OK se bem-sucedido.</returns>
-        [HttpDelete]
+        /// <param name="id">Identificador único do médico a ser removido.</param>
+        /// <returns>Retorna um código de status OK se o médico foi removido com sucesso ou BadRequest em caso de erro.</returns>
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try

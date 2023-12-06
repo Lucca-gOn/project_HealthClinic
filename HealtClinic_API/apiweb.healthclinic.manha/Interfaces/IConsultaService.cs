@@ -6,9 +6,7 @@ public interface IConsultaService
 {
     ListarConsultasResponse ListarConsultas();
 
-    ListarConsultasResponse ListarConsultasPorPaciente(Guid idPaciente);
-
-    ListarConsultasResponse ListarConsultarPorMedico(Guid idMedico);
+    ListarConsultasResponse ListarConsultasPorUsuario(Guid idUsuario);
 
     CriarConsultaResponse CriarConsulta(CriarConsultaRequest request);
 

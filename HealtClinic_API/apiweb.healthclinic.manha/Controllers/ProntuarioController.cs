@@ -20,10 +20,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Cadastra um novo prontuário.
+        /// Cadastra um novo prontuário no sistema.
         /// </summary>
-        /// <param name="novoProntuario">Objeto contendo informações do prontuário a ser cadastrado.</param>
-        /// <returns>StatusCode 201 se bem-sucedido.</returns>
+        /// <param name="novoProntuario">Dados do novo prontuário a ser cadastrado.</param>
+        /// <returns>Retorna um código de status 201 se o prontuário foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult Post(Prontuario novoProntuario)
         {
@@ -39,10 +39,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Obtém um prontuário específico baseado em seu ID.
+        /// Busca um prontuário específico por seu identificador único.
         /// </summary>
-        /// <param name="id">ID do prontuário a ser obtido.</param>
-        /// <returns>Detalhes do prontuário específico.</returns>
+        /// <param name="id">Identificador único do prontuário.</param>
+        /// <returns>Retorna os detalhes do prontuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -57,11 +57,11 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Atualiza as informações de um prontuário específico.
+        /// Atualiza os dados de um prontuário existente.
         /// </summary>
-        /// <param name="id">ID do prontuário a ser atualizado.</param>
-        /// <param name="prontuario">Objeto contendo as informações atualizadas do prontuário.</param>
-        /// <returns>StatusCode 200 se bem-sucedido.</returns>
+        /// <param name="id">Identificador único do prontuário a ser atualizado.</param>
+        /// <param name="prontuario">Dados atualizados do prontuário.</param>
+        /// <returns>Retorna um código de status 200 se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
         [HttpPut]
         public IActionResult Put(Guid id, Prontuario prontuario)
         {

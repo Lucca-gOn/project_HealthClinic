@@ -1,12 +1,6 @@
-using apiweb.healthclinic.manha.Contexts;
 using apiweb.healthclinic.manha.Domains;
 using apiweb.healthclinic.manha.Dto.Consultas;
-using apiweb.healthclinic.manha.Dto.Imagens;
-using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
-using apiweb.healthclinic.manha.Utils;
-
 namespace apiweb.healthclinic.manha.Services;
 
 public class ConsultaService : IConsultaService
@@ -75,35 +69,9 @@ public class ConsultaService : IConsultaService
         return new ListarConsultasResponse(itens);
     }
 
-    public ListarConsultasResponse ListarConsultasPorPaciente(Guid idPaciente)
+    public ListarConsultasResponse ListarConsultasPorUsuario(Guid idUsuario)
     {
-        List<Consulta> consultas = _consultaRepository.ListarPorPaciente(idPaciente);
-
-        var itens = consultas
-            .Select(c => new ListarConsultasResponseItem(
-                Id: c.IdConsulta,
-                IdPaciente: c.Paciente.IdPaciente,
-                Nome: c.Paciente.Usuario.Nome,
-                CaminhoImagem: c.Paciente.Usuario.CaminhoImagem,
-                IdMedico: c.Medico.IdMedico,
-                NomeMedico: c.Medico.Usuario.Nome,
-                CaminhoImagemMedico: c.Medico.Usuario.CaminhoImagem,
-                IdEspecialidade: c.Medico.Especialidade.IdEspecialidade,
-                Especialidade: c.Medico.Especialidade.TituloEspecialidade,
-                DataHorarioConsulta: c.DataHorarioConsulta.ToString("dd/MM/yyyy HH:mm"),
-                DescricaoProntuario: c.Prontuario?.DescricaoProntuario,
-                IdProntuario: c.Prontuario?.IdProntuario,
-                DescricaoComentario: c.Comentario?.DescricaoComentario,
-                IdComentario: c.Comentario?.IdComentario))
-            .ToList()
-            .AsReadOnly();
-
-        return new ListarConsultasResponse(itens);
-    }
-
-    public ListarConsultasResponse ListarConsultarPorMedico(Guid idMedico)
-    {
-        List<Consulta> consultas = _consultaRepository.ListarPorMedico(idMedico);
+        List<Consulta> consultas = _consultaRepository.ListarPorUsuario(idUsuario);
 
         var itens = consultas
             .Select(c => new ListarConsultasResponseItem(
@@ -142,5 +110,6 @@ public class ConsultaService : IConsultaService
         _consultaRepository.Atualizar(consultaBuscada);
         return new AtualizarConsultaResponse(consultaBuscada.IdConsulta);
     }
+
 }
 

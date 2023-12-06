@@ -20,6 +20,11 @@ namespace apiweb.healthclinic.manha.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+        /// <summary>
+        /// Cadastra um novo usuário no sistema.
+        /// </summary>
+        /// <param name="request">Dados do usuário a ser cadastrado.</param>
+        /// <returns>Retorna uma resposta contendo o ID do usuário criado e seus detalhes, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult CriarUsuario([FromForm] CriarUsuarioRequest request)
         {
@@ -40,10 +45,10 @@ namespace apiweb.healthclinic.manha.Controllers
 
 
         /// <summary>
-        /// Endpoint GET para buscar um usuário pelo ID.
+        /// Busca um usuário específico por seu identificador único.
         /// </summary>
-        /// <param name="id">ID do usuário a ser buscado.</param>
-        /// <returns>Detalhes do usuário ou código 400 com a mensagem de erro.</returns>
+        /// <param name="id">Identificador único do usuário.</param>
+        /// <returns>Retorna os detalhes do usuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -57,6 +62,10 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Lista todos os usuários cadastrados no sistema.
+        /// </summary>
+        /// <returns>Retorna uma lista de usuários ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -71,6 +80,12 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados de um usuário existente.
+        /// </summary>
+        /// <param name="idUsuario">Identificador único do usuário a ser atualizado.</param>
+        /// <param name="request">Dados atualizados do usuário.</param>
+        /// <returns>Retorna uma resposta com os detalhes atualizados do usuário ou BadRequest em caso de erro.</returns>
         [HttpPut]
         public IActionResult Put(Guid idUsuario,[FromForm] AtualizarUsuarioRequest request)
         {
@@ -86,7 +101,12 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
-        [HttpDelete]
+        /// <summary>
+        /// Remove um usuário específico do sistema.
+        /// </summary>
+        /// <param name="id">Identificador único do usuário a ser removido.</param>
+        /// <returns>Retorna um código de status OK se o usuário foi removido com sucesso ou BadRequest em caso de erro.</returns>
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
@@ -100,6 +120,10 @@ namespace apiweb.healthclinic.manha.Controllers
             }
         }
 
+        /// <summary>
+        /// Lista todos os usuários com perfil de administrador no sistema.
+        /// </summary>
+        /// <returns>Retorna uma lista de usuários administradores ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet("ListarAdministradores")]
         public IActionResult ListarAdministradores()
         {

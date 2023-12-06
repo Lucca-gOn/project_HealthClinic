@@ -18,10 +18,10 @@ namespace apiweb.healthclinic.manha.Controllers
 
 
         /// <summary>
-        /// Cadastra um novo tipo de usuário.
+        /// Cadastra um novo tipo de usuário no sistema.
         /// </summary>
-        /// <param name="novoTipoUsuario">Objeto contendo informações do tipo de usuário a ser cadastrado.</param>
-        /// <returns>StatusCode 201 se bem-sucedido.</returns>
+        /// <param name="novoTipoUsuario">Dados do novo tipo de usuário a ser cadastrado.</param>
+        /// <returns>Retorna um código de status 201 se o tipo de usuário foi cadastrado com sucesso, ou BadRequest em caso de erro.</returns>
         [HttpPost]
         public IActionResult Post(TiposUsuario novoTipoUsuario)
         {
@@ -37,9 +37,9 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Lista todos os tipos de usuários cadastrados.
+        /// Lista todos os tipos de usuários cadastrados no sistema.
         /// </summary>
-        /// <returns>Uma lista de tipos de usuários.</returns>
+        /// <returns>Retorna uma lista de tipos de usuários ou um código de status BadRequest em caso de erro.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -54,10 +54,10 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Obtém um tipo de usuário específico baseado em seu ID.
+        /// Busca um tipo de usuário específico por seu identificador único.
         /// </summary>
-        /// <param name="id">ID do tipo de usuário a ser obtido.</param>
-        /// <returns>Detalhes do tipo de usuário específico.</returns>
+        /// <param name="id">Identificador único do tipo de usuário.</param>
+        /// <returns>Retorna os detalhes do tipo de usuário correspondente ao ID fornecido ou BadRequest em caso de erro.</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -72,11 +72,11 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Atualiza as informações de um tipo de usuário específico.
+        /// Atualiza os dados de um tipo de usuário existente.
         /// </summary>
-        /// <param name="id">ID do tipo de usuário a ser atualizado.</param>
-        /// <param name="tipoUsuario">Objeto contendo as informações atualizadas do tipo de usuário.</param>
-        /// <returns>StatusCode 200 se bem-sucedido.</returns>
+        /// <param name="id">Identificador único do tipo de usuário a ser atualizado.</param>
+        /// <param name="tipoUsuario">Dados atualizados do tipo de usuário.</param>
+        /// <returns>Retorna um código de status 200 se a atualização foi bem-sucedida ou BadRequest em caso de erro.</returns>
         [HttpPut]
         public IActionResult Put(Guid id, TiposUsuario tipoUsuario)
         {

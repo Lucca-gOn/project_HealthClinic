@@ -38,7 +38,7 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Recupera todos os comentários disponíveis.
+        /// Lista todos os comentários disponíveis.
         /// </summary>
         /// <returns>Retorna uma lista de comentários.</returns>
         [HttpGet]
@@ -56,7 +56,7 @@ namespace apiweb.healthclinic.manha.Controllers
         }
 
         /// <summary>
-        /// Recupera um comentário específico com base em seu ID.
+        /// Lista um comentário específico com base em seu ID.
         /// </summary>
         /// <param name="id">O ID do comentário a ser recuperado.</param>
         /// <returns>Retorna o comentário especificado.</returns>
@@ -79,7 +79,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// </summary>
         /// <param name="id">O ID do comentário a ser excluído.</param>
         /// <returns>Retorna um código de status indicando o resultado da operação.</returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
@@ -99,7 +99,7 @@ namespace apiweb.healthclinic.manha.Controllers
         /// </summary>
         /// <param name="id">ID do comentario a ser atualizado.</param>
         /// <param name="comentario">Objeto contendo as informações atualizadas do comentario.</param>
-        /// <returns>StatusCode 200 se bem-sucedido.</returns>
+        /// <returns>Retorna um código de status indicando o resultado da operação.StatusCode 200 se bem-sucedido.</returns>
         [HttpPut]
         public IActionResult Put(Guid id, Comentario comentario)
         {
