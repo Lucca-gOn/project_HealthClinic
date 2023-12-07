@@ -1,8 +1,5 @@
 ﻿using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto.Usuarios;
 using apiweb.healthclinic.manha.Interfaces;
-using apiweb.healthclinic.manha.Repositories;
-using apiweb.healthclinic.manha.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiweb.healthclinic.manha.Controllers

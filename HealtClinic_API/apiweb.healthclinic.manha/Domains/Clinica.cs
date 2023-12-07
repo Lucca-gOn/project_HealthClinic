@@ -12,46 +12,46 @@ namespace apiweb.healthclinic.manha.Domains
         public Guid IdClinica { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "Nome fantasia obrigatório!")]
+        [Required]
         public string? NomeFantasia { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "Razão social obrigatório!")]
+        [Required]
         public string? RazaoSocial { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "Endereço obrigatório!")]
+        [Required]
         public string? Endereco { get; set; }
 
         [Column(TypeName = "VARCHAR(20)")]
-        [Required(ErrorMessage = "CEP obrigatório!")]
+        [Required]
         public string? CEP { get; set; }
 
         [Column(TypeName = "VARCHAR(30)")]
-        [Required(ErrorMessage = "Número obrigatório!")]
+        [Required]
         public string? Numero { get; set; }
 
         [Column(TypeName = "VARCHAR(MAX)")]
-        [Required(ErrorMessage = "Primeiro dia semana obrigatório!")]
+        [Required]
         public string? PrimeiroDiaSemana { get; set; }
 
         [Column(TypeName = "VARCHAR(MAX)")]
-        [Required(ErrorMessage = "Segundo dia semana obrigatório!")]
+        [Required]
         public string? SegundoDiaSemana { get; set; }
 
         [Column(TypeName = "VARCHAR(25)")]
-        [Required(ErrorMessage = "CNPJ obrigatório!")]
+        [Required]
         [StringLength(25)]
         public string? CNPJ { get; set; }
 
         [Column(TypeName = "TIME")]
-        [Required(ErrorMessage = "Horário de abertura obrigatório!")]
+        [Required]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"hh\:mm")]
         public TimeSpan HorarioAbertura { get; set; }
 
         [Column(TypeName = "TIME")]
-        [Required(ErrorMessage = "Horário de fechamento obrigatório!")]
+        [Required]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"hh\:mm")]
         public TimeSpan HorarioFechamento { get; set; }   

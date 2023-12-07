@@ -5,25 +5,25 @@ namespace apiweb.healthclinic.manha;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly HealthContext _context;
+    private readonly HealthContext _healthContext;
 
     public UnitOfWork(HealthContext context)
     {
-        _context = context;
+        _healthContext = context;
     }
 
     public void Commit()
     {
-        _context.SaveChanges();
+        _healthContext.SaveChanges();
     }
 
     public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
-        await _context.SaveChangesAsync(cancellationToken);
+        await _healthContext.SaveChangesAsync(cancellationToken);
     }
 
     public void Dispose()
     {
-        _context.Dispose();
+        _healthContext.Dispose();
     }
 }

@@ -15,7 +15,7 @@ namespace apiweb.healthclinic.manha.Domains
         public string? CPF { get; set; }
 
         //Referencia com Usuario
-        [Required(ErrorMessage = "Informe o usuário!")]
+        [Required]
         public Guid IdUsuario { get; set; }
 
         [ForeignKey(nameof(IdUsuario))]

@@ -1,9 +1,6 @@
 ﻿using apiweb.healthclinic.manha.Domains;
-using apiweb.healthclinic.manha.Dto.Imagens;
 using apiweb.healthclinic.manha.Interfaces;
 using apiweb.healthclinic.manha.ViewModels;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

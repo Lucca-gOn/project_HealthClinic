@@ -15,7 +15,7 @@ namespace apiweb.healthclinic.manha.Domains
         public DateTime DataHorarioConsulta { get; set; }
 
         //Referencia com Paciente
-        [Required(ErrorMessage = "Informe o paciente!")]
+        [Required]
         public Guid IdPaciente { get; set; }
 
         [ForeignKey(nameof(IdPaciente))]
@@ -23,7 +23,7 @@ namespace apiweb.healthclinic.manha.Domains
         public Paciente? Paciente { get; set; }
 
         //Referencia com Medico
-        [Required(ErrorMessage = "Informe o tipo do médico!")]
+        [Required]
         public Guid IdMedico { get; set; }
 
         [ForeignKey(nameof(IdMedico))]

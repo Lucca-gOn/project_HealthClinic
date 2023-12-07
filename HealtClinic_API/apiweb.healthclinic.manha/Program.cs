@@ -146,12 +146,12 @@ app.MapControllers();
 app.UseStaticFiles();
 
 //app.Urls.Add("http://192.168.15.7:5000"); // CASA
-app.Urls.Add("http://172.16.34.155:5000");  //SENAI TECNICO
+app.Urls.Add("http://172.16.35.116:5000");  //SENAI TECNICO
 //app.Urls.Add("http://172.16.26.30:5000");  //SENAI CODE
 
 app.Run();
 
-// Implementa��o do filtro de opera��o para upload de arquivos
+//Implementa��o do filtro de opera��o para upload de arquivos
 public class FileUploadOperation : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)

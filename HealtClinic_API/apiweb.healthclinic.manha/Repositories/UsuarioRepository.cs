@@ -157,10 +157,10 @@ namespace apiweb.healthclinic.manha.Repositories
                 }
 
                 // Remover o usuário
-                var usuarioARemover = _healthContext.Usuario.Find(idUsuario);
-                if (usuarioARemover != null)
+                var usuarioRemover = _healthContext.Usuario.Find(idUsuario);
+                if (usuarioRemover != null)
                 {
-                    _healthContext.Usuario.Remove(usuarioARemover);
+                    _healthContext.Usuario.Remove(usuarioRemover);
                 }
 
                 _healthContext.SaveChanges();

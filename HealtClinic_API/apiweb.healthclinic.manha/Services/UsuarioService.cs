@@ -236,7 +236,7 @@ public class UsuarioService : IUsuarioService
 
     public ListarUsuariosResponse ListarAdministradores()
     {
-        var listaUsuariosAdministradores = _healthContext.Usuario
+        var UsuariosAdministradores = _healthContext.Usuario
         .Include(u => u.TiposUsuario)
         .Where(u => u.TiposUsuario.Titulo == "Administrador")
         .Select(u => new ListarUsuariosResponseItem(
@@ -263,6 +263,6 @@ public class UsuarioService : IUsuarioService
         .ToList()
         .AsReadOnly();
 
-        return new ListarUsuariosResponse(listaUsuariosAdministradores);
+        return new ListarUsuariosResponse(UsuariosAdministradores);
     }
 }
